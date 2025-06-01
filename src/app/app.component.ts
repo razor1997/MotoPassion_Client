@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
+  standalone: true,
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'MotoPassionClient';
+  title = 'Feel the road';
+  constructor(private router: Router) {}
+
+  navigateTo(destination: string) {
+    this.router.navigate([destination]);
+  }
 }
