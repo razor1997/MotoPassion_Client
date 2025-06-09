@@ -1,17 +1,2 @@
-<div class="container">
-  <header class="header">
-    <img src="assets/logo.png" alt="Logo" class="logo">
-    <h1>Feel the Road</h1>
-    <p>Twoja platforma do dzielenia się trasami i emocjami z jazdy.</p>
-    <nav class="auth-navigation">
-    <button (click)="navigateTo('login')">Logowanie</button>
-    <button (click)="navigateTo('register')">Rejestracja</button>
-  </nav>
-  </header>
-
-<!--  <nav class="auth-navigation">-->
-<!--    <button (click)="navigateTo('journeys')">Dzienniki trasy</button>-->
-<!--    <button (click)="navigateTo('community')">Społeczność</button>-->
-<!--    <button (click)="navigateTo('inspiration')">Motoinspiracje</button>-->
-<!--  </nav>-->
-</div>
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>

@@ -8,9 +8,10 @@ import { PostsComponent }  from './components/posts/posts.component';
 import {EventsComponent} from './components/events/events.component';
 import { LoginComponent} from './auth/login/login.component';
 import { RegisterComponent} from './auth/register/register.component';
+import {HomeComponent} from './components/home/home.component';
 
 export const routes: Routes = [
-  { path: '', component: AppComponent },  // Strona startowa
+  { path: '', component: HomeComponent },  // Strona startowa
   { path: 'posts', component: PostsComponent },
   { path: 'events', component: EventsComponent },
   { path: 'journeys', component: JourneysComponent },
