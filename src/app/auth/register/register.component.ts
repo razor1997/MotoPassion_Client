@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import {FormGroup, FormBuilder, Validators, ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserCreate} from '../../model/user-create.model';
 import {CommonModule} from '@angular/common';
+import {AuthService} from '../../services/auth.service';
 
 
 @Component({
@@ -14,9 +15,11 @@ import {CommonModule} from '@angular/common';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  constructor(private fb: FormBuilder, private router: Router ) {
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private authService: AuthService) {
     this.registerForm = this.fb.group({})
   }
   ngOnInit(): void {
@@ -37,11 +40,19 @@ export class RegisterComponent {
     return password === confirmPassword ? null : { notMatching: true };
   }
 
-  submit(): void {
+  submit():
+    void {
     if (this.registerForm.valid) {
       const userData: UserCreate = this.registerForm.value;
-      console.log('Rejestracja zakończona sukcesem', userData);
-      // Wykonaj akcję taką jak przesłanie do serwera
+      this.authService.register(userData).subscribe({
+        next: (response) => {
+          console.log('Rejestracja zakończona sukcesem', response);
+          this.router.navigate(['/login']); // Przekierowanie do strony logowania po rejestracji
+        },
+        error: (err) => {
+          console.error('Błąd rejestracji', err);
+        }
+      });
     } else {
       console.log('Formularz zawiera błędy');
     }

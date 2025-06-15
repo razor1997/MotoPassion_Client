@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-journeys',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './journeys.component.css'
 })
 export class JourneysComponent {
+  constructor(private http: HttpClient) { }
 
 }

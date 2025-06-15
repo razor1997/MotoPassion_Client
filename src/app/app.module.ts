@@ -11,10 +11,13 @@ import { AppRoutingModule } from './app.routes';
 import {HomeComponent} from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {AuthService} from './services/auth.service';
 
 @NgModule({
   declarations: [
-    RegisterComponent
+    AppComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,10 +30,10 @@ import { CommonModule } from '@angular/common';
     LoginComponent,
     HomeComponent,
     ReactiveFormsModule,
-    CommonModule
-    // Importuj moduł routingu tylko tutaj
+    CommonModule, AppRoutingModule, ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: []
+  providers: [AuthService,
+    provideHttpClient()],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
