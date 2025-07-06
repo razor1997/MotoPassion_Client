@@ -9,9 +9,10 @@ import {environment} from '../environments/environment';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private https: HttpClient) { }
 
   register(user: UserCreate): Observable<any> {
-    return this.http.post(`${environment.urlAddress}/register`, user);
+    console.log('Próba utworzenia użytkownika');
+    return this.https.post(`${environment.urlAddress}/register`, user);
   }
 }

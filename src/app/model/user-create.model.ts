@@ -3,6 +3,7 @@ export interface UserCreate {
   email: string;
   password: string;
   confirmPassword: string;
+  carModel?: string;
   avatarUrl?: string;
   bio?: string;
   baseLocation?: string;

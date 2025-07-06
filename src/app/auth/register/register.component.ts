@@ -24,10 +24,11 @@ export class RegisterComponent implements OnInit {
   }
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      userName: ['', [Validators.required, Validators.maxLength(50)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)]],
-      confirmPassword: ['', Validators.required],
+      userName: ['test', [Validators.required, Validators.maxLength(50)]],
+      email: ['test321@gmail.com', [Validators.required, Validators.email]],
+      password: ['test321', [Validators.required, Validators.minLength(6), Validators.maxLength(100)]],
+      confirmPassword: ['test321', Validators.required],
+      carModel: ['BMW', Validators.maxLength(200)],
       avatarUrl: ['', Validators.pattern('https?://.+')],
       bio: ['', Validators.maxLength(200)],
       baseLocation: ['', Validators.maxLength(100)]
@@ -44,15 +45,18 @@ export class RegisterComponent implements OnInit {
     void {
     if (this.registerForm.valid) {
       const userData: UserCreate = this.registerForm.value;
-      this.authService.register(userData).subscribe({
-        next: (response) => {
+      console.log(userData.userName);
+      this.authService.register(userData).subscribe(
+        response => {
           console.log('Rejestracja zakończona sukcesem', response);
           this.router.navigate(['/login']); // Przekierowanie do strony logowania po rejestracji
         },
-        error: (err) => {
-          console.error('Błąd rejestracji', err);
+        error => {
+
+          console.error('Błąd rejestracji');
+          console.error(error);
         }
-      });
+      );
     } else {
       console.log('Formularz zawiera błędy');
     }
