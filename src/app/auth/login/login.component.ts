@@ -17,8 +17,7 @@ import {LocalStorageService} from '../../services/local-storage.service';
 export class LoginComponent {
   loginForm: FormGroup;
   constructor(private fb: FormBuilder, private router: Router,
-              private authService: AuthService,
-              private localStorageService: LocalStorageService) {
+              private authService: AuthService) {
     this.loginForm = this.fb.group({  })
   }
 

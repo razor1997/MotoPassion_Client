@@ -12,8 +12,10 @@ import {NgIf} from '@angular/common';
 })
 export class NavbarComponent implements OnInit {
   show = true;
+  selectedSite: string = 'journeys';
   constructor(private router: Router) {}
   navigateTo(destination: string) {
+    this.selectedSite = destination;
     this.router.navigate([destination]);
   }
   isUserLoggedIn(): boolean {
@@ -21,10 +23,25 @@ export class NavbarComponent implements OnInit {
     return !!localStorage.getItem('authToken');
   }
   logoutUser(): void {
+    this.router.navigate(['login']);
     localStorage.removeItem('authToken');
     localStorage.removeItem('userId');
   }
-
+  getTitleSite(): string| null
+  {
+    switch(this.selectedSite) {
+      case 'journeys':{
+        return "Journeys";
+      }break;
+      case 'community':{
+        return "Community";
+      }break;
+      case 'inspiration':{
+        return "Inspiration";
+      }break;
+    }
+    return '';
+  }
   ngOnInit(): void {
   }
 }

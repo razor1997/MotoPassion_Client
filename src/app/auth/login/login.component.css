@@ -34,6 +34,7 @@
   border-radius: 4px;
   font-size: 16px;
   cursor: pointer;
+
 }
 
 .btn:hover {
@@ -41,6 +42,6 @@
 }
 .error-message {
   color: red;
-  font-size: 14px; /* Opcjonalnie zmniejsz font dla błędów */
-  margin-top: 5px; /* Dodatkowa przestrzeń od pola */
+  font-size: 14px;
+  margin-top: 5px;
 }

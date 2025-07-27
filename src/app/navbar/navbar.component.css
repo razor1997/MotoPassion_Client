@@ -22,8 +22,12 @@
   border-radius: 5px;
   background-color: #2b99d2;
   color: white;
-}
 
+}
+.auth-navigation button:active {
+  background-color: #5cb85c;
+  font-weight: bold;
+}
 .auth-navigation button:hover {
-  background-color: #218838;
+  background-color: #217088;
 }
