@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app.routes';
 import {HomeComponent} from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {NavbarComponent} from './navbar/navbar.component';
 import {provideHttpClient} from '@angular/common/http';
 import {AuthService} from './services/auth.service';
 
@@ -18,6 +19,7 @@ import {AuthService} from './services/auth.service';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     AppRoutingModule,
     RegisterComponent,
     AppComponent,
@@ -27,7 +29,7 @@ import {AuthService} from './services/auth.service';
     LoginComponent,
     HomeComponent,
     ReactiveFormsModule,
-    CommonModule, AppRoutingModule, ReactiveFormsModule
+    CommonModule, AppRoutingModule, ReactiveFormsModule, NavbarComponent
   ],
   providers: [AuthService,
     provideHttpClient()],

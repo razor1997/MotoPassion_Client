@@ -1,11 +1,16 @@
 <div class="container">
   <header class="header">
     <nav class="auth-navigation">
-    <button (click)="navigateTo('login')">Logowanie</button>
-    <button (click)="navigateTo('register')">Rejestracja</button>
-    <button (click)="navigateTo('journeys')">Dzienniki trasy</button>
-    <button (click)="navigateTo('community')">Społeczność</button>
-    <button (click)="navigateTo('inspiration')">Motoinspiracje</button>
+    <div *ngIf="!isUserLoggedIn()">
+      <button (click)="navigateTo('login')">Logowanie</button>
+      <button (click)="navigateTo('register')">Rejestracja</button>
+    </div>
+      <div *ngIf="isUserLoggedIn()">
+        <button (click)="navigateTo('journeys')">Dzienniki trasy</button>
+        <button (click)="navigateTo('community')">Społeczność</button>
+        <button (click)="navigateTo('inspiration')">Motoinspiracje</button>
+       <button (click)="logoutUser()">Wyloguj</button>
+      </div>
   </nav>
     <h1>Feel the Road</h1>
     <p>Twoja platforma do dzielenia się trasami i emocjami z jazdy.</p>
