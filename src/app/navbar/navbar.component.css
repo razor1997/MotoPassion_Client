@@ -11,6 +11,10 @@
 
 .auth-navigation {
   margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 200px;
 }
 
 .auth-navigation button {
@@ -22,7 +26,6 @@
   border-radius: 5px;
   background-color: #2b99d2;
   color: white;
-
 }
 .auth-navigation button:active {
   background-color: #5cb85c;
@@ -30,4 +33,61 @@
 }
 .auth-navigation button:hover {
   background-color: #217088;
+}
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-account {
+  position: relative;
+}
+
+.dropdown {
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 1;
+  margin-left: auto;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s;
+  border-top: 1px solid #bbb;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }

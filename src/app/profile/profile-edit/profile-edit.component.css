@@ -1,0 +1,69 @@
+.profile-edit-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="file"] {
+  width: calc(100% - 22px);
+  padding: 10px;
+  border: 1px solid #ccc; /* Ramka wokół pola */
+  border-radius: 4px; /* Zaokrąglenie pola */
+  font-size: 16px;
+}
+
+input[type="file"] {
+  padding: 4px;
+}
+
+img {
+  display: block;
+  max-width: 100px;
+  margin: 10px 0;
+  border-radius: 50%;
+}
+
+button[type="submit"],
+button[type="button"] {
+  padding: 10px 15px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="button"] {
+  background-color: #f44336;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+button[type="button"]:hover {
+  background-color: #e53935;
+}

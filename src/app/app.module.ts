@@ -13,6 +13,9 @@ import { CommonModule } from '@angular/common';
 import {NavbarComponent} from './navbar/navbar.component';
 import {provideHttpClient} from '@angular/common/http';
 import {AuthService} from './services/auth.service';
+import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
+import {ProfileSettingsComponent} from './profile/profile-settings/profile-settings.component';
+import {ProfilePreferencesComponent} from './profile/profile-preferences/profile-preferences.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import {AuthService} from './services/auth.service';
     LoginComponent,
     HomeComponent,
     ReactiveFormsModule,
-    CommonModule, AppRoutingModule, ReactiveFormsModule, NavbarComponent
+    CommonModule, AppRoutingModule, ReactiveFormsModule, NavbarComponent,
+    ProfileEditComponent,
+    ProfileSettingsComponent,
+    ProfilePreferencesComponent
   ],
   providers: [AuthService,
     provideHttpClient()],

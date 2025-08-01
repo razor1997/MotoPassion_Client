@@ -9,8 +9,24 @@
         <button (click)="navigateTo('journeys')">Dzienniki trasy</button>
         <button (click)="navigateTo('community')">Społeczność</button>
         <button (click)="navigateTo('inspiration')">Motoinspiracje</button>
-       <button (click)="logoutUser()">Wyloguj</button>
+        <button (click)="navigateTo('profile-edit')">Edytuj profil</button>
       </div>
+      <nav class="navbar">
+        <div class="navbar-account">
+          <div class="dropdown">
+            <button class="dropbtn">
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+              <i class="fas fa-user"></i>
+            </button>
+            <div class="dropdown-content">
+              <a (click)="navigateTo('profile/edit')">Edycja konta</a>
+              <a (click)="navigateTo('profile/settings')">Ustawienia</a>
+              <a (click)="navigateTo('profile/preferences')">Preferencje</a>
+              <a (click)="logoutUser()">Wyloguj</a>
+            </div>
+          </div>
+        </div>
+      </nav>
   </nav>
     <h1>{{getTitleSite()}}</h1>
     <p>Twoja platforma do dzielenia się trasami i emocjami z jazdy.</p>

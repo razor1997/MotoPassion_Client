@@ -9,6 +9,9 @@ import {EventsComponent} from './components/events/events.component';
 import { LoginComponent} from './auth/login/login.component';
 import { RegisterComponent} from './auth/register/register.component';
 import {HomeComponent} from './components/home/home.component';
+import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
+import {ProfileSettingsComponent} from './profile/profile-settings/profile-settings.component';
+
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },  // Strona startowa
@@ -19,6 +22,9 @@ export const routes: Routes = [
   { path: 'inspiration', component: InspirationComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'profile/edit', component: ProfileEditComponent },
+  { path: 'profile/settings', component: ProfileSettingsComponent },
+  { path: 'profile/preferences', component: ProfileSettingsComponent },
   { path: '**', redirectTo: '' }
 ];
 @NgModule({

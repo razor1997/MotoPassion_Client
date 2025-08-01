@@ -39,6 +39,9 @@ export class NavbarComponent implements OnInit {
       case 'inspiration':{
         return "Inspiration";
       }break;
+      case 'profile-edit':{
+        return "Edycja użytkownika";
+      }break;
     }
     return '';
   }
