@@ -1,0 +1,23 @@
+.user-cards {
+  display: flex;
+  flex-direction: row; /* Ustawiamy kierunek w linii poziomej */
+  justify-content: space-around; /* Rozstawiamy elementy równo */
+  flex-wrap: wrap; /* Dodatkowo elementy będą mogły zawijać się na nowe liniie, jeśli będzie to konieczne */
+  column-count: 4;
+}
+
+.user-card {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 8px;
+  border-radius: 8px;
+  flex-basis: 23%;
+  max-width: 23%;
+  box-sizing: border-box;
+}
+h2
+{
+  font-size: 32px;
+  font-weight: bold;
+  text-align: center;
+}

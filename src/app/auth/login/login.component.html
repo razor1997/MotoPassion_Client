@@ -16,6 +16,9 @@
         Hasło musi mieć co najmniej 6 znaków.
       </div>
     </div>
+    <div *ngIf="errorMessage" class="error-message">
+      Błąd logowania {{errorMessage}}
+    </div>
 
     <button type="submit" [disabled]="loginForm.invalid" class="btn">Zaloguj się</button>
   </form>

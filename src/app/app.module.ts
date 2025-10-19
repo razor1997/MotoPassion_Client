@@ -16,6 +16,8 @@ import {AuthService} from './services/auth.service';
 import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
 import {ProfileSettingsComponent} from './profile/profile-settings/profile-settings.component';
 import {ProfilePreferencesComponent} from './profile/profile-preferences/profile-preferences.component';
+import {UserCardComponent} from './components/user-card/user-card.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import {ProfilePreferencesComponent} from './profile/profile-preferences/profile
     CommonModule, AppRoutingModule, ReactiveFormsModule, NavbarComponent,
     ProfileEditComponent,
     ProfileSettingsComponent,
-    ProfilePreferencesComponent
+    ProfilePreferencesComponent,
+    UserCardComponent
   ],
   providers: [AuthService,
     provideHttpClient()],

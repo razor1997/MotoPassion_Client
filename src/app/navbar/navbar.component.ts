@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigate([destination]);
   }
   isUserLoggedIn(): boolean {
-    console.log('isUserLoggedIn' + localStorage.getItem('authToken'));
+    // console.log('isUserLoggedIn' + localStorage.getItem('authToken'));
     return !!localStorage.getItem('authToken');
   }
   logoutUser(): void {
