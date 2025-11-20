@@ -24,7 +24,6 @@ label {
 }
 
 input[type="text"],
-input[type="email"],
 input[type="file"] {
   width: calc(100% - 22px);
   padding: 10px;
@@ -60,6 +59,12 @@ button[type="button"] {
   background-color: #f44336;
 }
 
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
 button[type="submit"]:hover {
   background-color: #45a049;
 }
@@ -67,3 +72,26 @@ button[type="submit"]:hover {
 button[type="button"]:hover {
   background-color: #e53935;
 }
+.avatar-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;      /* Okrąg */
+  overflow: hidden;        /* Przycięcie obrazu */
+  border: 2px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f0f0f0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     /* Zachowuje proporcje i wypełnia koło */
+  }
+
+  .placeholder {
+    font-size: 32px;
+    color: #555;
+  }
+}
+

@@ -1,0 +1,8 @@
+<h1>TEST</h1>
+<div class="inspiration-grid" >
+  <div class="inspiration-item" *ngFor="let inspiration of inspirations">
+    <p>{{inspiration.place}}</p>
+    <img [src]="inspiration.viewImageUrl" alt="View" class="inspiration-view" />
+    <img [src]="inspiration.mapImageUrl" alt="Map" class="inspiration-map" />
+  </div>
+</div>

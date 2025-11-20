@@ -12,14 +12,20 @@ export class AuthService {
 
   constructor(private https: HttpClient) { }
   login(login: Login): Observable<any> {
-    return this.https.post(`${environment.urlAddress}/login`, login);
+    console.log("login", login);
+    return this.https.post(`${environment.urlAddress}/auth/login`, login);
   }
   register(user: UserCreate): Observable<any> {
     console.log('Próba utworzenia użytkownika');
-    return this.https.post(`${environment.urlAddress}/register`, user);
+    return this.https.post(`${environment.urlAddress}/auth/register`, user);
   }
   logout()
   {
 
+  }
+  refreshToken(): Observable<any> {
+    return this.https.post('/auth/refresh', {
+      refreshToken: localStorage.getItem('refreshToken')
+    });
   }
 }

@@ -1,17 +1,45 @@
 <div class="profile-edit-container">
   <h2>Edycja Profilu</h2>
   <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+    <div class="avatar-container">
+      <img
+        *ngIf="avatarUrl; else placeholder"
+        [src]="avatarUrl"
+        alt="Avatar"
+      />
+
+      <ng-template #placeholder>
+        <div class="placeholder">
+          {{ initials }}
+        </div>
+      </ng-template>
+    </div>
+
+    <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+
     <div>
       <label for="firstName">Imię</label>
-      <input id="firstName" name="firstName" [(ngModel)]="user.firstName">
+      <input id="firstName" name="firstName" [(ngModel)]="user.name">
     </div>
     <div>
       <label for="lastName">Nazwisko</label>
-      <input id="lastName" name="lastName" [(ngModel)]="user.lastName">
+      <input id="lastName" name="lastName" [(ngModel)]="user.surname">
     </div>
     <div>
       <label for="email">Email</label>
       <input id="email" name="email" type="email" [(ngModel)]="user.email">
+    </div>
+    <div>
+      <label for="bio">O sobie</label>
+      <input id="bio" name="bio" type="text" [(ngModel)]="user.bio">
+    </div>
+    <div>
+      <label for="carModel">Model auta</label>
+      <input id="carModel" name="carModel" type="text" [(ngModel)]="user.carModel">
+    </div>
+    <div>
+      <label for="baseLocation">Lokalizacja</label>
+      <input id="baseLocation" name="baseLocation" type="text" [(ngModel)]="user.baseLocation">
     </div>
     <div>
       <label for="avatar">Zdjęcie profilowe</label>
@@ -21,6 +49,9 @@
     <div>
       <button type="submit">Zapisz</button>
       <button type="button" (click)="onCancel()">Anuluj</button>
+    </div>
+    <div *ngIf="errorMessage" class="error-message">
+      {{this.errorMessage}}
     </div>
   </form>
 </div>

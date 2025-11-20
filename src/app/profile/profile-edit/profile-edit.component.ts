@@ -3,68 +3,97 @@ import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {ProfileService} from '../../services/profile.service';
+import {CommonModule} from '@angular/common';
+import {ProfileEdit} from '../../model/profile-edit';
+import {FilesService} from '../../services/files.service';
+import {of, switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-profile-edit',
   templateUrl: './profile-edit.component.html',
   imports: [
-    FormsModule
+    FormsModule,CommonModule
   ],
   styleUrls: ['./profile-edit.component.css']
 })
 export class ProfileEditComponent {
-  user = {
-    firstName: '',
-    lastName: '',
+  avatar: File | null = null;
+  avatarUrl: string | null = null;
+  initials = "AB";
+  user= {
+    name: '',
+    surname: '',
     email: '',
     avatarUrl: '',
     bio: '',
     carModel: '',
-    baseLocation: ''
+    baseLocation:'',
   };
+  errorMessage: string = "";
   constructor(private https: HttpClient,
               private router: Router,
-              private profileService: ProfileService)
+              private profileService: ProfileService,
+              private filesService: FilesService)
   {
   }
-  currentAvatar: string | ArrayBuffer | null = null;
 
 ngOnInit(): void {
+  console.log(this.user)
   this.setUserValue();
 }
 setUserValue() {
-  console.log(localStorage.getItem('firstName'));
-  this.user.firstName=   localStorage.getItem('firstName') ?? '';
-  this.user.lastName = localStorage.getItem('lastName') ?? '';
-  this.user.email=localStorage.getItem('email') ?? '';
-  this.user.bio=localStorage.getItem('bio') ?? '';
-  this.user.carModel=localStorage.getItem('carModel') ?? '';
+  console.log('test'+localStorage.getItem('firstname'));
+  this.user.name=     localStorage.getItem('firstname') ?? '';
+  this.user.surname = localStorage.getItem('lastname') ?? '';
+  this.user.email=    localStorage.getItem('userEmail') ?? '';
+  this.user.bio=      localStorage.getItem('bio') ?? '';
+  this.user.carModel= localStorage.getItem('carModel') ?? '';
   this.user.baseLocation=localStorage.getItem('baseLocation') ?? '';
-
+  this.avatarUrl=localStorage.getItem('avatarUrl') ?? '';
 }
-  onFileSelected(event: Event): void {
+  onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => this.currentAvatar = reader.result;
-      reader.readAsDataURL(file);
-    }
+    if (!file) return;
+
+    this.avatar = file;
+    const reader = new FileReader();
+    reader.onload = () => this.avatarUrl = reader.result as string;
+    reader.readAsDataURL(file);
+    console.log('Dodaje zdjęcie' +this.avatar);
   }
 
   onSubmit(): void {
-    // tutaj możesz dodać logikę do zapisywania zmian profilu
-    console.log("test zapisu danych");
-    this.profileService.edit(this.user).subscribe(
-      response => this.router.navigate(['/profile/edit'])
-      ,error => {
-        console.log(error);
-      }
-    );
+  console.log((localStorage.getItem('userId')));
+    const formData = new FormData();
+    formData.append("Bio", this.user.bio);
+    // formData.append("CarModel", this.user.carModel);
+    // formData.append("BaseLocation", this.user.baseLocation);
+    formData.append("Name", this.user.name);
+    formData.append("Surname", this.user.surname);
+    formData.append("Email", this.user.email);
 
-    console.log(this.user);
+    const upload$ = this.avatar
+      ? this.filesService.uploadImage(this.avatar)
+      : of({ url: this.user.avatarUrl });
+
+    upload$
+      .pipe(
+        switchMap((result: any) => {
+          formData.append("AvatarUrl", result.url);
+          console.log(result.url);
+          console.log(formData.get('AvatarUrl'));
+          return this.profileService.edit(formData);
+        })
+      )
+      .subscribe({
+        next: () => console.log("Profile saved!"),
+        error: (err) => console.error(err)
+      });
   }
+
 
   onCancel(): void {
     // logika dla przycisku anuluj
   }
+
 }

@@ -5,6 +5,7 @@ import {Login} from '../../model/login.model';
 import {CommonModule} from '@angular/common';
 import {AuthService} from '../../services/auth.service';
 import {LocalStorageService} from '../../services/local-storage.service';
+import {UserSessionService} from '../../services/user-service.service';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent {
   errorMessage: string = "";
 
   constructor(private fb: FormBuilder, private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private session: UserSessionService) {
     this.loginForm = this.fb.group({  })
   }
 
@@ -36,19 +38,12 @@ export class LoginComponent {
       const loginData: Login = this.loginForm.value;
       this.authService.login(loginData).subscribe(
         response => {
-          const token = response.token;
-          // console.log("teststsst " + response.);
-          localStorage.setItem('authToken', token);
-          localStorage.setItem('userId', response.userId);
-          localStorage.setItem('userName', response.userName);
-          localStorage.setItem('userEmail', response.Email);
-          localStorage.setItem('firstName', response.userName);
-
-          this.router.navigate(['/inspiration']);
+          this.session.setUserSession(response.user, response.token);
+          this.router.navigate(['/home']);
         },
         error => {
           this.errorMessage = error.message;
-          console.log(error);
+          console.log("TESTUJE" +error);
         }
       )
       console.log('Logowanie zakończone sukcesem', loginData);
@@ -57,4 +52,9 @@ export class LoginComponent {
       console.log('Formularz zawiera błędy');
     }
   }
+  logout(): void {
+    this.session.logout();
+    this.router.navigate(['/login']);
+  }
+
 }

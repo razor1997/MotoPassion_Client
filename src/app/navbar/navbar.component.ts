@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgIf} from '@angular/common';
+import {UserSessionService} from '../services/user-service.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,19 +14,22 @@ import {NgIf} from '@angular/common';
 export class NavbarComponent implements OnInit {
   show = true;
   selectedSite: string = 'journeys';
-  constructor(private router: Router) {}
+  avatarUrl: string | null = null;
+  constructor(private router: Router,
+              private session: UserSessionService) {}
+
   navigateTo(destination: string) {
     this.selectedSite = destination;
     this.router.navigate([destination]);
   }
   isUserLoggedIn(): boolean {
     // console.log('isUserLoggedIn' + localStorage.getItem('authToken'));
-    return !!localStorage.getItem('authToken');
+    this.avatarUrl = this.session.avatarUrl;
+    return !!this.session.token;
   }
   logoutUser(): void {
+    this.session.logout();
     this.router.navigate(['login']);
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userId');
   }
   getTitleSite(): string| null
   {

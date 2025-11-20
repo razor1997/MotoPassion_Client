@@ -11,12 +11,13 @@ import {HomeComponent} from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import {NavbarComponent} from './navbar/navbar.component';
-import {provideHttpClient} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, provideHttpClient} from '@angular/common/http';
 import {AuthService} from './services/auth.service';
 import {ProfileEditComponent} from './profile/profile-edit/profile-edit.component';
 import {ProfileSettingsComponent} from './profile/profile-settings/profile-settings.component';
 import {ProfilePreferencesComponent} from './profile/profile-preferences/profile-preferences.component';
 import {UserCardComponent} from './components/user-card/user-card.component';
+import {AuthInterceptor} from './interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -41,7 +42,14 @@ import {UserCardComponent} from './components/user-card/user-card.component';
     UserCardComponent
   ],
   providers: [AuthService,
-    provideHttpClient()],
+    provideHttpClient(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
+
   bootstrap: []
 })
 export class AppModule { }

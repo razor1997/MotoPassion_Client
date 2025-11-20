@@ -1,0 +1,18 @@
+.inspiration-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(2000px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.inspiration-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.inspiration-view, .inspiration-map {
+  width: 200px; /* Ustaw pełną szerokość dla obrazów */
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 10px; /* Odstęp pomiędzy obrazkiem widokowym a mapą */
+}

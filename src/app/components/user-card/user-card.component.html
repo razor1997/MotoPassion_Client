@@ -1,0 +1,9 @@
+<div class="user-card" *ngIf="user">
+  <img [src]="user.avatarUrl" alt="{{ user.name }}'s avatar" class="avatar" />
+  <div>
+    <h3>User: {{ user?.name }}</h3>
+    <p>Car: {{ user?.car }}</p>
+    <p>Miles: {{ user?.miles }}km</p>
+    <p>Friends: {{ user?.friends }}</p>
+  </div>
+</div>
