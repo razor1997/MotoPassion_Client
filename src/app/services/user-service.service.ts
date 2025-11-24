@@ -22,9 +22,17 @@ export class UserSessionService {
   get token(): string | null {
     return localStorage.getItem(this.keys.token);
   }
-
+  get firstName(): string | null {
+    return localStorage.getItem(this.keys.firstname)
+  }
+  get lastName(): string | null {
+    return localStorage.getItem(this.keys.lastname)
+  }
   get userId(): string | null {
     return localStorage.getItem(this.keys.userId);
+  }
+  get bio(): string | null {
+    return localStorage.getItem(this.keys.bio);
   }
 
   get userEmail(): string | null {

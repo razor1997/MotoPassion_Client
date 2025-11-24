@@ -16,3 +16,12 @@
   border-radius: 8px;
   margin-bottom: 10px; /* Odstęp pomiędzy obrazkiem widokowym a mapą */
 }
+.wall-container {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+

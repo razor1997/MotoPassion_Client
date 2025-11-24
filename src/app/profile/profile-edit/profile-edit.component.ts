@@ -7,6 +7,7 @@ import {CommonModule} from '@angular/common';
 import {ProfileEdit} from '../../model/profile-edit';
 import {FilesService} from '../../services/files.service';
 import {of, switchMap} from 'rxjs';
+import {UserSessionService} from '../../services/user-service.service';
 
 @Component({
   selector: 'app-profile-edit',
@@ -21,7 +22,7 @@ export class ProfileEditComponent {
   avatarUrl: string | null = null;
   initials = "AB";
   user= {
-    name: '',
+    firstName: '',
     surname: '',
     email: '',
     avatarUrl: '',
@@ -33,7 +34,8 @@ export class ProfileEditComponent {
   constructor(private https: HttpClient,
               private router: Router,
               private profileService: ProfileService,
-              private filesService: FilesService)
+              private filesService: FilesService,
+              private session: UserSessionService)
   {
   }
 
@@ -43,13 +45,13 @@ ngOnInit(): void {
 }
 setUserValue() {
   console.log('test'+localStorage.getItem('firstname'));
-  this.user.name=     localStorage.getItem('firstname') ?? '';
-  this.user.surname = localStorage.getItem('lastname') ?? '';
-  this.user.email=    localStorage.getItem('userEmail') ?? '';
-  this.user.bio=      localStorage.getItem('bio') ?? '';
+  this.user.firstName =  this.session.firstName ?? '';//   localStorage.getItem('firstname') ?? '';
+  this.user.surname = this.session.lastName ?? '';//localStorage.getItem('lastname') ?? '';
+  this.user.email= this.session.userEmail ?? '';// localStorage.getItem('email') ?? '';
+  this.user.bio=  this.session.bio ?? '';// localStorage.getItem('bio') ?? '';
   this.user.carModel= localStorage.getItem('carModel') ?? '';
   this.user.baseLocation=localStorage.getItem('baseLocation') ?? '';
-  this.avatarUrl=localStorage.getItem('avatarUrl') ?? '';
+  this.avatarUrl=this.session.avatarUrl ?? '';//localStorage.getItem('avatarUrl') ?? '';
 }
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -66,9 +68,9 @@ setUserValue() {
   console.log((localStorage.getItem('userId')));
     const formData = new FormData();
     formData.append("Bio", this.user.bio);
-    // formData.append("CarModel", this.user.carModel);
-    // formData.append("BaseLocation", this.user.baseLocation);
-    formData.append("Name", this.user.name);
+    formData.append("CarModel", this.user.carModel);
+    formData.append("BaseLocation", this.user.baseLocation);
+    formData.append("Name", this.user.firstName);
     formData.append("Surname", this.user.surname);
     formData.append("Email", this.user.email);
 

@@ -43,7 +43,6 @@ export class LoginComponent {
         },
         error => {
           this.errorMessage = error.message;
-          console.log("TESTUJE" +error);
         }
       )
       console.log('Logowanie zakończone sukcesem', loginData);
