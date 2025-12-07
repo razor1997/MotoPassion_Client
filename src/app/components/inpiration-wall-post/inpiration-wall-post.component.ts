@@ -1,11 +1,12 @@
 import {Component, Input} from '@angular/core';
 import {CommunityPost} from '../../model/community-post';
 import {DatePipe} from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-inpiration-wall-post',
   imports: [
-    DatePipe
+    DatePipe,CommonModule
   ],
   templateUrl: './inpiration-wall-post.component.html',
   styleUrl: './inpiration-wall-post.component.css'

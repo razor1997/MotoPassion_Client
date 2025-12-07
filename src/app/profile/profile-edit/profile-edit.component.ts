@@ -75,7 +75,7 @@ setUserValue() {
     formData.append("Email", this.user.email);
 
     const upload$ = this.avatar
-      ? this.filesService.uploadImage(this.avatar)
+      ? this.filesService.uploadImage(this.avatar,1)
       : of({ url: this.user.avatarUrl });
 
     upload$

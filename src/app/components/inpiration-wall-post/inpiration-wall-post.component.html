@@ -1,19 +1,19 @@
 <div class="post-card">
 
   <div class="post-header">
-    <img class="avatar" [src]="post.userAvatar" alt="avatar">
+    <img class="avatar" [src]="post.userAvatarUrl" alt="avatar">
     <div>
       <div class="user-name">{{ post.userName }}</div>
       <div class="post-date">{{ post.createdAt | date:'short' }}</div>
     </div>
   </div>
 
-  <img class="post-img" [src]="post.imageUrl">
+  <img class="post-img" [src]="post.photoUrl">
 
   <div class="post-desc">{{ post.description }}</div>
 
   <div *ngIf="post.location" class="location" (click)="navigateToLocation()">
-     {{ post.location?.name }} - <span class="link">Prowadź</span>
+     {{ post.location.name }} - <span class="link">Prowadź</span>
   </div>
 
 </div>

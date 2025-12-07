@@ -13,10 +13,10 @@ export class FilesService {
 
   }
 
-  uploadImage(file: File) : Observable<any>{
+  uploadImage(file: File, typePostPhoto:number) : Observable<any>{
     const formData = new FormData();
     formData.append("file", file, file.name);
 
-    return this.https.post(`${environment.urlAddress}/files/avatar`, formData);
+    return this.https.post(`${environment.urlAddress}/files/images/`, formData);
   }
 }

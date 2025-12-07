@@ -49,6 +49,12 @@ export class NavbarComponent implements OnInit {
     }
     return '';
   }
+  hover = false;
+
+  openAddInspiration() {
+    this.router.navigate(['/inspirations/add']);
+  }
+
   ngOnInit(): void {
   }
 }

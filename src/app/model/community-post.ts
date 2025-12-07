@@ -1,9 +1,9 @@
 export interface CommunityPost {
   id: string;
   userName: string;
-  userAvatar: string;
+  userAvatarUrl: string;
   createdAt: string;
-  imageUrl: string;
+  photoUrl: string;
   description: string;
   location?: {
     name: string;

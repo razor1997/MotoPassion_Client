@@ -14,6 +14,9 @@ import {ProfileSettingsComponent} from './profile/profile-settings/profile-setti
 import {AuthGuard} from './guards/auth.guard';
 import {RoleGuard} from './guards/role.guard';
 import {AdminPanelComponent} from './components/admin-panel/admin-panel/admin-panel.component';
+import {
+  InspirationWallPostAddComponent
+} from './components/inspiration-wall-post-add/inspiration-wall-post-add.component';
 
 
 export const routes: Routes = [
@@ -28,6 +31,7 @@ export const routes: Routes = [
   { path: 'profile/edit', component: ProfileEditComponent, canActivate: [AuthGuard] },
   { path: 'profile/settings', component: ProfileSettingsComponent },
   { path: 'profile/preferences', component: ProfileSettingsComponent },
+  { path: 'inspirations/add', component: InspirationWallPostAddComponent },
   {
     path: 'admin/panel',
     component: AdminPanelComponent,
