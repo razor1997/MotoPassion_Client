@@ -1,0 +1,78 @@
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  padding: 10px;
+}
+
+.post-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: scale 0.3s ease;
+  }
+
+  &:hover img {
+    scale: 1.07;
+  }
+
+  &:hover .post-overlay {
+    opacity: 1;
+  }
+}
+
+.post-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  color: white;
+}
+
+.post-info {
+  font-size: 14px;
+
+  .location {
+    opacity: 0.8;
+    font-size: 12px;
+  }
+}
+
+.edit-btn {
+  align-self: flex-end;
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+
+  &:hover {
+    background: white;
+  }
+}
+
+/* Responsywność */
+@media (max-width: 900px) {
+  .posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .posts-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

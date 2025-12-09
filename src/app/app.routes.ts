@@ -17,6 +17,7 @@ import {AdminPanelComponent} from './components/admin-panel/admin-panel/admin-pa
 import {
   InspirationWallPostAddComponent
 } from './components/inspiration-wall-post-add/inspiration-wall-post-add.component';
+import {InspirationUserPostsComponent} from './components/inspiration-user-posts/inspiration-user-posts.component';
 
 
 export const routes: Routes = [
@@ -32,6 +33,7 @@ export const routes: Routes = [
   { path: 'profile/settings', component: ProfileSettingsComponent },
   { path: 'profile/preferences', component: ProfileSettingsComponent },
   { path: 'inspirations/add', component: InspirationWallPostAddComponent },
+  {path: 'inspirations/users', component: InspirationUserPostsComponent },
   {
     path: 'admin/panel',
     component: AdminPanelComponent,

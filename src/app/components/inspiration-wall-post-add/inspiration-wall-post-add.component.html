@@ -1,0 +1,21 @@
+<div class="add-post-container">
+
+  <h2>Dodaj inspirację</h2>
+
+  <label class="img-picker">
+    <input type="file" accept="image/*" (change)="onImageSelected($event)">
+    <span>Wybierz zdjęcie</span>
+  </label>
+
+  <div class="preview" *ngIf="previewImage">
+    <img [src]="previewImage">
+  </div>
+
+  <textarea
+    [(ngModel)]="description"
+    placeholder="Dodaj opis…"
+  ></textarea>
+
+  <button (click)="submitPost()">Opublikuj</button>
+
+</div>

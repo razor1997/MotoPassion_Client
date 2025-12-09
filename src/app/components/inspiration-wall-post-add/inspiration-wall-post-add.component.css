@@ -1,0 +1,31 @@
+.add-post-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.img-picker input {
+  display: none;
+}
+
+.img-picker {
+  padding: 10px;
+  background: #eee;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.preview img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 15px;
+  padding: 10px;
+}

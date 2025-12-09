@@ -36,15 +36,18 @@ export class NavbarComponent implements OnInit {
     switch(this.selectedSite) {
       case 'journeys':{
         return "Journeys";
-      }break;
+      } break;
       case 'community':{
         return "Community";
-      }break;
+      } break;
       case 'inspiration':{
         return "Inspiration";
       }break;
       case 'profile-edit':{
         return "Edycja użytkownika";
+      }break;
+      case 'inspirations-user-posts':{
+        return "Twoje posty";
       }break;
     }
     return '';
