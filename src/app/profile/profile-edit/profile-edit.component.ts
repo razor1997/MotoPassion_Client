@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {ProfileService} from '../../services/profile.service';
 import {CommonModule} from '@angular/common';
-import {ProfileEdit} from '../../model/profile-edit';
 import {FilesService} from '../../services/files.service';
 import {of, switchMap} from 'rxjs';
 import {UserSessionService} from '../../services/user-service.service';

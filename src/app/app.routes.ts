@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { JourneysComponent } from './components/journeys/journeys.component';
 import { CommunityComponent } from './components/community/community.component';
 import { InspirationComponent } from './components/inspiration/inspiration.component';
