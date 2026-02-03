@@ -1,0 +1,54 @@
+<div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer">
+
+  <!-- Photo -->
+  <div class="relative h-48">
+    <img
+      [src]="event.photoUrl"
+      alt=""
+      class="w-full h-full object-cover"
+    />
+
+    <span class="absolute top-2 left-2 bg-black/60 text-white text-sm px-3 py-1 rounded-lg">
+      {{ getCategoryName(event.category) }}
+    </span>
+  </div>
+
+  <!-- Body -->
+  <div class="p-4">
+    <h2 class="text-lg font-semibold mb-1">
+      {{ event.title }}
+    </h2>
+
+    <p class="text-gray-600 text-sm mb-3 line-clamp-2">
+      {{ event.description }}
+    </p>
+
+    <div class="flex items-center text-sm text-gray-700 mb-2">
+      <span class="material-icons text-base mr-1">event</span>
+      {{ event.date | date:'medium' }}
+    </div>
+
+    <div class="flex items-center text-sm text-gray-700">
+      <span class="material-icons text-base mr-1">place</span>
+      {{ event.latitude }}, {{ event.longitude }}
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="flex items-center justify-between p-4 border-t">
+    <div class="flex items-center space-x-2">
+      <img
+        [src]="event.creator.avatarUrl"
+        class="w-8 h-8 rounded-full object-cover"
+      />
+      <span class="text-sm font-medium">
+        {{ event.creator.name }}
+      </span>
+    </div>
+
+    <button class="px-3 py-1 bg-primary text-white rounded-md text-sm">
+      Szczegóły
+    </button>
+  </div>
+
+</div>

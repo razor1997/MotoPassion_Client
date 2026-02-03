@@ -1,0 +1,57 @@
+<div class="event-form-card">
+  <h2>Utwórz wydarzenie</h2>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <input type="text" placeholder="Tytuł wydarzenia"
+           formControlName="Title" />
+    <div class="error" *ngIf="form.get('Title')?.invalid">
+      Tytuł jest wymagany
+    </div>
+
+    <textarea placeholder="Opis wydarzenia"
+              formControlName="Description"></textarea>
+    <div class="error" *ngIf="form.get('Description')?.invalid">
+      Tytuł jest wymagany
+    </div>
+
+    <input type="datetime-local"
+           formControlName="DateTime" />
+    <div class="error" *ngIf="form.get('DateTime')?.invalid">
+      Tytuł jest wymagany
+    </div>
+    <div class="row">
+      <input type="number" placeholder="Szerokość (lat)"
+             formControlName="Latitude" />
+
+      <input type="number" placeholder="Długość (lng)"
+             formControlName="Longitude" />
+    </div>
+    <div class="error" *ngIf="form.get('Latitude')?.invalid" >
+      Tytuł jest wymagany
+    </div>
+    <div class="error" *ngIf="form.get('Longitude')?.invalid" >
+      Tytuł jest wymagany
+    </div>
+    <select formControlName="Category">
+      <option [value]="0">Zlot</option>
+      <option [value]="1">Spot lokalny</option>
+      <option [value]="2">Trasa</option>
+      <option [value]="3">Event zamknięty</option>
+    </select>
+      <p>Maksymalna liczba uczestników</p>
+      <input type="number"
+             placeholder="Maksymalna liczba uczestników"
+             formControlName="MaxCountParticipants" />
+
+
+    <input type="file"
+           accept="image/*"
+           (change)="onFileSelected($event)" />
+
+    <button type="submit" [disabled]="form.invalid || loading">
+      {{ loading ? 'Zapisywanie...' : 'Dodaj event' }}
+    </button>
+
+  </form>
+</div>
