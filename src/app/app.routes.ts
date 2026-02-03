@@ -18,6 +18,7 @@ import {
   InspirationWallPostAddComponent
 } from './components/inspiration-wall-post-add/inspiration-wall-post-add.component';
 import {InspirationUserPostsComponent} from './components/inspiration-user-posts/inspiration-user-posts.component';
+import {EventCreateFormComponent} from './components/event/event-create-form/event-create-form.component';
 
 
 export const routes: Routes = [
@@ -34,6 +35,7 @@ export const routes: Routes = [
   { path: 'profile/preferences', component: ProfileSettingsComponent },
   { path: 'inspirations/add', component: InspirationWallPostAddComponent },
   {path: 'inspirations/users', component: InspirationUserPostsComponent },
+  {path: 'event/create', component: EventCreateFormComponent },
   {
     path: 'admin/panel',
     component: AdminPanelComponent,

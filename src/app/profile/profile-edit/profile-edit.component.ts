@@ -52,6 +52,7 @@ setUserValue() {
   this.user.carModel= localStorage.getItem('carModel') ?? '';
   this.user.baseLocation=localStorage.getItem('baseLocation') ?? '';
   this.avatarUrl=this.session.avatarUrl ?? '';//localStorage.getItem('avatarUrl') ?? '';
+  this.user.avatarUrl=this.session.avatarUrl ?? '';
 }
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -82,8 +83,6 @@ setUserValue() {
       .pipe(
         switchMap((result: any) => {
           formData.append("AvatarUrl", result.url);
-          console.log(result.url);
-          console.log(formData.get('AvatarUrl'));
           return this.profileService.edit(formData);
         })
       )
@@ -95,7 +94,7 @@ setUserValue() {
 
 
   onCancel(): void {
-    // logika dla przycisku anuluj
+    //
   }
 
 }

@@ -14,9 +14,11 @@
         </div>
       </ng-template>
     </div>
-
-    <input type="file" accept="image/*" (change)="onFileSelected($event)" />
-
+    <div>
+      <label for="avatar">Zdjęcie profilowe</label>
+      <input id="avatar" name="avatar" type="file" (change)="onFileSelected($event)">
+      <!--      <img *ngIf="currentAvatar" [src]="currentAvatar" alt="Current Avatar">-->
+    </div>
     <div>
       <label for="firstName">Imię</label>
       <input id="firstName" name="firstName" [(ngModel)]="user.firstName">
@@ -40,11 +42,6 @@
     <div>
       <label for="baseLocation">Lokalizacja</label>
       <input id="baseLocation" name="baseLocation" type="text" [(ngModel)]="user.baseLocation">
-    </div>
-    <div>
-      <label for="avatar">Zdjęcie profilowe</label>
-      <input id="avatar" name="avatar" type="file" (change)="onFileSelected($event)">
-<!--      <img *ngIf="currentAvatar" [src]="currentAvatar" alt="Current Avatar">-->
     </div>
     <div>
       <button type="submit">Zapisz</button>

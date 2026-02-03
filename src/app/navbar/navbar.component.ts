@@ -49,6 +49,9 @@ export class NavbarComponent implements OnInit {
       case 'inspirations-user-posts':{
         return "Twoje posty";
       }break;
+      case 'event-create-form':{
+        return "Utwórz wydarzenie";
+      }break;
     }
     return '';
   }
@@ -57,7 +60,9 @@ export class NavbarComponent implements OnInit {
   openAddInspiration() {
     this.router.navigate(['/inspirations/add']);
   }
-
+  openEventCreate(){
+    this.router.navigate(['/event/create']);
+  }
   ngOnInit(): void {
   }
 }
