@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {VehicleExpense} from '../../../model/vehicle-espense.model';
 
 @Component({
   selector: 'app-expense-part',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './expense-part.component.html',
   styleUrl: './expense-part.component.css'
 })
 export class ExpensePartComponent {
-
+  @Input() expense!: VehicleExpense;
+  @Output() remove = new EventEmitter<string>();
 }

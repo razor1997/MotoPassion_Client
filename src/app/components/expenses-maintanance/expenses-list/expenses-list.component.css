@@ -1,0 +1,22 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.empty {
+  color: #777;
+  font-size: 14px;
+}
+.header {
+  font-weight: 600;
+  background: #fafafa;
+  border-bottom: 1px solid #ddd;
+}
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.col { flex: 1; }
+.col.title { flex: 2; }

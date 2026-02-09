@@ -1,1 +1,21 @@
-<p>expenses-costs works!</p>
+<h3>Podsumowanie</h3>
+
+<div class="filters">
+  <div class="form-row">
+    <label>Od</label>
+    <input type="date" [ngModel]="filterFrom" (ngModelChange)="filterFromChange.emit($event)">
+  </div>
+  <div class="form-row">
+    <label>Do</label>
+    <input type="date" [ngModel]="filterTo" (ngModelChange)="filterToChange.emit($event)">
+  </div>
+</div>
+
+<div class="total">
+  <span>Suma wydatków</span>
+  <strong>{{ totalCost.toFixed(2) }} PLN</strong>
+</div>
+
+<div class="count">
+  Liczba wpisów: {{ totalCount }}
+</div>

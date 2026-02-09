@@ -1,1 +1,18 @@
-<p>expenses-list works!</p>
+<div class="list">
+  <div class="empty" *ngIf="expenses.length === 0">
+    Brak kosztów w wybranym zakresie.
+  </div>
+  <div class="row header">
+    <div class="col date">Data</div>
+    <div class="col category">Kategoria</div>
+    <div class="col title">Opis</div>
+    <div class="col cost">Koszt</div>
+    <div class="col actions">Akcje</div>
+  </div>
+</div>
+
+<app-expense-part
+  *ngFor="let e of expenses"
+  [expense]="e"
+  (remove)="remove.emit($event)">
+</app-expense-part>

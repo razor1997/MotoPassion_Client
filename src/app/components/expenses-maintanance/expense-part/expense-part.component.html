@@ -1,1 +1,9 @@
-<p>expense-part works!</p>
+<div class="row">
+  <div class="col date">{{ expense.date | date:'dd.MM.yyyy' }}</div>
+  <div class="col category">{{ expense.category }}</div>
+  <div class="col title">{{ expense.title }}</div>
+  <div class="col cost">{{ expense.cost.toFixed(2) }} PLN</div>
+  <div class="col actions">
+    <button class="ghost" (click)="remove.emit(expense.id)">Usuń</button>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+.row {
+  display: grid;
+  grid-template-columns: 140px 140px 1fr 140px 80px;
+  gap: 8px;
+  align-items: center;
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.col.cost,
+.col.actions {
+  text-align: right;
+}
+
+.ghost {
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .row {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 6px;
+  }
+  .col.actions, .col.cost {
+    text-align: left;
+  }
+}

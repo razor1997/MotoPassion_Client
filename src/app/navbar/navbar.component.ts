@@ -52,6 +52,10 @@ export class NavbarComponent implements OnInit {
       case 'event-create-form':{
         return "Utwórz wydarzenie";
       }break;
+      case 'expenses': {
+        return "Eksploatacja";
+      } break;
+
     }
     return '';
   }
