@@ -14,9 +14,13 @@
   border-bottom: 1px solid #ddd;
 }
 .row {
-  display: flex;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 140px 140px 1fr 80px 50px;
+  gap: 8px;
   align-items: center;
+  padding: 5px 8px;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
 }
 .col { flex: 1; }
 .col.title { flex: 2; }
