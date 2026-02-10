@@ -115,4 +115,9 @@ export class ExpensesPageComponent {
     const dd = String(d.getDate()).padStart(2, '0');
     return `${d.getFullYear()}-${mm}-${dd}`;
   }
+  onVehicleSelected(id: string) {
+    this.selectedVehicleId = id;
+    this.loadExpenses();
+  }
+
 }

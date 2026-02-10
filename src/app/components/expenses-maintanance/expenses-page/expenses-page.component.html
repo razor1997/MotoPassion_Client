@@ -1,9 +1,22 @@
 <div class="expenses-page">
-  <div class="header">
-    <h2>Eksploatacja i koszty</h2>
-    <p>Dodawaj wydatki i śledź historię eksploatacji auta.</p>
+  <div class="header h1">
+    <div class="form-header">
+      <p>Dodawaj wydatki i śledź historię eksploatacji auta.</p>
+    </div>
+    <div class="form-col">
+      <section>
+      <app-expenses-costs
+        [totalCost]="totalCost"
+        [(filterFrom)]="filterFrom"
+        [(filterTo)]="filterTo"
+        [totalCount]="filteredExpenses.length"
+        [vehicles]="vehicles"
+        [selectedVehicleId]="selectedVehicleId"
+        (vehicleChange)="onVehicleSelected($event)">
+      </app-expenses-costs>
+      </section>
+    </div>
   </div>
-
   <div class="grid">
     <section class="card">
       <h3>Dodaj koszt</h3>
@@ -15,6 +28,7 @@
         <label>Kategoria</label>
         <select [(ngModel)]="newExpense.category">
           <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+          <option [value]="1">sadasd</option>
         </select>
       </div>
       <div class="form-row">
@@ -34,27 +48,9 @@
 
     <section class="card list-card">
 
-      <div class="form-row">
-        <label>Pojazd</label>
-        <select [(ngModel)]="selectedVehicleId" (change)="loadExpenses()">
-          <option *ngFor="let v of vehicles" [value]="v.id">
-            {{ v.make }} {{ v.model }} ({{ v.year }})
-          </option>
-        </select>
-      </div>
       <app-expenses-list
         [expenses]="filteredExpenses"
         (remove)="removeExpense($event.toString())">
       </app-expenses-list>
     </section>
-
-    <section class="card">
-      <app-expenses-costs
-        [totalCost]="totalCost"
-        [(filterFrom)]="filterFrom"
-        [(filterTo)]="filterTo"
-        [totalCount]="filteredExpenses.length">
-      </app-expenses-costs>
-    </section>
-  </div>
 </div>

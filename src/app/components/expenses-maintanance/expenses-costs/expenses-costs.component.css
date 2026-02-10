@@ -1,0 +1,12 @@
+.filters {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 16px;
+  align-items: center;
+  width: 100%;
+  align-content: center;
+  border-bottom: 1px solid #ddd;
+  background: #fafafa;
+  border-left: 1px;
+
+}

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {Vehicle} from '../../../model/vehicle.model';
 
 @Component({
   selector: 'app-expenses-costs',
@@ -18,4 +19,12 @@ export class ExpensesCostsComponent {
 
   @Input() filterTo: string = '';
   @Output() filterToChange = new EventEmitter<string>();
+  @Input() vehicles: Vehicle[] = [];
+  @Input() selectedVehicleId: string | null = null;
+
+  @Output() vehicleChange = new EventEmitter<string>();
+
+  onVehicleChange(id: string) {
+    this.vehicleChange.emit(id);
+  }
 }
