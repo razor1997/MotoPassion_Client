@@ -15,7 +15,7 @@
 .grid {
    display: grid;
    grid-template-columns: 1fr 2.5fr;
-   gap: 16px;
+   gap: 50px;
    width: 100%;
  }
 
