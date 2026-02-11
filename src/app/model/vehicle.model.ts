@@ -2,7 +2,7 @@ export interface Vehicle {
   id: string;
   userId: string;
   category: number;
-  make: string;
+  mark: string;
   model: string;
   year: number;
   horsePower: number;
@@ -12,3 +12,16 @@ export interface Vehicle {
   vin?: string;
   createdAt: string;
 }
+export interface VehicleCreate {
+  userId: string;
+  category: number;
+  mark: string;
+  model: string;
+  year: number;
+  horsePower: number;
+  engineCapacity: number;
+  fuelType: number;
+  mileage?: number;
+  vin?: string;
+}
+

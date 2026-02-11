@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Vehicle} from '../../model/vehicle.model';
+import {Vehicle, VehicleCreate} from '../../model/vehicle.model';
 
 @Injectable({ providedIn: 'root' })
 export class VehicleService {
@@ -14,4 +14,8 @@ export class VehicleService {
     const url = userId ? `${this.baseUrl}?userId=${userId}` : this.baseUrl;
     return this.http.get<Vehicle[]>(url);
   }
+  create(dto: VehicleCreate): Observable<Vehicle> {
+    return this.http.post<Vehicle>(this.baseUrl, dto);
+  }
+
 }

@@ -19,6 +19,7 @@ import {
 import {InspirationUserPostsComponent} from './components/inspiration-user-posts/inspiration-user-posts.component';
 import {EventCreateFormComponent} from './components/event/event-create-form/event-create-form.component';
 import {ExpensesPageComponent} from './components/expenses-maintanance/expenses-page/expenses-page.component';
+import {VehicleAddComponent} from './components/vehicles/vehicle-add/vehicle-add.component';
 
 
 export const routes: Routes = [
@@ -37,6 +38,7 @@ export const routes: Routes = [
   {path: 'inspirations/users', component: InspirationUserPostsComponent },
   {path: 'event/create', component: EventCreateFormComponent },
   { path: 'expenses', component: ExpensesPageComponent },
+  { path: 'vehicles/add', component: VehicleAddComponent },
   {
     path: 'admin/panel',
     component: AdminPanelComponent,

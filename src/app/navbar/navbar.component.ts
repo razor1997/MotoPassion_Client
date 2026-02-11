@@ -67,6 +67,10 @@ export class NavbarComponent implements OnInit {
   openEventCreate(){
     this.router.navigate(['/event/create']);
   }
+  openVehicleAdd() {
+    this.router.navigate(['/vehicles/add']);
+  }
+
   ngOnInit(): void {
   }
 }

@@ -10,3 +10,12 @@
   border-left: 1px;
 
 }
+select {
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 14px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+

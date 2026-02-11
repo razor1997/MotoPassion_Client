@@ -1,0 +1,49 @@
+.card {
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  padding: 16px;
+  align-content: center;
+  justify-content: center;
+  display: grid;
+  background: #fafafa;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 16px;
+}
+.form-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+label {
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 6px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+input, select {
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 14px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.primary {
+  background: #1f6feb;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}

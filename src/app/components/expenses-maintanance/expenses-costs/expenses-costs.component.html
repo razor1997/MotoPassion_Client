@@ -20,7 +20,7 @@
     <label>Pojazd</label>
     <select [ngModel]="selectedVehicleId" (ngModelChange)="onVehicleChange($event)">
       <option *ngFor="let v of vehicles" [value]="v.id">
-        {{ v.make }} {{ v.model }}
+        {{ v.mark }} {{ v.model }}
       </option>
     </select>
   </div>
