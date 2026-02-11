@@ -27,13 +27,16 @@
       <div class="form-row">
         <label>Kategoria</label>
         <select [(ngModel)]="newExpense.category">
-          <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
-          <option [value]="1">sadasd</option>
+          <option *ngFor="let c of expensesCategory" [value]="c.id">{{ c.name }}</option>
         </select>
       </div>
       <div class="form-row">
         <label>Opis</label>
         <input type="text" placeholder="Np. Wymiana zderzaka" [(ngModel)]="newExpense.title">
+      </div>
+      <div class="form-row">
+        <label>Faktura/Paragon</label>
+<!--        todo add photo-->
       </div>
       <div class="form-row">
         <label>Koszt (PLN)</label>
@@ -53,4 +56,5 @@
         (remove)="removeExpense($event.toString())">
       </app-expenses-list>
     </section>
+</div>
 </div>

@@ -7,7 +7,8 @@ import {Vehicle} from '../../../model/vehicle.model';
 import {VehicleExpense, VehicleExpenseCreate} from '../../../model/vehicle-espense.model';
 import {VehicleService} from '../../../services/vehicle/vehicle.service';
 import {VehicleExpenseService} from '../../../services/vehicle-expense/vehicle-expense.service';
-import {ExpenseCategory} from '../expenses-utils/expenses-category';
+import {EXPENSE_CATEGORIES} from '../expenses-utils/expenses-category';
+// import {ExpenseCategory} from '../expenses-utils/expenses-category';
 
 @Component({
   selector: 'app-expenses-page',
@@ -17,9 +18,8 @@ import {ExpenseCategory} from '../expenses-utils/expenses-category';
   styleUrl: './expenses-page.component.css'
 })
 export class ExpensesPageComponent {
-  categories: ExpenseCategory[] = [
-    ExpenseCategory.Naprawa,2,3,4,5,6
-  ];
+  expensesCategory = EXPENSE_CATEGORIES;
+
   vehicles: Vehicle[] = [];
   selectedVehicleId: string | null = null;
   expenses: VehicleExpense[] = [];
@@ -119,5 +119,4 @@ export class ExpensesPageComponent {
     this.selectedVehicleId = id;
     this.loadExpenses();
   }
-
 }

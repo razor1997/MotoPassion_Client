@@ -1,4 +1,3 @@
-import {ExpenseCategory} from '../components/expenses-maintanance/expenses-utils/expenses-category';
 
 export interface VehicleExpense {
   id: string;
@@ -7,7 +6,7 @@ export interface VehicleExpense {
   description?: string;
   cost: number;
   date: string;
-  category: ExpenseCategory;
+  category: number;
   createdAt: string;
 }
 
