@@ -1,0 +1,16 @@
+<div class="vehicles-page">
+  <h2>Twoje auta</h2>
+
+  <div class="loading" *ngIf="loading">Ładowanie...</div>
+
+  <div class="grid" *ngIf="!loading">
+    <app-vehicle-card
+      *ngFor="let v of vehicles"
+      [vehicle]="v">
+    </app-vehicle-card>
+
+    <div class="empty" *ngIf="vehicles.length === 0">
+      Brak dodanych pojazdów.
+    </div>
+  </div>
+</div>

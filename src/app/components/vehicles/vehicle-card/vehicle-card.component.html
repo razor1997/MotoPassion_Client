@@ -1,0 +1,23 @@
+<div class="card">
+  <div class="photo">
+    <span>Foto</span>
+  </div>
+
+  <div class="title">
+    {{ vehicle.mark }} {{ vehicle.model }}
+  </div>
+
+  <div class="meta">
+    <div><strong>VIN:</strong> {{ vehicle.vin || '—' }}</div>
+    <div><strong>Rok:</strong> {{ vehicle.year }}</div>
+    <div><strong>Moc:</strong> {{ vehicle.horsePower }} KM</div>
+    <div><strong>Pojemność:</strong> {{ vehicle.engineCapacity }} L</div>
+    <div><strong>Paliwo:</strong> {{ fuelLabel }}</div>
+    <div><strong>Przebieg:</strong> {{ vehicle.mileage || '—' }} km</div>
+  </div>
+
+  <div class="extras">
+    <div><strong>Przegląd:</strong> —</div>
+    <div><strong>Ubezpieczenie:</strong> —</div>
+  </div>
+</div>
