@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Vehicle} from '../../../model/vehicle.model';
 import {CommonModule} from '@angular/common';
+import {VEHICLE_PETROL} from '../vehicle-utils/vehicle-utils';
 
 @Component({
   selector: 'app-vehicle-card',
@@ -11,15 +12,12 @@ import {CommonModule} from '@angular/common';
 })
 export class VehicleCardComponent {
   @Input() vehicle!: Vehicle;
-  get fuelLabel(): string {
-    const map: Record<number, string> = {
-      1: 'Benzyna',
-      2: 'Diesel',
-      3: 'Hybryda',
-      4: 'Elektryk',
-      5: 'LPG',
-      99: 'Inne'
-    };
-    return map[this.vehicle.fuelType] ?? '—';
+   vehiclePetrol = VEHICLE_PETROL;
+
+  getfuelLabel(): string {
+    if(this.vehicle) {
+      return <string>this.vehiclePetrol.at(this.vehicle.fuelType);
+    }
+    return '-';
   }
 }

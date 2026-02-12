@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
 
   navigateTo(destination: string) {
     this.selectedSite = destination;
+    console.log(destination);
     this.router.navigate([destination]);
   }
   isUserLoggedIn(): boolean {
@@ -34,6 +35,9 @@ export class NavbarComponent implements OnInit {
   getTitleSite(): string| null
   {
     switch(this.selectedSite) {
+      case 'vehicles/user-list':{
+        return 'Twoje pojazdy';
+      }break;
       case 'journeys':{
         return "Journeys";
       } break;
@@ -55,7 +59,6 @@ export class NavbarComponent implements OnInit {
       case 'expenses': {
         return "Eksploatacja";
       } break;
-
     }
     return '';
   }

@@ -12,7 +12,7 @@
     <div><strong>Rok:</strong> {{ vehicle.year }}</div>
     <div><strong>Moc:</strong> {{ vehicle.horsePower }} KM</div>
     <div><strong>Pojemność:</strong> {{ vehicle.engineCapacity }} L</div>
-    <div><strong>Paliwo:</strong> {{ fuelLabel }}</div>
+    <div><strong>Paliwo:</strong> {{ getfuelLabel() }}</div>
     <div><strong>Przebieg:</strong> {{ vehicle.mileage || '—' }} km</div>
   </div>
 
