@@ -17,5 +17,17 @@ export class VehicleService {
   create(dto: VehicleCreate): Observable<Vehicle> {
     return this.http.post<Vehicle>(this.baseUrl, dto);
   }
+  update(id: string, dto: VehicleCreate) {
+    return this.http.put<Vehicle>(`${this.baseUrl}/${id}`, dto);
+  }
+
+  delete(id: string) {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  getById(id: string) {
+    return this.http.get<Vehicle>(`${this.baseUrl}/${id}`);
+  }
+
 
 }

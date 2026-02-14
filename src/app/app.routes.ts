@@ -21,6 +21,7 @@ import {EventCreateFormComponent} from './components/event/event-create-form/eve
 import {ExpensesPageComponent} from './components/expenses-maintanance/expenses-page/expenses-page.component';
 import {VehicleAddComponent} from './components/vehicles/vehicle-add/vehicle-add.component';
 import {VehiclesUserListComponent} from './components/vehicles/vehicles-user-list/vehicles-user-list.component';
+import {VehicleEditComponent} from './components/vehicles/vehicle-edit/vehicle-edit.component';
 
 
 export const routes: Routes = [
@@ -41,6 +42,8 @@ export const routes: Routes = [
   { path: 'expenses', component: ExpensesPageComponent },
   { path: 'vehicles/add', component: VehicleAddComponent },
   { path: 'vehicles/user-list', component: VehiclesUserListComponent },
+  { path: 'vehicles/edit/:id', component: VehicleEditComponent },
+
   {
     path: 'admin/panel',
     component: AdminPanelComponent,

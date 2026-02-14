@@ -1,0 +1,58 @@
+<div class="card">
+  <h3>Edytuj auto</h3>
+
+  <div class="form-row">
+    <label>Kategoria</label>
+    <select [(ngModel)]="form.category">
+      <option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</option>
+    </select>
+  </div>
+
+  <div class="form-col">
+  <div class="form-row">
+    <label>Marka</label>
+    <input type="text" [(ngModel)]="form.mark">
+  </div>
+
+  <div class="form-row">
+    <label>Model</label>
+    <input type="text" [(ngModel)]="form.model">
+  </div>
+
+  <div class="form-row">
+    <label>Rok</label>
+    <input type="number" [(ngModel)]="form.year">
+  </div>
+</div >
+  <div class="form-col">
+  <div class="form-row">
+    <label>Moc (KM)</label>
+    <input type="number" [(ngModel)]="form.horsePower">
+  </div>
+
+  <div class="form-row">
+    <label>Pojemność (L)</label>
+    <input type="number" step="0.1" [(ngModel)]="form.engineCapacity">
+  </div>
+
+  <div class="form-row">
+    <label>Rodzaj paliwa</label>
+    <select [(ngModel)]="form.fuelType">
+      <option *ngFor="let f of fuelTypes" [value]="f.id">{{ f.name }}</option>
+    </select>
+  </div>
+</div>
+  <div class="form-row">
+    <label>Przebieg</label>
+    <input type="number" [(ngModel)]="form.mileage">
+  </div>
+
+  <div class="form-row">
+    <label>VIN</label>
+    <input type="text" [(ngModel)]="form.vin">
+  </div>
+
+  <button class="primary" (click)="submit()" [disabled]="saving">
+    {{ saving ? 'Zapisywanie...' : 'Zapisz zmiany' }}
+  </button>
+</div>

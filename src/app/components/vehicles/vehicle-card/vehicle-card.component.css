@@ -39,3 +39,25 @@
   padding-top: 8px;
   border-top: 1px solid #eee;
 }
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.ghost {
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.danger {
+  background: #ffecec;
+  border: 1px solid #f5b5b5;
+  color: #b30000;
+  border-radius: 6px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
