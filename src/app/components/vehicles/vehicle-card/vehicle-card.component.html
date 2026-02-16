@@ -1,6 +1,7 @@
 <div class="card">
   <div class="photo">
-    <span>Foto</span>
+    <img *ngIf="vehicle.imageUrl" [src]="vehicle.imageUrl" alt="photo">
+    <span *ngIf="!vehicle.imageUrl">Foto</span>
   </div>
 
   <div class="title">

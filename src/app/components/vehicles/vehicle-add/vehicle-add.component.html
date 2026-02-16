@@ -1,5 +1,14 @@
 <div class="card">
-  <h2 align="center">Dodaj auto</h2>
+  <h2>Dodaj auto</h2>
+  <div class="form-row">
+    <label>Zdjęcie pojazdu</label>
+    <input type="file" accept="image/*" (change)="onFileSelected($event)">
+    <div class="preview" *ngIf="form.imageUrl">
+      <img [src]="form.imageUrl" alt="photo">
+    </div>
+    <div class="hint" *ngIf="uploading">Wysyłanie...</div>
+  </div>
+
   <div class="form-col">
     <div class="form-row">
       <label>Kategoria</label>

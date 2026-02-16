@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import {Vehicle, VehicleCreate} from '../../../model/vehicle.model';
+import {Vehicle, VehicleUpdate} from '../../../model/vehicle.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {VehicleService} from '../../../services/vehicle/vehicle.service';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {categories, fuelTypes} from '../vehicle-utils/vehicle-utils';
+import {FilesService} from '../../../services/files.service';
+import {of, switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-vehicle-edit',
@@ -14,7 +16,7 @@ import {categories, fuelTypes} from '../vehicle-utils/vehicle-utils';
 })
 export class VehicleEditComponent {
   id!: string;
-  form: VehicleCreate = {
+  form: VehicleUpdate = {
     userId: '',
     category: 1,
     mark: '',
@@ -24,15 +26,20 @@ export class VehicleEditComponent {
     engineCapacity: 1.0,
     fuelType: 1,
     mileage: undefined,
-    vin: ''
+    vin: '',
+    imageUrl: '',
   };
 
   saving = false;
+  uploading = false;
+  image: File | null = null;
+  imageUrl: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private vehicleService: VehicleService
+    private vehicleService: VehicleService,
+    private filesService: FilesService
   ) {}
 
   ngOnInit(): void {
@@ -49,7 +56,8 @@ export class VehicleEditComponent {
           engineCapacity: v.engineCapacity,
           fuelType: v.fuelType,
           mileage: v.mileage,
-          vin: v.vin
+          vin: v.vin,
+          imageUrl: v.imageUrl
         };
       }
     });
@@ -57,17 +65,40 @@ export class VehicleEditComponent {
 
   submit(): void {
     this.saving = true;
-    this.vehicleService.update(this.id, this.form).subscribe({
-      next: () => {
-        this.saving = false;
-        this.router.navigate(['/vehicles/user-list']);
-      },
-      error: () => {
-        this.saving = false;
-      }
-    });
-  }
 
+
+    const upload$ = this.image
+      ? this.filesService.uploadImage(this.image, 1)
+      : of({url: this.form.imageUrl});
+
+    upload$
+      .pipe(
+        switchMap((result: any) => {
+          console.log(result.url);
+          this.form.imageUrl = result.url;
+          return this.vehicleService.update(this.id, this.form)
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.saving = false;
+          this.router.navigate(['/vehicles/user-list']);
+        },
+        error: (err) => {
+          this.saving = false;
+          console.error(err)
+        }
+      });
+  }
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+
+    this.image = file;
+    const reader = new FileReader();
+    reader.onload = () => this.imageUrl = reader.result as string;
+    reader.readAsDataURL(file);
+  }
   protected readonly categories = categories;
   protected readonly fuelTypes = fuelTypes;
 }
