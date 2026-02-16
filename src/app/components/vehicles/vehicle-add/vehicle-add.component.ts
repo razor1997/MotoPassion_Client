@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import {VehicleCreate} from '../../../model/vehicle.model';
 import {VehicleService} from '../../../services/vehicle/vehicle.service';
-import {FormBuilder, FormsModule} from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
+import {FilesService} from '../../../services/files.service';
+import {of, switchMap} from 'rxjs';
 
 @Component({
   selector: 'app-vehicle-add',
@@ -30,6 +32,9 @@ export class VehicleAddComponent {
     { id: 5, name: 'LPG' },
     { id: 99, name: 'Inne' }
   ];
+  uploading = false;
+  image: File | null = null;
+  imageUrl: string | null = null;
 
   form: VehicleCreate = {
     userId: localStorage.getItem('userId') || '',
@@ -41,24 +46,52 @@ export class VehicleAddComponent {
     engineCapacity: 1.0,
     fuelType: 1,
     mileage: undefined,
-    vin: ''
+    vin: '',
+    imageUrl: '',
   };
 
   saving = false;
-  constructor(private vehicleService: VehicleService, private router: Router) { }
+  constructor(private vehicleService: VehicleService,
+              private router: Router,
+              private fileService: FilesService) { }
 
   submit(): void {
     if (!this.form.userId || !this.form.mark || !this.form.model) return;
 
     this.saving = true;
-    this.vehicleService.create(this.form).subscribe({
-      next: () => {
-        this.saving = false;
-        this.router.navigate(['/inspiration']);
-      },
-      error: () => {
-        this.saving = false;
-      }
-    });
+    const upload$ = this.image
+      ? this.fileService.uploadImage(this.image,1)
+      : of({ url: '' });
+
+    upload$
+      .pipe(
+        switchMap((result: any) => {
+          console.log(result.url);
+          this.form.imageUrl = result.url;
+          return this.vehicleService.create(this.form);
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.saving = false;
+          this.router.navigate(['/inspiration']);
+          console.log("Profile saved!")
+        },
+        error: (err) =>{
+          this.saving = false;
+          console.error(err)
+        }
+      });
+
+
+  }
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+
+    this.image = file;
+    const reader = new FileReader();
+    reader.onload = () => this.imageUrl = reader.result as string;
+    reader.readAsDataURL(file);
   }
 }
