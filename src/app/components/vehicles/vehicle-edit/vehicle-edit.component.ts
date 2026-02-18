@@ -28,6 +28,8 @@ export class VehicleEditComponent {
     mileage: undefined,
     vin: '',
     imageUrl: '',
+    dateInspection: '',
+    dateInsurance: ''
   };
 
   saving = false;
@@ -57,7 +59,9 @@ export class VehicleEditComponent {
           fuelType: v.fuelType,
           mileage: v.mileage,
           vin: v.vin,
-          imageUrl: v.imageUrl
+          imageUrl: v.imageUrl,
+          dateInspection: v.dateInspection? v.dateInspection.split('T')[0] : '',
+          dateInsurance: v.dateInsurance? v.dateInsurance.split('T')[0] : '',
         };
       }
     });
@@ -65,6 +69,8 @@ export class VehicleEditComponent {
 
   submit(): void {
     this.saving = true;
+    this.form.dateInspection = `${this.form.dateInspection}T00:00:00`;
+    this.form.dateInsurance = `${this.form.dateInsurance}T00:00:00`;
 
 
     const upload$ = this.image
@@ -99,6 +105,11 @@ export class VehicleEditComponent {
     reader.onload = () => this.imageUrl = reader.result as string;
     reader.readAsDataURL(file);
   }
+  toDateInput(value: string | null | undefined): string {
+    if (!value) return '';
+    return value.split('T')[0];
+  }
+
   protected readonly categories = categories;
   protected readonly fuelTypes = fuelTypes;
 }

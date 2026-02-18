@@ -12,6 +12,8 @@ export interface Vehicle {
   vin?: string;
   createdAt: string;
   imageUrl:string;
+  dateInsurance: string;
+  dateInspection: string;
 }
 export interface VehicleCreate {
   userId: string;
@@ -25,6 +27,8 @@ export interface VehicleCreate {
   mileage?: number;
   vin?: string;
   imageUrl: string;
+  dateInsurance: string;
+  dateInspection: string;
 }
 export interface VehicleUpdate {
   userId: string;
@@ -38,5 +42,7 @@ export interface VehicleUpdate {
   mileage?: number;
   vin?: string;
   imageUrl: string;
+  dateInsurance: string;
+  dateInspection: string;
 }
 

@@ -58,7 +58,16 @@
     <label>VIN</label>
     <input type="text" [(ngModel)]="form.vin">
   </div>
-
+  <div class="form-col">
+    <div class="form-row">
+      <label>Data ubezpieczenia</label>
+      <input type="date" [(ngModel)]="form.dateInsurance">
+    </div>
+    <div class="form-row">
+      <label>Data przeglądu</label>
+      <input type="date" [(ngModel)]="form.dateInspection">
+    </div>
+  </div>
   <button class="primary" (click)="submit()" [disabled]="saving">
     {{ saving ? 'Zapisywanie...' : 'Zapisz zmiany' }}
   </button>

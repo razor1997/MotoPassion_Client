@@ -18,8 +18,8 @@
   </div>
 
   <div class="extras">
-    <div><strong>Przegląd:</strong> —</div>
-    <div><strong>Ubezpieczenie:</strong> —</div>
+    <div><strong>Przegląd:</strong> {{vehicle.dateInspection | date:'dd.MM.yyyy'}} </div>
+    <div><strong>Ubezpieczenie:</strong> {{vehicle.dateInsurance | date:'dd.MM.yyyy'}}</div>
   </div>
   <div class="actions">
     <button class="ghost" (click)="edit()">Edytuj</button>

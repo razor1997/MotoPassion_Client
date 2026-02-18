@@ -48,6 +48,8 @@ export class VehicleAddComponent {
     mileage: undefined,
     vin: '',
     imageUrl: '',
+    dateInspection: '',
+    dateInsurance: ''
   };
 
   saving = false;
@@ -74,7 +76,7 @@ export class VehicleAddComponent {
       .subscribe({
         next: () => {
           this.saving = false;
-          this.router.navigate(['/inspiration']);
+          this.router.navigate(['vehicles/user-list']);
           console.log("Profile saved!")
         },
         error: (err) =>{
