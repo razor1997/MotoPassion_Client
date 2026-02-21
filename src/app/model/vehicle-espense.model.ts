@@ -8,6 +8,8 @@ export interface VehicleExpense {
   date: string;
   category: number;
   createdAt: string;
+  mileage: number;
+  factureImageUrl: string;
 }
 
 export interface VehicleExpenseCreate {
@@ -17,4 +19,6 @@ export interface VehicleExpenseCreate {
   cost: number;
   date: string;
   category: number;
+  mileage: number;
+  factureImageUrl: string;
 }

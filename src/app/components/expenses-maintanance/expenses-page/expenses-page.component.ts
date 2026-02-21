@@ -8,6 +8,9 @@ import {VehicleExpense, VehicleExpenseCreate} from '../../../model/vehicle-espen
 import {VehicleService} from '../../../services/vehicle/vehicle.service';
 import {VehicleExpenseService} from '../../../services/vehicle-expense/vehicle-expense.service';
 import {EXPENSE_CATEGORIES} from '../expenses-utils/expenses-category';
+import {UtilsFolderNames} from '../../../assets/utils';
+import {of, switchMap} from 'rxjs';
+import {FilesService} from '../../../services/files.service';
 // import {ExpenseCategory} from '../expenses-utils/expenses-category';
 
 @Component({
@@ -20,6 +23,8 @@ import {EXPENSE_CATEGORIES} from '../expenses-utils/expenses-category';
 export class ExpensesPageComponent {
   expensesCategory = EXPENSE_CATEGORIES;
 
+  factureImage: File | null = null;
+  factureImageUrl: string | null = null;
   vehicles: Vehicle[] = [];
   selectedVehicleId: string | null = null;
   expenses: VehicleExpense[] = [];
@@ -31,22 +36,26 @@ export class ExpensesPageComponent {
     cost: 0,
     description: '',
     vehicleId: '',
-    createdAt:''
+    createdAt: '',
+    mileage: 0,
+    factureImageUrl: ''
   };
 
   constructor(
     private vehicleService: VehicleService,
-    private expenseService: VehicleExpenseService
+    private expenseService: VehicleExpenseService,
+    private filesService: FilesService
+  ) {
+  }
 
-  ){}
   ngOnInit(): void {
     this.loadVehicles();
   }
+
   filterFrom: string = '';
   filterTo: string = '';
 
   loadVehicles(): void {
-    // jeśli masz userId -> wstaw tutaj
     this.vehicleService.getAll().subscribe({
       next: (vehicles) => {
         this.vehicles = vehicles;
@@ -67,6 +76,7 @@ export class ExpensesPageComponent {
         next: (data) => this.expenses = data
       });
   }
+
   get filteredExpenses(): VehicleExpense[] {
     return this.expenses
       .filter(e => {
@@ -83,21 +93,38 @@ export class ExpensesPageComponent {
   get totalCost(): number {
     return this.filteredExpenses.reduce((sum, e) => sum + e.cost, 0);
   }
+
   addExpense(): void {
     if (!this.selectedVehicleId) return;
 
-    const dto: VehicleExpenseCreate = {
+    let dto: VehicleExpenseCreate = {
       vehicleId: this.selectedVehicleId,
       title: this.newExpense.title,
       description: this.newExpense.description,
       cost: Number(this.newExpense.cost),
       date: this.newExpense.date,
-      category: this.newExpense.category
+      category: this.newExpense.category,
+      mileage: this.newExpense.mileage,
+      factureImageUrl: this.newExpense.factureImageUrl,
     };
 
-    this.expenseService.create(dto).subscribe({
-      next: () => this.loadExpenses()
-    });
+    const upload$ = this.factureImage
+      ? this.filesService.uploadImage(this.factureImage, 1)
+      : of({url: ''});
+
+    upload$
+      .pipe(
+        switchMap((result: any) => {
+            return this.expenseService.create(dto);
+          }
+        ))
+      .subscribe({
+        next: () => {
+          next: () => this.loadExpenses();
+          console.log("Profile saved!")
+        },
+        error: (err) => console.error(err)
+      });
   }
 
   removeExpense(id: string): void {
@@ -118,5 +145,16 @@ export class ExpensesPageComponent {
   onVehicleSelected(id: string) {
     this.selectedVehicleId = id;
     this.loadExpenses();
+  }
+
+  onFileSelected(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (!file) return;
+
+    this.factureImage = file;
+    // this.factureImage.name = '';//UtilsFolderNames.vehicle_expenses_factures;
+    const reader = new FileReader();
+    reader.onload = () => this.factureImageUrl = reader.result as string;
+    reader.readAsDataURL(file);
   }
 }

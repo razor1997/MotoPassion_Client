@@ -36,11 +36,18 @@
       </div>
       <div class="form-row">
         <label>Faktura/Paragon</label>
-<!--        todo add photo-->
+        <input type="file" accept="image/*" (change)="onFileSelected($event)">
+        <div class="preview" *ngIf="newExpense.factureImageUrl">
+          <img [src]="newExpense.factureImageUrl" alt="photo">
+        </div>
       </div>
       <div class="form-row">
         <label>Koszt (PLN)</label>
         <input type="number" min="0" step="0.01" [(ngModel)]="newExpense.cost">
+      </div>
+      <div class="form-row">
+        <label>Przebieg</label>
+        <input type="number" min="0" [(ngModel)]="newExpense.mileage">
       </div>
       <div class="form-row">
         <label>Opis (opcjonalnie)</label>
