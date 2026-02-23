@@ -8,7 +8,6 @@ import {VehicleExpense, VehicleExpenseCreate} from '../../../model/vehicle-espen
 import {VehicleService} from '../../../services/vehicle/vehicle.service';
 import {VehicleExpenseService} from '../../../services/vehicle-expense/vehicle-expense.service';
 import {EXPENSE_CATEGORIES} from '../expenses-utils/expenses-category';
-import {UtilsFolderNames} from '../../../assets/utils';
 import {of, switchMap} from 'rxjs';
 import {FilesService} from '../../../services/files.service';
 // import {ExpenseCategory} from '../expenses-utils/expenses-category';
@@ -84,8 +83,8 @@ export class ExpensesPageComponent {
         const from = this.filterFrom ? this.toDate(this.filterFrom) : null;
         const to = this.filterTo ? this.toDate(this.filterTo) : null;
         if (from && d < from) return false;
-        if (to && d > to) return false;
-        return true;
+        return !(to && d > to);
+
       })
       .sort((a, b) => (a.date < b.date ? 1 : -1));
   }
@@ -115,12 +114,13 @@ export class ExpensesPageComponent {
     upload$
       .pipe(
         switchMap((result: any) => {
-            return this.expenseService.create(dto);
+          dto.factureImageUrl = result?.url ?? '';
+          return this.expenseService.create(dto);
           }
         ))
       .subscribe({
         next: () => {
-          next: () => this.loadExpenses();
+          this.loadExpenses();
           console.log("Profile saved!")
         },
         error: (err) => console.error(err)
