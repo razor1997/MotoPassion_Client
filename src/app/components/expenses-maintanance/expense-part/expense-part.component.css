@@ -1,6 +1,6 @@
 .row {
   display: grid;
-  grid-template-columns: 140px 140px 1fr 140px 80px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   gap: 8px;
   align-items: center;
   padding: 10px 8px;
@@ -9,10 +9,15 @@
 }
 
 .col.cost,
-.col.actions {
-  text-align: right;
+.col.actions,
+.col.summary,
+.col.sum{
+  text-align: left;
 }
-
+.facture {
+  border-radius: 50%;
+  width: 60px;
+}
 .ghost {
   background: transparent;
   border: 1px solid #ddd;
@@ -26,7 +31,9 @@
     grid-template-columns: 1fr 1fr;
     row-gap: 6px;
   }
-  .col.actions, .col.cost {
+  .col.actions,
+  .col.mileage,
+  .col.cost {
     text-align: left;
   }
 }

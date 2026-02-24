@@ -3,6 +3,9 @@
   <div class="col category">{{ getCategoryDetails(expense.category )}}</div>
   <div class="col mileage">{{ expense.mileage }}</div>
   <div class="col title">{{ expense.title }}</div>
+<!--  <div class="col facture">-->
+    <img [src]="expense.factureImageUrl" alt="{{ expense.id }}" class="facture" />
+<!--  </div>-->
   <div class="col cost">{{ expense.cost.toFixed(2) }} PLN</div>
   <div class="col actions">
     <button class="ghost" (click)="showMore.emit(expense.id)">Więcej</button>
