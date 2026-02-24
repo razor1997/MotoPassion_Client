@@ -19,4 +19,14 @@ export class ExpensePartComponent {
   getCategoryDetails(id: number) {
     return this.expensesCategory[id].name;
   }
+
+  activeImageUrl: string | null = null;
+
+  openImage(url: string) {
+    this.activeImageUrl = url;
+  }
+
+  closeImage() {
+    this.activeImageUrl = null;
+  }
 }

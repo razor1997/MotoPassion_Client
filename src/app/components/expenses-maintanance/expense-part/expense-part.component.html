@@ -4,7 +4,13 @@
   <div class="col mileage">{{ expense.mileage }}</div>
   <div class="col title">{{ expense.title }}</div>
 <!--  <div class="col facture">-->
-    <img [src]="expense.factureImageUrl" alt="{{ expense.id }}" class="facture" />
+  <img
+    *ngIf="expense.factureImageUrl"
+    class="thumb"
+    [src]="expense.factureImageUrl"
+    alt="Faktura"
+    (click)="openImage(expense.factureImageUrl)"
+  />
 <!--  </div>-->
   <div class="col cost">{{ expense.cost.toFixed(2) }} PLN</div>
   <div class="col actions">
@@ -12,3 +18,9 @@
     <button class="ghost" (click)="remove.emit(expense.id)">Usuń</button>
   </div>
 </div>
+
+<div class="lightbox" *ngIf="activeImageUrl" (click)="closeImage()">
+  <img class="lightbox-img" [src]="activeImageUrl" alt="Faktura" (click)="$event.stopPropagation()">
+  <button class="lightbox-close" (click)="closeImage()">×</button>
+</div>
+
