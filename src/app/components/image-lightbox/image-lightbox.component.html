@@ -1,0 +1,4 @@
+<div class="lightbox" *ngIf="url" (click)="close.emit()">
+  <img class="lightbox-img" [src]="url" alt="Faktura" (click)="$event.stopPropagation()">
+  <button class="lightbox-close" (click)="close.emit()">×</button>
+</div>

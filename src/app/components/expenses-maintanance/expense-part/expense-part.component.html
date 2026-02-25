@@ -19,8 +19,8 @@
   </div>
 </div>
 
-<div class="lightbox" *ngIf="activeImageUrl" (click)="closeImage()">
-  <img class="lightbox-img" [src]="activeImageUrl" alt="Faktura" (click)="$event.stopPropagation()">
-  <button class="lightbox-close" (click)="closeImage()">×</button>
-</div>
 
+<app-image-lightbox
+  [url]="activeImageUrl"
+  (close)="closeImage()">
+</app-image-lightbox>
