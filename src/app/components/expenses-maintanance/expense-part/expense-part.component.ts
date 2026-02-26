@@ -18,7 +18,7 @@ export class ExpensePartComponent {
    expensesCategory = EXPENSE_CATEGORIES;
 
   getCategoryDetails(id: number) {
-    return this.expensesCategory[id].name;
+    return this.expensesCategory.find(x => x.id === id)?.name;
   }
 
   activeImageUrl: string | null = null;

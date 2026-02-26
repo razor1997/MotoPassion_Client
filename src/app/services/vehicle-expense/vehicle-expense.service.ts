@@ -10,10 +10,12 @@ export class VehicleExpenseService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(vehicleId: string, from?: string, to?: string): Observable<VehicleExpense[]> {
+  getAll(vehicleId: string, from?: string, to?: string, categoryId?:number): Observable<VehicleExpense[]> {
+    console.log(categoryId);
     let url = `${this.baseUrl}?vehicleId=${vehicleId}`;
     if (from) url += `&from=${from}`;
     if (to) url += `&to=${to}`;
+    if(categoryId) url += `&categoryId=${categoryId}`;
     return this.http.get<VehicleExpense[]>(url);
   }
 

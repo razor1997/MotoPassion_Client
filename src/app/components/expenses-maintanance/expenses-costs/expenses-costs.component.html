@@ -16,6 +16,13 @@
       <strong>{{ totalCost.toFixed(2) }} PLN</strong>
     </div>
 
+  <div class="form-row">
+    <label>Kategoria</label>
+    <select [ngModel]="selectedCategory" (ngModelChange)="onCategoryChange($event.target.value)">
+      <option *ngFor="let c of expensesCategory" [value]="c.id">{{ c.name }}</option>
+    </select>
+  </div>
+
   <div class="form-col">
     <label>Pojazd</label>
     <select [ngModel]="selectedVehicleId" (ngModelChange)="onVehicleChange($event)">
@@ -23,5 +30,8 @@
         {{ v.mark }} {{ v.model }}
       </option>
     </select>
+  </div>
+  <div class="filter">
+    <button class="filter" (click)="onClick()">Filtruj</button>
   </div>
 </div>

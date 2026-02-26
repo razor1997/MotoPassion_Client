@@ -26,6 +26,7 @@ export class ExpensesPageComponent {
   factureImageUrl: string | null = null;
   vehicles: Vehicle[] = [];
   selectedVehicleId: string | null = null;
+  categoryId: number | null = null;
   expenses: VehicleExpense[] = [];
   newExpense: VehicleExpense = {
     id: '',
@@ -70,7 +71,7 @@ export class ExpensesPageComponent {
     if (!this.selectedVehicleId) return;
 
     this.expenseService
-      .getAll(this.selectedVehicleId, this.filterFrom || undefined, this.filterTo || undefined)
+      .getAll(this.selectedVehicleId, this.filterFrom || undefined, this.filterTo || undefined, this.categoryId || undefined)
       .subscribe({
         next: (data) => this.expenses = data
       });
@@ -144,6 +145,10 @@ export class ExpensesPageComponent {
   }
   onVehicleSelected(id: string) {
     this.selectedVehicleId = id;
+    this.loadExpenses();
+  }
+  onCategorySelected(id: number) {
+    this.categoryId = id;
     this.loadExpenses();
   }
 

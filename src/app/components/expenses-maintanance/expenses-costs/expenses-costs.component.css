@@ -1,6 +1,6 @@
 .filters {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1fr;
   gap: 16px;
   align-items: center;
   width: 100%;
@@ -17,5 +17,22 @@ select {
   font-size: 14px;
   margin-left: 16px;
   margin-right: 16px;
+}
+.filter button {
+  margin: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #2b99d2;
+  color: white;
+}
+.filter button:active {
+  background-color: #5cb85c;
+  font-weight: bold;
+}
+.filter button:hover {
+  background-color: #217088;
 }
 
