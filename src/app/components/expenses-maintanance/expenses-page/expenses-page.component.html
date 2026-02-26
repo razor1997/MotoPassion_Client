@@ -1,8 +1,5 @@
 <div class="expenses-page">
   <div class="header h1">
-<!--    <div class="form-header">-->
-<!--      <p>Dodawaj wydatki i śledź historię eksploatacji auta.</p>-->
-<!--    </div>-->
     <div class="form-col">
       <section>
       <app-expenses-costs
@@ -12,7 +9,9 @@
         [totalCount]="filteredExpenses.length"
         [vehicles]="vehicles"
         [selectedVehicleId]="selectedVehicleId"
-        (vehicleChange)="onVehicleSelected($event)">
+        (vehicleChange)="onVehicleSelected($event)"
+        (selectedCategory)="onCategorySelected($event)"
+      >
       </app-expenses-costs>
       </section>
     </div>
