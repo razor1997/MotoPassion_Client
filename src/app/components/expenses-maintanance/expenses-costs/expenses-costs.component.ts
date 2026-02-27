@@ -23,7 +23,7 @@ export class ExpensesCostsComponent {
   @Output() filterToChange = new EventEmitter<string>();
 
   @Input() category: number = 0;
-  @Output() selectedCategory: number = 0;
+  @Output() selectedCategory  = new EventEmitter<number>();
 
   @Input() vehicles: Vehicle[] = [];
   @Input() selectedVehicleId: string | null = null;
