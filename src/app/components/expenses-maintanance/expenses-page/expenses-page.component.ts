@@ -151,7 +151,9 @@ export class ExpensesPageComponent {
     this.categoryId = id;
     this.loadExpenses();
   }
-
+  onFilterRefreshClick(): void {
+    this.loadVehicles();
+  }
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (!file) return;

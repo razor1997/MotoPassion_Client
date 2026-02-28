@@ -10,7 +10,8 @@
         [vehicles]="vehicles"
         [selectedVehicleId]="selectedVehicleId"
         (vehicleChange)="onVehicleSelected($event)"
-        (selectedCategory)="onCategorySelected($event)"
+        (categoryChange)="onCategorySelected($event)"
+        (filterRefreshClick)="onFilterRefreshClick()"
       >
       </app-expenses-costs>
       </section>

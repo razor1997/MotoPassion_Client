@@ -23,26 +23,23 @@ export class ExpensesCostsComponent {
   @Output() filterToChange = new EventEmitter<string>();
 
   @Input() category: number = 0;
-  @Output() selectedCategory  = new EventEmitter<number>();
 
   @Input() vehicles: Vehicle[] = [];
   @Input() selectedVehicleId: string | null = null;
 
   @Output() vehicleChange = new EventEmitter<string>();
-  @Output() selectedVehicleChange = new EventEmitter<number>();
+  @Output() categoryChange = new EventEmitter<number>();
+  @Output() filterRefreshClick = new EventEmitter();
 
   onVehicleChange(id: string) {
     this.vehicleChange.emit(id);
   }
   onCategoryChange(id: string) {
-    console.log("testest"+id);
-    this.selectedVehicleChange.emit(Number(id));
+    this.categoryChange.emit(Number(id));
   }
   onClick()
   {
-    if(this.selectedVehicleId){
-      this.vehicleChange.emit(this.selectedVehicleId);
-    }
+    this.filterRefreshClick.emit();
   }
 
   protected readonly onclick = onclick;

@@ -18,7 +18,7 @@
 
   <div class="form-row">
     <label>Kategoria</label>
-    <select [ngModel]="selectedCategory" (ngModelChange)="onCategoryChange($event.target.value)">
+    <select [ngModel]="category" (ngModelChange)="onCategoryChange($event)">
       <option *ngFor="let c of expensesCategory" [value]="c.id">{{ c.name }}</option>
     </select>
   </div>

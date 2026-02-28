@@ -1,4 +1,5 @@
 export const EXPENSE_CATEGORIES = [
+  { id: 0, name: 'Wszystkie'},
   { id: 1, name: 'Naprawa' },
   { id: 2, name: 'Serwis' },
   { id: 3, name: 'Części' },

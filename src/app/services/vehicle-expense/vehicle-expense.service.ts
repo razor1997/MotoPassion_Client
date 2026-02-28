@@ -11,11 +11,12 @@ export class VehicleExpenseService {
   constructor(private http: HttpClient) {}
 
   getAll(vehicleId: string, from?: string, to?: string, categoryId?:number): Observable<VehicleExpense[]> {
-    console.log(categoryId);
+    console.log("GetAll" + categoryId);
     let url = `${this.baseUrl}?vehicleId=${vehicleId}`;
     if (from) url += `&from=${from}`;
     if (to) url += `&to=${to}`;
-    if(categoryId) url += `&categoryId=${categoryId}`;
+    if(categoryId) url += `&category=${categoryId}`;
+    console.log(url);
     return this.http.get<VehicleExpense[]>(url);
   }
 
