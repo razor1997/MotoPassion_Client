@@ -154,6 +154,11 @@ export class ExpensesPageComponent {
   onFilterRefreshClick(): void {
     this.loadVehicles();
   }
+  onPdfGenerateClick(): void {
+    if(!this.selectedVehicleId){return}
+    this.expenseService
+      .generatePdf(this.selectedVehicleId, this.filterFrom || undefined, this.filterTo || undefined, this.categoryId || undefined);
+  }
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (!file) return;

@@ -30,6 +30,7 @@ export class ExpensesCostsComponent {
   @Output() vehicleChange = new EventEmitter<string>();
   @Output() categoryChange = new EventEmitter<number>();
   @Output() filterRefreshClick = new EventEmitter();
+  @Output() pdfGenerate = new EventEmitter();
 
   onVehicleChange(id: string) {
     this.vehicleChange.emit(id);
@@ -41,6 +42,9 @@ export class ExpensesCostsComponent {
   {
     this.filterRefreshClick.emit();
   }
-
+  generatePDF()
+  {
+    this.pdfGenerate.emit();
+  }
   protected readonly onclick = onclick;
 }

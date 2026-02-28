@@ -19,6 +19,15 @@ export class VehicleExpenseService {
     console.log(url);
     return this.http.get<VehicleExpense[]>(url);
   }
+  generatePdf(vehicleId: string, from?: string, to?: string, categoryId?:number) {
+    let url = `${this.baseUrl}/report?vehicleId=${vehicleId}`;
+    if (from) url += `&from=${from}`;
+    if (to) url += `&to=${to}`;
+    if(categoryId) url += `&category=${categoryId}`;
+    console.log(url);
+
+    window.open(url, '_blank');
+  }
 
   create(dto: VehicleExpenseCreate): Observable<VehicleExpense> {
     return this.http.post<VehicleExpense>(this.baseUrl, dto);
