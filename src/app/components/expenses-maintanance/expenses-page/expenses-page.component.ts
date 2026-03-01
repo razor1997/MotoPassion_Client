@@ -60,7 +60,7 @@ export class ExpensesPageComponent {
       next: (vehicles) => {
         this.vehicles = vehicles;
         if (vehicles.length > 0) {
-          this.selectedVehicleId = vehicles[0].id;
+          // this.selectedVehicleId = vehicles[0].id;
           this.loadExpenses();
         }
       }

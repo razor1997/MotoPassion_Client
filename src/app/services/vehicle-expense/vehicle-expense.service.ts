@@ -19,6 +19,12 @@ export class VehicleExpenseService {
     console.log(url);
     return this.http.get<VehicleExpense[]>(url);
   }
+  getAllByVehicleId(vehicleId: string): Observable<VehicleExpense[]>
+  {
+    let url = `${this.baseUrl}/vehicleId?vehicleId=${vehicleId}`;
+    console.log(url)
+    return this.http.get<VehicleExpense[]>(url);
+  }
   generatePdf(vehicleId: string, from?: string, to?: string, categoryId?:number) {
     let url = `${this.baseUrl}/report?vehicleId=${vehicleId}`;
     if (from) url += `&from=${from}`;

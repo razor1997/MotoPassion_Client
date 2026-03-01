@@ -22,6 +22,7 @@ import {ExpensesPageComponent} from './components/expenses-maintanance/expenses-
 import {VehicleAddComponent} from './components/vehicles/vehicle-add/vehicle-add.component';
 import {VehiclesUserListComponent} from './components/vehicles/vehicles-user-list/vehicles-user-list.component';
 import {VehicleEditComponent} from './components/vehicles/vehicle-edit/vehicle-edit.component';
+import {VehiclePreviewComponent} from './components/vehicles/vehicle-preview/vehicle-preview.component';
 
 
 export const routes: Routes = [
@@ -43,6 +44,7 @@ export const routes: Routes = [
   { path: 'vehicles/add', component: VehicleAddComponent },
   { path: 'vehicles/user-list', component: VehiclesUserListComponent },
   { path: 'vehicles/edit/:id', component: VehicleEditComponent },
+  { path: 'vehicles/preview/:id', component: VehiclePreviewComponent },
 
   {
     path: 'admin/panel',

@@ -26,7 +26,9 @@ constructor(private router: Router, private vehicleService: VehicleService) {
   edit() {
     this.router.navigate(['/vehicles/edit', this.vehicle.id]);
   }
-
+  preview(){
+  this.router.navigate(['/vehicles/preview', this.vehicle.id]);
+  }
   remove() {
     if (!confirm('Usunąć pojazd?')) return;
 
