@@ -6,13 +6,15 @@ import {VehicleExpenseService} from '../../../services/vehicle-expense/vehicle-e
 import {ActivatedRoute} from '@angular/router';
 import {VehicleService} from '../../../services/vehicle/vehicle.service';
 import {DatePipe, NgIf} from '@angular/common';
+import {ImageLightboxComponent} from '../../image-lightbox/image-lightbox.component';
 
 @Component({
   selector: 'app-vehicle-preview',
   imports: [
     ExpensesListComponent,
     DatePipe,
-    NgIf
+    NgIf,
+    ImageLightboxComponent
   ],
   templateUrl: './vehicle-preview.component.html',
   styleUrl: './vehicle-preview.component.css'
@@ -21,6 +23,7 @@ export class VehiclePreviewComponent {
   vehicleId: string | null =null;
   vehicle: Vehicle | undefined;
   expenses: VehicleExpense[] = [];
+  activeImageUrl: string | null = null;
 
   constructor(
     private expenseService: VehicleExpenseService,
@@ -67,5 +70,15 @@ export class VehiclePreviewComponent {
     this.expenseService.delete(id).subscribe({
       next: () => this.loadExpenses()
     });
+  }
+
+  openImage() {
+    if (this.vehicle) {
+      this.activeImageUrl = this.vehicle.imageUrl;
+    }
+  }
+
+  closeImage() {
+    this.activeImageUrl = null;
   }
 }

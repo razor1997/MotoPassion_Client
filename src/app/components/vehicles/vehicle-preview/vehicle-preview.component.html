@@ -1,7 +1,7 @@
 <div class="grid">
 <div class="card">
   <div class="photo">
-    <img *ngIf="vehicle?.imageUrl" [src]="vehicle?.imageUrl" alt="photo">
+    <img *ngIf="vehicle?.imageUrl" class="thumb" [src]="vehicle?.imageUrl" alt="photo" (click)="openImage()">
     <span *ngIf="!vehicle?.imageUrl">Foto</span>
   </div>
 
@@ -28,3 +28,9 @@
   (remove)="removeExpense($event.toString())">
 </app-expenses-list>
 </div>
+
+
+<app-image-lightbox
+  [url]="activeImageUrl"
+  (close)="closeImage()">
+</app-image-lightbox>
