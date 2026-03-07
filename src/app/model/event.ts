@@ -9,6 +9,10 @@ export interface Event {
   category: number;
   maxCountParticipants: number;
   creatorId: string;
+  createdAt: string;
+  type: number;
+  location: string;
+  visibility: number;
 }
 export interface EventDto {
   id: string;
@@ -27,6 +31,10 @@ export interface EventDto {
     surname: string;
     avatarUrl: string;
   };
+  createdAt: string;
+  type: number;
+  location: string;
+  visibility: number;
 }
 export interface EventCreate {
   title: string;
@@ -39,3 +47,12 @@ export interface EventCreate {
   photo?: File | null;
 }
 
+export interface EventRow {
+  id: string;
+  name: string;
+  date: string; // YYYY-MM-DD
+  location: string;
+  description: string;
+  participantsCount: number;
+  maxParticipants?: number;
+}

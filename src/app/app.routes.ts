@@ -23,12 +23,14 @@ import {VehicleAddComponent} from './components/vehicles/vehicle-add/vehicle-add
 import {VehiclesUserListComponent} from './components/vehicles/vehicles-user-list/vehicles-user-list.component';
 import {VehicleEditComponent} from './components/vehicles/vehicle-edit/vehicle-edit.component';
 import {VehiclePreviewComponent} from './components/vehicles/vehicle-preview/vehicle-preview.component';
+import {EventsListComponent} from './components/event/events-list/events-list.component';
 
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },  // Strona startowa
   { path: 'posts', component: PostsComponent },
   { path: 'events', component: EventsComponent },
+  { path: 'event/events-list', component: EventsListComponent },
   { path: 'journeys', component: JourneysComponent },
   { path: 'community', component: CommunityComponent },
   { path: 'inspiration', component: InspirationComponent },
