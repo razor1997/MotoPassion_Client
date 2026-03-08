@@ -1,0 +1,47 @@
+<div class="event-list">
+  <h2>Wydarzenia</h2>
+
+  <div class="header h1">
+    <div class="form-col">
+      <section>
+        <app-event-filter
+          [(filterFrom)]="filterFrom"
+          [(filterTo)]="filterTo"
+          (filterRefreshClick)="onFilterRefreshClick()"
+        >
+        </app-event-filter>
+      </section>
+    </div>
+  </div>
+  <table class="events-table">
+    <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Data</th>
+      <th>Miejsce</th>
+      <th>Opis</th>
+      <th>Uczestnicy</th>
+      <th>Akcje</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let e of events">
+      <td class="name">
+        <a (click)="openDetails(e.id)">{{ e.name }}</a>
+      </td>
+      <td>{{ e.date }}</td>
+      <td>{{ e.location }}</td>
+      <td class="desc">{{ e.description }}</td>
+      <td>
+        {{ e.participantsCount }}
+        <span *ngIf="e.participantsCount">/ {{ e.maxCountParticipants }}</span>
+      </td>
+      <td class="actions">
+        <button class="primary" (click)="join(e.id)">Weź udział</button>
+        <button class="ghost" (click)="more(e.id)">Więcej</button>
+        <button class="ghost" (click)="skip(e.id)">Pomiń</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

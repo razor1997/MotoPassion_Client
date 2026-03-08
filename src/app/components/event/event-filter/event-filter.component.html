@@ -1,0 +1,11 @@
+<div class="filters">
+  <div class="form-row">
+    <label>Od</label>
+    <input type="date" [ngModel]="filterFrom" (ngModelChange)="filterFromChange.emit($event)">
+    <label>Do</label>
+    <input type="date" [ngModel]="filterTo" (ngModelChange)="filterToChange.emit($event)">
+  </div>
+  <div class="filter">
+    <button class="filter" (click)="onClick()">Filtruj</button>
+  </div>
+</div>
