@@ -10,6 +10,7 @@ import {VehicleExpenseService} from '../../../services/vehicle-expense/vehicle-e
 import {EXPENSE_CATEGORIES} from '../expenses-utils/expenses-category';
 import {of, switchMap} from 'rxjs';
 import {FilesService} from '../../../services/files.service';
+import {toDate, today} from '../../../utils/date-utils';
 // import {ExpenseCategory} from '../expenses-utils/expenses-category';
 
 @Component({
@@ -30,7 +31,7 @@ export class ExpensesPageComponent {
   expenses: VehicleExpense[] = [];
   newExpense: VehicleExpense = {
     id: '',
-    date: this.today(),
+    date: today(),
     category: 1,
     title: '',
     cost: 0,
@@ -80,9 +81,9 @@ export class ExpensesPageComponent {
   get filteredExpenses(): VehicleExpense[] {
     return this.expenses
       .filter(e => {
-        const d = this.toDate(e.date);
-        const from = this.filterFrom ? this.toDate(this.filterFrom) : null;
-        const to = this.filterTo ? this.toDate(this.filterTo) : null;
+        const d = toDate(e.date);
+        const from = this.filterFrom ? toDate(this.filterFrom) : null;
+        const to = this.filterTo ? toDate(this.filterTo) : null;
         if (from && d < from) return false;
         return !(to && d > to);
 
@@ -133,16 +134,7 @@ export class ExpensesPageComponent {
       next: () => this.loadExpenses()
     });
   }
-  private toDate(value: string): Date {
-    return new Date(`${value}T00:00:00`);
-  }
 
-  private today(): string {
-    const d = new Date();
-    const mm = String(d.getMonth() + 1).padStart(2, '0');
-    const dd = String(d.getDate()).padStart(2, '0');
-    return `${d.getFullYear()}-${mm}-${dd}`;
-  }
   onVehicleSelected(id: string) {
     this.selectedVehicleId = id;
     this.loadExpenses();

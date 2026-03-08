@@ -1,4 +1,4 @@
-export interface Event {
+export interface EventAutomotive {
   id: string;
   title: string;
   description: string;
@@ -13,6 +13,7 @@ export interface Event {
   type: number;
   location: string;
   visibility: number;
+  participantsCount: number;
 }
 export interface EventDto {
   id: string;
@@ -35,6 +36,7 @@ export interface EventDto {
   type: number;
   location: string;
   visibility: number;
+  participantsCount: number;
 }
 export interface EventCreate {
   title: string;
@@ -54,5 +56,5 @@ export interface EventRow {
   location: string;
   description: string;
   participantsCount: number;
-  maxParticipants?: number;
+  maxCountParticipants?: number;
 }
