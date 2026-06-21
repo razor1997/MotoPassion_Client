@@ -27,5 +27,6 @@ export class EventFilterComponent {
 
   onClick() {
     this.filterRefreshClick.emit();
+    console.log(this.filterTo);
   }
 }

@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { EventDto, EventRow} from '../../../model/event';
-import {EventService} from '../../../services/events/event.service';
+import { EventDto, EventRow } from '../../../model/event';
 import {EventFilterComponent} from '../event-filter/event-filter.component';
-import {toDate} from '../../../utils/date-utils';
 import {mapEventToRow} from '../../../mapper/event.mapper';
+import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {EventService} from '../../../services/events/event.service';
+import {Observable} from 'rxjs';
+import {toDate, today, toDateDescriptionParam} from '../../../utils/date-utils';
 
 @Component({
   selector: 'app-event-list',
@@ -15,70 +17,50 @@ import {mapEventToRow} from '../../../mapper/event.mapper';
   styleUrl: './events-list.component.css'
 })
 export class EventsListComponent {
-  eventsAutomotive: EventDto[]=[];
-  events: EventRow[] = [
-    {
-      id: '1',
-      name: 'Zlot klasyków – Wrocław',
-      date: '2026-03-15',
-      location: 'Wrocław, Rynek',
-      description: 'Spotkanie miłośników klasycznych aut.',
-      participantsCount: 18,
-      maxCountParticipants: 50
-    },
-    {
-      id: '2',
-      name: 'Wycieczka w góry – Sudety',
-      date: '2026-04-02',
-      location: 'Karpacz',
-      description: 'Trasa krajoznawcza, tempo turystyczne.',
-      participantsCount: 8,
-      maxCountParticipants: 20
-    }
-  ];
+  @Input() eventsAutomotive: EventDto[] = [];
+  filteredEvents: EventRow[] = [];
 
-  constructor(private router: Router,
-              private eventService: EventService) {}
-
-  ngOnInit(): void {
-    this.loadEventsAutomotive();
-  }
-
-  loadEventsAutomotive(): void {
-    this.eventService.getAllEvents().subscribe({
-      next: (eventsAutomotive) => {
-        this.eventsAutomotive = eventsAutomotive;
-      }
-    });
-  }
+  constructor(private http: HttpClient, private router: Router, private eventService: EventService) {}
   onFilterRefreshClick(): void {
-    this.loadEventsAutomotive();
-    this.eventService.getAllEvents().subscribe({
-      next: (data) => {
-        this.events = data.map(mapEventToRow);
-      }
-    });
-    this.filterEvents();
+    this.applyFilters();
+  }
+  ngOnChanges(): void {
+    this.applyFilters();
   }
 
+  applyFilters(): void {
+    this.filteredEvents = this.eventsAutomotive
+      .map(mapEventToRow)
+      .filter(e => {
+        const d = toDate(e.date);
+        const from = this.filterFrom ? toDate(this.filterFrom) : null;
+        const to = this.filterTo ? toDate(this.filterTo) : null;
 
-  filterEvents(): void  {
-    this.events
+        if (from && d < from) return false;
+        if (to && d > to) return false;
+        return true;
+      })
+      .sort((a, b) => (a.date < b.date ? 1 : -1));
+  }
+
+  get events(): EventRow[] {
+    return this.eventsAutomotive
+      .map(mapEventToRow)
       .filter(e => {
         const d = toDate(e.date);
         const from = this.filterFrom ? toDate(this.filterFrom) : null;
         const to = this.filterTo ? toDate(this.filterTo) : null;
         if (from && d < from) return false;
         return !(to && d > to);
-
       })
       .sort((a, b) => (a.date < b.date ? 1 : -1));
   }
+
   filterFrom: string = '';
   filterTo: string = '';
 
   openDetails(id: string): void {
-    this.router.navigate(['/events', id]);
+    console.log('Open event details', id);
   }
 
   join(id: string): void {
@@ -86,10 +68,13 @@ export class EventsListComponent {
   }
 
   more(id: string): void {
-    this.router.navigate(['/events', id]);
+    console.log('Open event details', id);
   }
 
   skip(id: string): void {
     console.log('Skip event', id);
   }
+
+  protected readonly toDate = toDate;
+  protected readonly toDateDescriptionParam = toDateDescriptionParam;
 }

@@ -1,24 +1,42 @@
 import { Component } from '@angular/core';
-import {NgIf} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {EventService} from '../../services/events/event.service';
-import {EventCardFormComponent} from '../event/event-card-form/event-card-form.component';
+import {EventsListComponent} from '../event/events-list/events-list.component';
+import {EventDto} from '../../model/event';
 
 @Component({
   selector: 'app-events',
+  standalone: true,
   imports: [
-    NgIf,
-    EventCardFormComponent
+    CommonModule,
+    EventsListComponent
   ],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })
 export class EventsComponent {
-  events: Event[] = [];
+  eventsAutomotive: EventDto[] = [];
 
   loading = true;
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService) {
+
+  }
 
   ngOnInit(): void {
+    this.loadEvents();
+    console.log("Events Component loaded");
+  }
 
+  loadEvents(): void {
+    this.loading = true;
+    this.eventService.getAllEvents().subscribe({
+      next: (events) => {
+        this.eventsAutomotive = events;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
   }
 }

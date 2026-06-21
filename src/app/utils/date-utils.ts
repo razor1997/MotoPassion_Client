@@ -9,3 +9,6 @@ export function today(): string {
   const dd = String(d.getDate()).padStart(2, '0');
   return `${d.getFullYear()}-${mm}-${dd}`;
 }
+export function toDateDescriptionParam(value: string): string {
+  return value ? value.replace('T', ' ') : value;
+}

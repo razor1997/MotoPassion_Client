@@ -5,6 +5,7 @@ import {of, switchMap} from 'rxjs';
 import {FilesService} from '../../../services/files.service';
 import {UserSessionService} from '../../../services/user-service.service';
 import {CommonModule} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-event-create-form',
@@ -22,7 +23,8 @@ export class EventCreateFormComponent {
     private fb: FormBuilder,
     private eventsService: EventService,
     private filesService: FilesService,
-    private session: UserSessionService
+    private session: UserSessionService,
+    private router: Router,
   ) {
 
   }
@@ -30,7 +32,7 @@ export class EventCreateFormComponent {
     this.form = this.fb.group({
       Title: ['', Validators.required],
       Description: ['', Validators.required],
-      DateTime: ['', Validators.required],
+      Date: ['', Validators.required],
       Latitude: [0, Validators.required],
       Longitude: [0, Validators.required],
       Category: [0, Validators.required],
@@ -65,8 +67,16 @@ export class EventCreateFormComponent {
         return this.eventsService.createEvent(formData);
       })
     ).subscribe({
-      next: () => this.loading = false,
-      error: () => this.loading = false
+      next: ()=>{
+      this.loading = false;
+      this.router.navigate(['/events']);
+
+    } ,
+      error: () =>{
+
+        this.loading = false;
+      }
+
     })
   }
 }

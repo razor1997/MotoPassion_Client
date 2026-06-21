@@ -1,12 +1,12 @@
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+<div class="grid grid-cols-1 gap-6 p-4">
   <div *ngIf="loading">Ładowanie...</div>
 
-  <div *ngIf="!loading && events.length === 0">
-    Brak użytkowników do wyświetlenia.
+  <div *ngIf="!loading && eventsAutomotive.length === 0">
+    Brak wydarzeń do wyświetlenia.
   </div>
 
-  <app-event-card-form
-    *ngFor="let e of events"
-    [event]="e">
-  </app-event-card-form>
+  <app-event-list
+    *ngIf="!loading && eventsAutomotive.length > 0"
+    [eventsAutomotive]="eventsAutomotive">
+  </app-event-list>
 </div>
