@@ -25,11 +25,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let e of events">
+    <tr *ngFor="let e of filteredEvents">
       <td class="name">
         <a (click)="openDetails(e.id)">{{ e.name }}</a>
       </td>
-      <td>{{ toDateDescriptionParam(e.date) }}</td>
+      <td>{{ toDateDisplay(e.date) }}</td>
       <td>{{ e.location }}</td>
       <td class="desc">{{ e.description }}</td>
       <td>
