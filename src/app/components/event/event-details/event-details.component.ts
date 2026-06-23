@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../../../services/events/event.service';
 import { EventDto } from '../../../model/event';
 import { toDateDisplay } from '../../../utils/date-utils';
+import { toVisibilityLabel, toEventTypeLabel,toEventCategoryName } from '../../../utils/event-utils';
 
 @Component({
   selector: 'app-event-details',
@@ -59,4 +60,7 @@ export class EventDetailsComponent {
   }
 
   protected readonly toDateDisplay = toDateDisplay;
+  protected readonly toVisibilityLabel = toVisibilityLabel;
+  protected readonly toEventTypeLabel = toEventTypeLabel;
+  protected readonly toEventCategoryName = toEventCategoryName;
 }
