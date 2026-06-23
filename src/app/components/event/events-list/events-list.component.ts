@@ -4,6 +4,7 @@ import { EventDto, EventRow } from '../../../model/event';
 import {EventFilterComponent} from '../event-filter/event-filter.component';
 import {mapEventToRow} from '../../../mapper/event.mapper';
 import {toDate, toDateDisplay} from '../../../utils/date-utils';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-event-list',
@@ -20,7 +21,8 @@ export class EventsListComponent {
     this._eventsAutomotive = value ?? [];
     this.applyFilters();
   }
-
+constructor(private router: Router) {
+}
   onFilterRefreshClick(): void {
     this.applyFilters();
   }
@@ -52,16 +54,17 @@ export class EventsListComponent {
   filterTo: string = '';
 
   openDetails(id: string): void {
-    console.log('Open event details', id);
+    this.router.navigate(['/event/details', id]);
+  }
+
+  more(id: string): void {
+    this.router.navigate(['/event/details', id]);
   }
 
   join(id: string): void {
     console.log('Join event', id);
   }
 
-  more(id: string): void {
-    console.log('Open event details', id);
-  }
 
   skip(id: string): void {
     console.log('Skip event', id);

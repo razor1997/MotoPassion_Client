@@ -1,0 +1,73 @@
+<div class="details-page">
+  <div *ngIf="loading" class="state">Ładowanie wydarzenia...</div>
+
+  <div *ngIf="!loading && error" class="state error">
+    {{ error }}
+  </div>
+
+  <div *ngIf="!loading && event" class="details-card">
+    <div class="hero" *ngIf="event.photoUrl">
+      <img [src]="event.photoUrl" alt="Zdjęcie wydarzenia">
+    </div>
+
+    <div class="header">
+      <div>
+        <h2>{{ event.title }}</h2>
+        <p class="subtitle">{{ event.location }}</p>
+      </div>
+
+      <div class="actions">
+        <button class="ghost" (click)="back()">Wróć</button>
+        <button class="primary" (click)="join()">Weź udział</button>
+      </div>
+    </div>
+
+    <div class="meta-grid">
+      <div class="meta-item">
+        <span>Data</span>
+        <strong>{{ toDateDisplay(event.date) }}</strong>
+      </div>
+
+      <div class="meta-item">
+        <span>Miejsce</span>
+        <strong>{{ event.location }}</strong>
+      </div>
+
+      <div class="meta-item">
+        <span>Typ</span>
+        <strong>{{ event.type }}</strong>
+      </div>
+
+      <div class="meta-item">
+        <span>Widoczność</span>
+        <strong>{{ event.visibility }}</strong>
+      </div>
+
+      <div class="meta-item">
+        <span>Uczestnicy</span>
+        <strong>{{ event.participantsCount }}/{{ event.maxCountParticipants }}</strong>
+      </div>
+
+      <div class="meta-item">
+        <span>Kategoria</span>
+        <strong>{{ event.category }}</strong>
+      </div>
+    </div>
+
+    <div class="description">
+      <h3>Opis</h3>
+      <p>{{ event.description }}</p>
+    </div>
+
+    <div class="creator" *ngIf="event.creator">
+      <h3>Organizator</h3>
+      <div class="creator-box">
+        <img *ngIf="event.creator.avatarUrl" [src]="event.creator.avatarUrl" alt="Avatar organizatora">
+        <div>
+          <strong>{{ event.creator.name }} {{ event.creator.surname }}</strong>
+          <p>ID: {{ event.creator.id }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><p>event-details works!</p>

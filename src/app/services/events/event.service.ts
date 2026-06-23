@@ -25,4 +25,7 @@ export class EventService {
     console.log("GetAll" + url);
     return this.https.get<Event[]>(url);
   }
+  getEventById(id: string): Observable<EventDto> {
+    return this.https.get<EventDto>(`${environment.urlAddress}/events/${id}`);
+  }
 }

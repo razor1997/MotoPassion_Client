@@ -1,0 +1,154 @@
+.details-page {
+  padding: 24px;
+}
+
+.state {
+  padding: 18px;
+  border-radius: 12px;
+  background: #f6f7fb;
+  color: #333;
+}
+
+.state.error {
+  background: #fdecec;
+  color: #a40000;
+}
+
+.details-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #e7e7e7;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+}
+
+.hero {
+  width: 100%;
+  height: 320px;
+  background: #f2f2f2;
+  overflow: hidden;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px;
+  align-items: flex-start;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  color: #666;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.primary,
+.ghost {
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.primary {
+  background: #1f6feb;
+  color: #fff;
+}
+
+.ghost {
+  background: transparent;
+  border-color: #ddd;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding: 0 24px 24px;
+}
+
+.meta-item {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fafafa;
+}
+
+.meta-item span {
+  display: block;
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.meta-item strong {
+  font-size: 15px;
+}
+
+.description,
+.creator {
+  padding: 0 24px 24px;
+}
+
+.description h3,
+.creator h3 {
+  margin: 0 0 10px;
+}
+
+.creator-box {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fafafa;
+}
+
+.creator-box img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.creator-box p {
+  margin: 4px 0 0;
+  color: #666;
+}
+
+@media (max-width: 900px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .meta-grid {
+    grid-template-columns: 1fr;
+  }
+}
