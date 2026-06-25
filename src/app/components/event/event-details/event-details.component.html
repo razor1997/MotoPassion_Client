@@ -18,7 +18,19 @@
 
       <div class="actions">
         <button class="ghost" (click)="back()">Wróć</button>
-        <button class="primary" (click)="join()">Weź udział</button>
+        <button
+          *ngIf="event && !event.isParticipant"
+          class="primary"
+          (click)="join()">
+          Weź udział
+        </button>
+
+        <button
+          *ngIf="event && event.isParticipant"
+          class="primary joined"
+          disabled>
+          Bierzesz udział
+        </button>
       </div>
     </div>
 
@@ -57,6 +69,29 @@
     <div class="description">
       <h3>Opis</h3>
       <p>{{ event.description }}</p>
+    </div>
+
+    <div class="participants">
+      <h3>Uczestnicy</h3>
+
+      <div *ngIf="participants.length === 0" class="empty">
+        Brak uczestników.
+      </div>
+
+      <div class="participants-grid" *ngIf="participants.length > 0">
+        <div class="participant-card" *ngFor="let participant of participants">
+          <img
+            *ngIf="participant.avatarUrl"
+            [src]="participant.avatarUrl"
+            alt="Avatar uczestnika"
+          >
+          <div>
+            <strong>{{ participant.name }} {{ participant.surname }}</strong>
+            <p>{{ participant.userName }}</p>
+            <span *ngIf="participant.baseLocation">{{ participant.baseLocation }}</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="creator" *ngIf="event.creator">

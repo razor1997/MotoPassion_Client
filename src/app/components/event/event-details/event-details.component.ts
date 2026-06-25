@@ -5,6 +5,10 @@ import { EventService } from '../../../services/events/event.service';
 import { EventDto } from '../../../model/event';
 import { toDateDisplay } from '../../../utils/date-utils';
 import { toVisibilityLabel, toEventTypeLabel,toEventCategoryName } from '../../../utils/event-utils';
+import {CommunityService} from '../../../services/community/community.service';
+import {map, of, switchMap} from 'rxjs';
+import {CommunityUser} from '../../../model/community-user';
+import {UserSessionService} from '../../../services/user-service.service';
 
 @Component({
   selector: 'app-event-details',
@@ -18,11 +22,14 @@ export class EventDetailsComponent {
   loading = true;
   error = '';
   eventId = '';
+  participants: CommunityUser[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private eventService: EventService
+    private eventService: EventService,
+    private communityService: CommunityService,
+    private session: UserSessionService
   ) {}
 
   ngOnInit(): void {
@@ -34,9 +41,38 @@ export class EventDetailsComponent {
     }
 
     this.eventId = id;
-    this.loadEvent();
+    this.loadEventWithParticipants();
   }
 
+  private loadParticipantsForEvent(event: EventDto) {
+    if (!event.participantIds || event.participantIds.length === 0) {
+      return of([] as CommunityUser[]);
+    }
+
+    return this.communityService.getUsers().pipe(
+      map((users) => users.filter(user => event.participantIds.includes(user.id)))
+    );
+  }
+
+  loadEventWithParticipants(): void {
+    this.loading = true;
+
+    this.eventService.getEventById(this.eventId).pipe(
+      switchMap((event) => {
+        this.event = event;
+        return this.loadParticipantsForEvent(event);
+      })
+    ).subscribe({
+      next: (participants) => {
+        this.participants = participants ?? [];
+        this.loading = false;
+      },
+      error: () => {
+        this.error = 'Nie udało się pobrać wydarzenia.';
+        this.loading = false;
+      }
+    });
+  }
   loadEvent(): void {
     this.loading = true;
     this.eventService.getEventById(this.eventId).subscribe({
@@ -56,7 +92,26 @@ export class EventDetailsComponent {
   }
 
   join(): void {
-    console.log('Join event', this.eventId);
+    const currentUserId = this.session.userId;
+    if (!currentUserId || !this.event) return;
+
+    this.loading = true;
+
+    this.eventService.joinEvent(this.eventId, currentUserId).pipe(
+      switchMap((event) => {
+        this.event = event;
+        return this.loadParticipantsForEvent(event);
+      })
+    ).subscribe({
+      next: (participants) => {
+        this.participants = participants ?? [];
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = err?.error?.error ?? 'Nie udało się dołączyć do wydarzenia.';
+        this.loading = false;
+      }
+    });
   }
 
   protected readonly toDateDisplay = toDateDisplay;

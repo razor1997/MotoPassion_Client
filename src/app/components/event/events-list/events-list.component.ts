@@ -5,6 +5,8 @@ import {EventFilterComponent} from '../event-filter/event-filter.component';
 import {mapEventToRow} from '../../../mapper/event.mapper';
 import {toDate, toDateDisplay} from '../../../utils/date-utils';
 import {Router} from '@angular/router';
+import {EventService} from '../../../services/events/event.service';
+import {UserSessionService} from '../../../services/user-service.service';
 
 @Component({
   selector: 'app-event-list',
@@ -21,7 +23,11 @@ export class EventsListComponent {
     this._eventsAutomotive = value ?? [];
     this.applyFilters();
   }
-constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private eventService: EventService,
+    private session: UserSessionService
+  ) {
 }
   onFilterRefreshClick(): void {
     this.applyFilters();
@@ -62,14 +68,49 @@ constructor(private router: Router) {
   }
 
   join(id: string): void {
-    console.log('Join event', id);
-  }
+    const currentUserId = this.session.userId;
+    if (!currentUserId) {
+      return;
+    }
 
+    this.eventService.joinEvent(id, currentUserId).subscribe({
+      next: (updatedEvent) => {
+        this._eventsAutomotive = this._eventsAutomotive.map(event =>
+          event.id === updatedEvent.id ? updatedEvent : event
+        );
+        this.applyFilters();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+  detach(id: string): void {
+    const currentUserId = this.session.userId;
+    if (!currentUserId) {
+      return;
+    }
+
+    this.eventService.joinEvent(id, currentUserId).subscribe({
+      next: (updatedEvent) => {
+        this._eventsAutomotive = this._eventsAutomotive.map(event =>
+          event.id === updatedEvent.id ? updatedEvent : event
+        );
+        this.applyFilters();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
 
   skip(id: string): void {
     console.log('Skip event', id);
   }
-
+  // isLoggedUserParticipant(event: EventRow): boolean {
+    // if (!event || !this.session.userId) return false;
+    // return event.participantIds?.includes(this.session.userId) ?? false;
+  // }
   protected readonly toDate = toDate;
   protected readonly toDateDisplay = toDateDisplay;
 }

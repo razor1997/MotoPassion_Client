@@ -37,7 +37,14 @@
         <span *ngIf="e.participantsCount">/ {{ e.maxCountParticipants }}</span>
       </td>
       <td class="actions">
-        <button class="primary" (click)="join(e.id)">Weź udział</button>
+      <td>
+        <button *ngIf="!e.isParticipant" class="primary" (click)="join(e.id)">
+          Weź udział
+        </button>
+
+      <button *ngIf="e.isParticipant" class="joined-label" (click)="detach(e.id) ">
+          Bierzesz udział
+        </button>
         <button class="ghost" (click)="more(e.id)">Więcej</button>
         <button class="ghost" (click)="skip(e.id)">Pomiń</button>
       </td>

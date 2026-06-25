@@ -8,6 +8,7 @@ export function mapEventToRow(e: EventDto): EventRow {
     location: e.location,
     description: e.description,
     participantsCount: e.participantsCount,
-    maxCountParticipants: e.maxCountParticipants
+    maxCountParticipants: e.maxCountParticipants,
+    isParticipant: e.isParticipant
   };
 }

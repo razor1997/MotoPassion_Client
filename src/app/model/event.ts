@@ -36,7 +36,9 @@ export interface EventDto {
   type: number;
   location: string;
   visibility: number;
+  participantIds: string[];
   participantsCount: number;
+  isParticipant: boolean;
 }
 export interface EventCreate {
   title: string;
@@ -57,4 +59,5 @@ export interface EventRow {
   description: string;
   participantsCount: number;
   maxCountParticipants?: number;
+  isParticipant: boolean;
 }

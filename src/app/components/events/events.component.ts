@@ -1,35 +1,33 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {EventService} from '../../services/events/event.service';
-import {EventsListComponent} from '../event/events-list/events-list.component';
-import {EventDto} from '../../model/event';
+import { EventService } from '../../services/events/event.service';
+import { EventsListComponent } from '../event/events-list/events-list.component';
+import { EventDto } from '../../model/event';
+import { UserSessionService } from '../../services/user-service.service';
 
 @Component({
   selector: 'app-events',
   standalone: true,
-  imports: [
-    CommonModule,
-    EventsListComponent
-  ],
+  imports: [CommonModule, EventsListComponent],
   templateUrl: './events.component.html',
   styleUrl: './events.component.css'
 })
 export class EventsComponent {
   eventsAutomotive: EventDto[] = [];
-
   loading = true;
-  constructor(private eventService: EventService) {
 
-  }
+  constructor(
+    private eventService: EventService,
+    private session: UserSessionService
+  ) {}
 
   ngOnInit(): void {
     this.loadEvents();
-    console.log("Events Component loaded");
   }
 
   loadEvents(): void {
     this.loading = true;
-    this.eventService.getAllEvents().subscribe({
+    this.eventService.getAllEvents(this.session.userId ?? undefined).subscribe({
       next: (events) => {
         this.eventsAutomotive = events;
         this.loading = false;

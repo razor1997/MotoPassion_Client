@@ -13,19 +13,37 @@ export class EventService {
   createEvent(data: FormData) {
     return this.https.post(`${environment.urlAddress}/events`, data);
   }
-  getAllEvents() : Observable<EventDto[]> {
-    return this.https.get<EventDto[]>(`${environment.urlAddress}/events`);
-
+  getAllEvents(currentUserId?: string): Observable<EventDto[]> {
+    let url = `${environment.urlAddress}/events`;
+    if (currentUserId) {
+      url += `?currentUserId=${encodeURIComponent(currentUserId)}`;
+    }
+    return this.https.get<EventDto[]>(url);
   }
-  getAllEventsFiltered(from?: Date, to?: Date): Observable<Event[]> {
+
+  getAllEventsFiltered(from?: Date, to?: Date, currentUserId?: string): Observable<EventDto[]> {
     let url = `${environment.urlAddress}/events/filtered?`;
 
     if (from) url += `from=${encodeURIComponent(from.toISOString().slice(0, 10))}`;
     if (to) url += `&to=${encodeURIComponent(to.toISOString().slice(0, 10))}`;
-    console.log("GetAll" + url);
-    return this.https.get<Event[]>(url);
+    if (currentUserId) url += `&currentUserId=${encodeURIComponent(currentUserId)}`;
+
+    return this.https.get<EventDto[]>(url);
   }
-  getEventById(id: string): Observable<EventDto> {
-    return this.https.get<EventDto>(`${environment.urlAddress}/events/${id}`);
+
+  getEventById(id: string, currentUserId?: string): Observable<EventDto> {
+    let url = `${environment.urlAddress}/events/${id}`;
+    if (currentUserId) {
+      url += `?currentUserId=${encodeURIComponent(currentUserId)}`;
+    }
+    return this.https.get<EventDto>(url);
   }
+
+  joinEvent(id: string, currentUserId: string): Observable<EventDto> {
+    return this.https.post<EventDto>(
+      `${environment.urlAddress}/events/${id}/join?currentUserId=${encodeURIComponent(currentUserId)}`,
+      {}
+    );
+  }
+
 }

@@ -51,11 +51,22 @@
   border-radius: 6px;
   cursor: pointer;
 }
-
+.primary joined {
+  background: #b30000;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
 .ghost {
   background: transparent;
   border: 1px solid #ddd;
   padding: 6px 10px;
   border-radius: 6px;
   cursor: pointer;
+}
+.joined-label {
+  color: #2e7d32;
+  font-weight: 600;
 }
