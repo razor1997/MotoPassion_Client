@@ -1,14 +1,11 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {EventAutomotive} from '../../../model/event';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EventAutomotive } from '../../../model/event';
 
 @Component({
   selector: 'app-event-filter',
-  imports: [
-    ReactiveFormsModule,
-    FormsModule
-  ],
   standalone: true,
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './event-filter.component.html',
   styleUrl: './event-filter.component.css'
 })
@@ -20,13 +17,9 @@ export class EventFilterComponent {
   @Input() filterTo: string = '';
   @Output() filterToChange = new EventEmitter<string>();
 
+  @Output() filterRefreshClick = new EventEmitter<void>();
 
-  @Output() filterRefreshClick = new EventEmitter();
-
-  protected readonly onclick = onclick;
-
-  onClick() {
+  onClick(): void {
     this.filterRefreshClick.emit();
-    console.log(this.filterTo);
   }
 }

@@ -38,15 +38,17 @@ export class EventsListComponent {
   }
 
   applyFilters(): void {
+    const from = this.filterFrom || '';
+    const to = this.filterTo || '';
+
     this.filteredEvents = this.eventsAutomotive
       .map(mapEventToRow)
       .filter(e => {
-        const d = toDate(e.date);
-        const from = this.filterFrom ? toDate(this.filterFrom) : null;
-        const to = this.filterTo ? toDate(this.filterTo) : null;
+        const eventDate = (e.date ?? '').slice(0, 10);
 
-        if (from && d < from) return false;
-        if (to && d > to) return false;
+        if (from && eventDate < from) return false;
+        if (to && eventDate > to) return false;
+
         return true;
       })
       .sort((a, b) => (a.date < b.date ? 1 : -1));

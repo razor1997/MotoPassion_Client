@@ -89,7 +89,7 @@ export class EventDetailsComponent {
   }
 
   back(): void {
-    this.router.navigate(['/event/events-list']);
+    this.router.navigate(['/events']);
   }
 
   join(): void {
