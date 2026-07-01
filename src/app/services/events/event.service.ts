@@ -45,5 +45,10 @@ export class EventService {
       {}
     );
   }
-
+  leaveEvent(id: string, currentUserId: string): Observable<EventDto> {
+    return this.https.post<EventDto>(
+      `${environment.urlAddress}/events/${id}/leave?currentUserId=${encodeURIComponent(currentUserId)}`,
+      {}
+    );
+  }
 }

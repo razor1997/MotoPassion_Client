@@ -56,8 +56,9 @@ export class EventDetailsComponent {
 
   loadEventWithParticipants(): void {
     this.loading = true;
+    const currentUserId = this.session.userId;
 
-    this.eventService.getEventById(this.eventId).pipe(
+    this.eventService.getEventById(this.eventId, currentUserId ?? undefined).pipe(
       switchMap((event) => {
         this.event = event;
         return this.loadParticipantsForEvent(event);
@@ -113,7 +114,28 @@ export class EventDetailsComponent {
       }
     });
   }
+  leave(): void {
+    const currentUserId = this.session.userId;
+    if (!currentUserId || !this.event) return;
 
+    this.loading = true;
+
+    this.eventService.leaveEvent(this.eventId, currentUserId).pipe(
+      switchMap((event) => {
+        this.event = event;
+        return this.loadParticipantsForEvent(event);
+      })
+    ).subscribe({
+      next: (participants) => {
+        this.participants = participants ?? [];
+        this.loading = false;
+      },
+      error: (err) => {
+        this.error = err?.error?.error ?? 'Nie udało się opuścić wydarzenia.';
+        this.loading = false;
+      }
+    });
+  }
   protected readonly toDateDisplay = toDateDisplay;
   protected readonly toVisibilityLabel = toVisibilityLabel;
   protected readonly toEventTypeLabel = toEventTypeLabel;

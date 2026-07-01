@@ -85,13 +85,11 @@ export class EventsListComponent {
       }
     });
   }
-  detach(id: string): void {
+  leave(id: string): void {
     const currentUserId = this.session.userId;
-    if (!currentUserId) {
-      return;
-    }
+    if (!currentUserId) return;
 
-    this.eventService.joinEvent(id, currentUserId).subscribe({
+    this.eventService.leaveEvent(id, currentUserId).subscribe({
       next: (updatedEvent) => {
         this._eventsAutomotive = this._eventsAutomotive.map(event =>
           event.id === updatedEvent.id ? updatedEvent : event

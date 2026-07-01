@@ -42,7 +42,7 @@
           Weź udział
         </button>
 
-      <button *ngIf="e.isParticipant" class="joined-label" (click)="detach(e.id) ">
+      <button *ngIf="e.isParticipant" class="joined-label" (click)="leave(e.id) ">
           Bierzesz udział
         </button>
         <button class="ghost" (click)="more(e.id)">Więcej</button>
