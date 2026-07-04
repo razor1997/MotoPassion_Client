@@ -54,7 +54,7 @@
         <label>Opis (opcjonalnie)</label>
         <textarea rows="3" [(ngModel)]="newExpense.description"></textarea>
       </div>
-      <button class="primary" (click)="addExpense()">Dodaj</button>
+      <button class="primary" *ngIf="selectedVehicleId" (click)="addExpense()">Dodaj</button>
     </section>
 
     <section class="card list-card">

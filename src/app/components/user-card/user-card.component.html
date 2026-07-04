@@ -1,12 +1,58 @@
-<div class="user-card" *ngIf="user">
-  <img [src]="user.avatarUrl" alt="{{ user.name }}'s avatar" class="avatar" />
-  <div>
-    <h3>User: {{ user.name }}</h3>
-    <h3>Surname: {{user.surname}}</h3>
-    <h3>O mnie: {{user.bio}}</h3>
+<div class="profile-card" *ngIf="user">
+  <div class="profile-card__header">
+    <div class="profile-card__avatar">
+      <span class="icon icon--avatar" >
+          <img [src]="user.avatarUrl" alt="{{ user.name }}'s avatar" class="icon icon--avatar" />
+      </span>
+    </div>
 
-    <p>Car: {{ user.carModel}}</p>
-    <p>Miles: {{ user.surname }}km</p>
-<!--    <p>Friends: {{ user?.friends }}</p>-->
+    <div class="profile-card__identity">
+
+      <div class="profile-card__name">User: {{ user.name }} {{user.surname}}</div>
+      <div class="profile-card__reputation"> 171 Reputation</div>
+    </div>
+
+    <button class="profile-card__follow-btn">
+      <span class="icon icon--follow"></span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus-icon lucide-user-plus"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" x2="19" y1="8" y2="14"/><line x1="22" x2="16" y1="11" y2="11"/></svg>
+    </button>
+  </div>
+
+  <div class="profile-card__badge">
+    <span class="icon icon--car"></span>
+    <span> Car Owner: {{user.bio}}</span>
+  </div>
+
+  <div class="profile-card__section">
+    <div class="profile-card__section-title">
+      Moje Auta:
+      {{ user.carModel}}</div>
+    <ul class="profile-card__car-list">
+      <li class="profile-card__car-item">
+        <span class="icon icon--car-small">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-car-front-icon lucide-car-front"><path d="m21 8-2 2-1.5-3.7A2 2 0 0 0 15.646 5H8.4a2 2 0 0 0-1.903 1.257L5 10 3 8"/><path d="M7 14h.01"/><path d="M17 14h.01"/><rect width="18" height="8" x="3" y="10" rx="2"/><path d="M5 18v2"/><path d="M19 18v2"/></svg> </span>
+        <span>Toyota Supra (A40)</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="profile-card__section">
+    <div class="profile-card__section-title">Licznik Przebiegu</div>
+    <div class="profile-card__mileage">
+      <span class="icon icon--gauge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge-icon lucide-gauge"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+      </span>
+      <span>75.400 KM</span>
+    </div>
+  </div>
+
+  <div class="profile-card__section profile-card__section--event">
+    <div class="profile-card__section-title">Data Wydarzenia:</div>
+    <div class="profile-card__event">
+      <span class="icon icon--pin">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check-icon lucide-calendar-check"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+      </span>
+      <span> Łuczniki, "Włosienicy Głazyk" Spot </span>
+    </div>
   </div>
 </div>
