@@ -34,11 +34,11 @@ export class ExpensesPageComponent {
     date: today(),
     category: 1,
     title: '',
-    cost: 0,
+    cost: null,
     description: '',
     vehicleId: '',
     createdAt: '',
-    mileage: 0,
+    mileage: null,
     factureImageUrl: ''
   };
 
@@ -92,7 +92,7 @@ export class ExpensesPageComponent {
   }
 
   get totalCost(): number {
-    return this.filteredExpenses.reduce((sum, e) => sum + e.cost, 0);
+    return this.filteredExpenses.reduce((sum, e) => sum + (e.cost ?? 0), 0);
   }
 
   addExpense(): void {
@@ -105,7 +105,7 @@ export class ExpensesPageComponent {
       cost: Number(this.newExpense.cost),
       date: this.newExpense.date,
       category: this.newExpense.category,
-      mileage: this.newExpense.mileage,
+      mileage: Number(this.newExpense.mileage),
       factureImageUrl: this.newExpense.factureImageUrl,
     };
 
@@ -123,12 +123,26 @@ export class ExpensesPageComponent {
       .subscribe({
         next: () => {
           this.loadExpenses();
-          console.log("Profile saved!")
+          this.setDefaultValuesForNewExpense();
+          console.log("Expense saved!")
         },
         error: (err) => console.error(err)
       });
   }
-
+  private setDefaultValuesForNewExpense(): void {
+    this.newExpense= {
+      id: '',
+      date: today(),
+      category: 1,
+      title: '',
+      cost: null,
+      description: '',
+      vehicleId: '',
+      createdAt: '',
+      mileage: null,
+      factureImageUrl: ''
+    };
+  }
   removeExpense(id: string): void {
     this.expenseService.delete(id).subscribe({
       next: () => this.loadExpenses()
@@ -160,5 +174,15 @@ export class ExpensesPageComponent {
     const reader = new FileReader();
     reader.onload = () => this.factureImageUrl = reader.result as string;
     reader.readAsDataURL(file);
+  }
+  get selectedNameVehicle(): string
+  {
+    if(this.selectedVehicleId){
+      const found =  this.vehicles.find((element) => element.id === this.selectedVehicleId);
+      if(found)
+        return found?.mark + found.model;
+      else return "";
+    }
+    return "";
   }
 }

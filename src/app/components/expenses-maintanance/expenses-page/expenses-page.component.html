@@ -20,7 +20,7 @@
   </div>
   <div class="grid">
     <section class="card">
-      <h3>Dodaj koszt</h3>
+      <h3>Dodaj koszt dla {{selectedNameVehicle}}</h3>
       <div class="form-row">
         <label>Data</label>
         <input type="date" [(ngModel)]="newExpense.date">
@@ -44,17 +44,17 @@
       </div>
       <div class="form-row">
         <label>Koszt (PLN)</label>
-        <input type="number" min="0" step="0.01" [(ngModel)]="newExpense.cost">
+        <input type="number" class="no-spinner" [(ngModel)]="newExpense.cost" placeholder="1000">
       </div>
       <div class="form-row">
         <label>Przebieg</label>
-        <input type="number" min="0" [(ngModel)]="newExpense.mileage">
+        <input type="number" class="no-spinner" [(ngModel)]="newExpense.mileage" placeholder="186000">
       </div>
       <div class="form-row">
         <label>Opis (opcjonalnie)</label>
         <textarea rows="3" [(ngModel)]="newExpense.description"></textarea>
       </div>
-      <button class="primary" *ngIf="selectedVehicleId" (click)="addExpense()">Dodaj</button>
+      <button class="primary" *ngIf="selectedVehicleId" (click)="addExpense()">Dodaj do historii</button>
     </section>
 
     <section class="card list-card">

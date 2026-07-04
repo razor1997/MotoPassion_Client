@@ -47,7 +47,7 @@
 }
 
 label {
-  font-size: 13px;
+  font-size: 16px;
   color: #444;
   margin-bottom: 6px;
 }
@@ -58,7 +58,15 @@ input, select, textarea {
   padding: 8px 10px;
   font-size: 14px;
 }
-
+/* Chrome, Safari, Edge, Opera */
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-spinner {
+  -moz-appearance: textfield;
+}
 .primary {
   background: #1f6feb;
   color: #fff;
@@ -66,6 +74,7 @@ input, select, textarea {
   padding: 10px 14px;
   border-radius: 8px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .list-card {

@@ -25,7 +25,8 @@ select {
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background-color: #2b99d2;
+  background-color: #315e93;
+  /*background-color: #24303e;*/
   color: white;
 }
 .filter button:active {

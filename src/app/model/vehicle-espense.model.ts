@@ -4,11 +4,11 @@ export interface VehicleExpense {
   vehicleId: string;
   title: string;
   description?: string;
-  cost: number;
+  cost: number|null;
   date: string;
   category: number;
   createdAt: string;
-  mileage: number;
+  mileage: number|null;
   factureImageUrl: string;
 }
 
