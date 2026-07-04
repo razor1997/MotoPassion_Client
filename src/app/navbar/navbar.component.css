@@ -1,62 +1,74 @@
 .container {
+  background: transparent;
+  /*padding: 10px 20px 12px;*/
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
+.navbar__logo {
   text-align: center;
-  padding: 20px;
-}
+  color: #f0f2f5;
+  background: #1b2430;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 24px;
+  height: 40px;
+  letter-spacing: 0.02em;
 
+}
 .header {
-  background-color: #f3f4f6;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.auth-navigation {
-  margin-bottom: 20px;
+  background: #ffffff;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-left: 200px;
+  justify-content: center; /* whole row hugs the right edge */
+  gap: 16px; /* space between links group and avatar */
+  width: 100%;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.auth-navigation {
+  border-bottom: 1px solid #1b2430;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  background: #1b2430;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .auth-navigation button {
-  margin: 5px;
+  margin: 8px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background-color: #2b99d2;
-  color: white;
+  background: #24303e;
+  color: #c7cfd9;
+  white-space: nowrap;
 }
 .auth-navigation button:active {
-  background-color: #5cb85c;
-  font-weight: bold;
+  background: #2f9fe0;
+  color: #fff;
 }
 .auth-navigation button:hover {
   background-color: #217088;
 }
-.navbar {
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px 20px;
-  background-color: #f8f9fa;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .navbar-account {
+  background: transparent;
   position: relative;
+  border-radius: 50%;
 }
 
 .dropdown {
-  display: inline-block;
-}
-
-.dropbtn {
-  background-color: transparent;
+  background-color: #24303e;
   border: none;
   cursor: pointer;
-  padding: 2px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 16px;
+  /*padding: 2px;*/
 }
-
 .profile-icon {
   width: 40px;
   height: 40px;
@@ -64,10 +76,11 @@
 }
 
 .dropdown-content {
+  color: #fff;
   display: none;
   position: absolute;
   right: 0;
-  background-color: white;
+  background-color: #24303e;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   overflow: hidden;
@@ -76,7 +89,7 @@
 }
 
 .dropdown-content a {
-  color: black;
+  color: #ffffff;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
@@ -85,7 +98,7 @@
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background-color: #217088;
 }
 
 .dropdown:hover .dropdown-content {
