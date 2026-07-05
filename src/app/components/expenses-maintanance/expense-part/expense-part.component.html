@@ -14,10 +14,10 @@
 
   </div>
   <div class="facture label" *ngIf="!expense.factureImageUrl">
-        Nie podano
+    ------
   </div>
   <div class="col cost" *ngIf="expense.cost">{{ expense.cost.toFixed(2) }} PLN</div>
-  <div class="col cost" *ngIf="!expense.cost">Nie podano</div>
+  <div class="col cost" *ngIf="!expense.cost">------</div>
   <div class="col actions">
     <button class="ghost" (click)="showMore.emit(expense.id)">Więcej</button>
     <button class="ghost" (click)="remove.emit(expense.id)">Usuń</button>

@@ -1,4 +1,5 @@
 <div class="event-form-card">
+
   <h2>Utwórz wydarzenie</h2>
 
   <form [formGroup]="form" (ngSubmit)="submit()">
@@ -20,6 +21,11 @@
     <div class="error" *ngIf="form.get('Date')?.invalid">
       Tytuł jest wymagany
     </div>
+    <app-event-map
+      [latitude]="52.225665764"
+      [longitude]="21.003833318"
+      [location]="location">
+    </app-event-map>
     <div class="row">
       <input type="number" placeholder="Szerokość (lat)"
              formControlName="Latitude" />

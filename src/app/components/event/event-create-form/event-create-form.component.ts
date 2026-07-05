@@ -6,15 +6,16 @@ import {FilesService} from '../../../services/files.service';
 import {UserSessionService} from '../../../services/user-service.service';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
+import {EventMapComponent} from '../event-map/event-map.component';
 
 @Component({
   selector: 'app-event-create-form',
   templateUrl: './event-create-form.component.html',
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, EventMapComponent],
   styleUrls: ['./event-create-form.component.css']
 })
 export class EventCreateFormComponent {
-
+  location: string = "Warszawa";
   form!: FormGroup;
   loading = false;
   imageFile: File | null = null;
