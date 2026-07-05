@@ -21,17 +21,20 @@
     <div class="error" *ngIf="form.get('Date')?.invalid">
       Tytuł jest wymagany
     </div>
+    <input type="text" placeholder="Miejsce wydarzenia" formControlName="Location" />
+    <div class="error" *ngIf="form.get('Location')?.invalid">
+      Miejsce jest wymagane
+    </div>
     <app-event-map
-      [latitude]="52.225665764"
-      [longitude]="21.003833318"
-      [location]="location">
+      [latitude]="form.get('Latitude')?.value || 52.225665764"
+      [longitude]="form.get('Longitude')?.value || 21.003833318"
+      [location]="location"
+      [editable]="true"
+      (coordinatesChange)="onCoordinatesChange($event)">
     </app-event-map>
     <div class="row">
-      <input type="number" placeholder="Szerokość (lat)"
-             formControlName="Latitude" />
-
-      <input type="number" placeholder="Długość (lng)"
-             formControlName="Longitude" />
+      <input type="number" placeholder="Szerokość (lat)" formControlName="Latitude" />
+      <input type="number" placeholder="Długość (lng)" formControlName="Longitude" />
     </div>
     <div class="error" *ngIf="form.get('Latitude')?.invalid" >
       Tytuł jest wymagany

@@ -19,6 +19,8 @@ export class EventCreateFormComponent {
   form!: FormGroup;
   loading = false;
   imageFile: File | null = null;
+  mapLatitude = 52.225665764;
+  mapLongitude = 21.003833318;
 
   constructor(
     private fb: FormBuilder,
@@ -34,8 +36,9 @@ export class EventCreateFormComponent {
       Title: ['', Validators.required],
       Description: ['', Validators.required],
       Date: ['', Validators.required],
-      Latitude: [0, Validators.required],
-      Longitude: [0, Validators.required],
+      Location: ['', Validators.required],
+      Latitude: [52.225665764, Validators.required],
+      Longitude: [21.003833318, Validators.required],
       Category: [0, Validators.required],
       MaxCountParticipants: [10, Validators.required]
     });
@@ -45,39 +48,50 @@ export class EventCreateFormComponent {
     this.imageFile = event.target.files[0];
   }
 
-  submit() {
-    console.log("this.form.value");
+  submit(): void {
     if (this.form.invalid) return;
 
-    this.loading = false;
+    this.loading = true;
 
     const formData = new FormData();
-    Object.entries(this.form.value).forEach(([key, value]) => {
-      formData.append(key, value as any);
-    });
 
-    formData.append('UserId', this.session.userId as string);
-    const upload$ = of("");// this.imageFile
-      // ? this.filesService.uploadImage(this.imageFile, 3)
-      // : of("");
+    formData.append('Title', this.form.value.Title);
+    formData.append('Description', this.form.value.Description);
+    formData.append('Date', this.form.value.Date);
+    formData.append('Latitude', Number(this.form.value.Latitude).toFixed(9).replace('.', ','));
+    formData.append('Longitude', Number(this.form.value.Longitude).toFixed(9).replace('.', ','));
+    formData.append('Category', String(this.form.value.Category));
+    formData.append('MaxCountParticipants', String(this.form.value.MaxCountParticipants));
+    formData.append('CreatorId', this.session.userId ?? '');
+    formData.append('Location', this.form.value.Location);
+
+    const upload$ = this.imageFile
+      ? this.filesService.uploadImage(this.imageFile, 3)
+      : of({ url: '' });
 
     upload$.pipe(
       switchMap((result: any) => {
-        formData.append("PhotoUrl", result.url);
-
+        formData.append('PhotoUrl', result.url ?? '');
         return this.eventsService.createEvent(formData);
       })
     ).subscribe({
-      next: ()=>{
-      this.loading = false;
-      this.router.navigate(['/events']);
-
-    } ,
-      error: () =>{
-
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/events']);
+      },
+      error: (err) => {
+        console.error('Create event error:', err);
         this.loading = false;
       }
+    });
+  }
+  onCoordinatesChange(coords: { latitude: number; longitude: number }): void {
+    this.form.patchValue({
+      Latitude: coords.latitude,
+      Longitude: coords.longitude
+    });
 
-    })
+    this.mapLatitude = coords.latitude;
+    this.mapLongitude = coords.longitude;
   }
 }

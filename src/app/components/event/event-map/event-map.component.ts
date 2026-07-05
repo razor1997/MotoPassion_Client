@@ -1,15 +1,22 @@
+
 import {
   AfterViewInit,
   Component,
+  ElementRef,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
+  Output,
   SimpleChanges,
-  ViewChild,
-  ElementRef
+  ViewChild
 } from '@angular/core';
 import * as L from 'leaflet';
-
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: '/assets/leaflet/marker-icon-2x.png',
+  iconUrl: '/assets/leaflet/marker-icon.png',
+  shadowUrl: '/assets/leaflet/marker-shadow.png'
+});
 @Component({
   selector: 'app-event-map',
   standalone: true,
@@ -20,6 +27,9 @@ export class EventMapComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() latitude: number | null = null;
   @Input() longitude: number | null = null;
   @Input() location: string = '';
+  @Input() editable = false;
+
+  @Output() coordinatesChange = new EventEmitter<{ latitude: number; longitude: number }>();
 
   @ViewChild('mapContainer', { static: true }) mapContainer!: ElementRef<HTMLDivElement>;
 
@@ -43,27 +53,60 @@ export class EventMapComponent implements AfterViewInit, OnChanges, OnDestroy {
       return;
     }
 
+    const center: L.LatLngExpression = [this.latitude, this.longitude];
+
     if (!this.map) {
-      this.map = L.map(this.mapContainer.nativeElement).setView(
-        [this.latitude, this.longitude],
-        13
-      );
+      this.map = L.map(this.mapContainer.nativeElement).setView(center, 13);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
       }).addTo(this.map);
+
+      if (this.editable) {
+        this.map.on('click', (event: L.LeafletMouseEvent) => {
+          this.updateMarker(event.latlng.lat, event.latlng.lng);
+        });
+      }
     } else {
-      this.map.setView([this.latitude, this.longitude], 13);
+      this.map.setView(center, 13);
     }
+
+    this.updateMarker(this.latitude, this.longitude);
+  }
+
+  private updateMarker(latitude: number, longitude: number): void {
+    if (!this.map) return;
 
     if (this.marker) {
-      this.marker.remove();
+      this.marker.setLatLng([latitude, longitude]);
+    } else {
+      this.marker = L.marker([latitude, longitude], {
+        draggable: this.editable
+      }).addTo(this.map);
+
+      if (this.editable) {
+        this.marker.on('dragend', () => {
+          const position = this.marker?.getLatLng();
+          if (!position) return;
+
+          this.coordinatesChange.emit({
+            latitude: position.lat,
+            longitude: position.lng
+          });
+        });
+      }
+
+      this.marker.bindPopup(this.location || 'Lokalizacja wydarzenia');
     }
 
-    this.marker = L.marker([this.latitude, this.longitude])
-      .addTo(this.map)
-      .bindPopup(this.location || 'Lokalizacja wydarzenia')
-      .openPopup();
+    this.marker.setPopupContent(this.location || 'Lokalizacja wydarzenia');
+
+    if (this.editable) {
+      this.coordinatesChange.emit({
+        latitude,
+        longitude
+      });
+    }
   }
 
   ngOnDestroy(): void {
