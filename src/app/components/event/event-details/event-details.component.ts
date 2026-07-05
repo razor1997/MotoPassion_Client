@@ -9,11 +9,12 @@ import {CommunityService} from '../../../services/community/community.service';
 import {map, of, switchMap} from 'rxjs';
 import {CommunityUser} from '../../../model/community-user';
 import {UserSessionService} from '../../../services/user-service.service';
+import {EventMapComponent} from '../event-map/event-map.component';
 
 @Component({
   selector: 'app-event-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, EventMapComponent],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.css'
 })

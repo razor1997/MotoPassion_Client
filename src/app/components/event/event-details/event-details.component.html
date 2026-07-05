@@ -70,7 +70,16 @@
       <h3>Opis</h3>
       <p>{{ event.description }}</p>
     </div>
+    <app-event-map
+      *ngIf="event.latitude != null && event.longitude != null"
+      [latitude]="event.latitude"
+      [longitude]="event.longitude"
+      [location]="event.location">
+    </app-event-map>
 
+    <div *ngIf="event.latitude == null || event.longitude == null" class="empty">
+      Brak lokalizacji wydarzenia.
+    </div>
     <div class="participants">
       <h3>Uczestnicy</h3>
 
