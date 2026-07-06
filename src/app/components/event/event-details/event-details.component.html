@@ -15,6 +15,10 @@
         <h2>{{ event.title }}</h2>
         <p class="subtitle">{{ event.location }}</p>
       </div>
+      <div *ngIf="owner">
+        <h2>Autor</h2>
+        <p class="subtitle">{{owner}}</p>
+      </div>
 
       <div class="actions">
         <button class="ghost" (click)="back()">Wróć</button>

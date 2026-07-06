@@ -137,6 +137,16 @@ export class EventDetailsComponent {
       }
     });
   }
+  get owner():string{
+    if(this.event)
+    {
+      const owner =  this.participants.find((owner ) => owner.id === this.event?.creatorId)?.name;
+      if(owner){
+        return owner.toString();
+      }
+    }
+    return '';
+  }
   protected readonly toDateDisplay = toDateDisplay;
   protected readonly toVisibilityLabel = toVisibilityLabel;
   protected readonly toEventTypeLabel = toEventTypeLabel;
