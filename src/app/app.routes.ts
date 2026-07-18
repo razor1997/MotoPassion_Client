@@ -25,6 +25,9 @@ import {VehicleEditComponent} from './components/vehicles/vehicle-edit/vehicle-e
 import {VehiclePreviewComponent} from './components/vehicles/vehicle-preview/vehicle-preview.component';
 import {EventsListComponent} from './components/event/events-list/events-list.component';
 import { EventDetailsComponent } from './components/event/event-details/event-details.component';
+import {
+  EventParticipantDetailsComponent
+} from './components/event/event-participant-details/event-participant-details.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },  // Strona startowa
@@ -53,6 +56,10 @@ export const routes: Routes = [
     component: AdminPanelComponent,
     canActivate: [RoleGuard],
     data: { role: 'Admin' }
+  },
+  {
+    path: 'community/users/:id',
+    component: EventParticipantDetailsComponent
   },
   { path: '**', redirectTo: '' }
 ];

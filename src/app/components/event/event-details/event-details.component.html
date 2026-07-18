@@ -92,16 +92,18 @@
       </div>
 
       <div class="participants-grid" *ngIf="participants.length > 0">
-        <div class="participant-card" *ngFor="let participant of participants">
-          <img
-            *ngIf="participant.avatarUrl"
-            [src]="participant.avatarUrl"
-            alt="Avatar uczestnika"
-          >
-          <div>
-            <strong>{{ participant.name }} {{ participant.surname }}</strong>
-            <p>{{ participant.userName }}</p>
-            <span *ngIf="participant.baseLocation">{{ participant.baseLocation }}</span>
+          <div class="participant-card" *ngFor="let participant of participants">
+            <div
+              class="participant-link"
+              [routerLink]="['/community/users', participant.id]">
+            <img
+              *ngIf="participant.avatarUrl"
+              [src]="participant.avatarUrl"
+              alt="Avatar uczestnika"
+            >
+              <strong>{{ participant.name }} {{ participant.surname }}</strong>
+              <p>{{ participant.userName }}</p>
+              <span *ngIf="participant.baseLocation">{{ participant.baseLocation }}</span>
           </div>
         </div>
       </div>

@@ -1,0 +1,115 @@
+<div class="page__title">MotoPassion</div>
+
+<div class="participant-card" *ngIf="participant">
+
+  <!-- Profile header -->
+  <div class="profile-header">
+    <div class="profile-header__avatar">
+      <img [src]="participant.avatarUrl" alt="">
+    </div>
+    <div class="profile-header__info">
+      <h1 class="profile-header__name">{{ participant.name }}</h1>
+      <div class="profile-header__meta">
+<!--        <span class="icon icon&#45;&#45;verified" *ngIf="participant.verified"></span>-->
+        <span class="icon icon--pin"></span>
+        <span>{{ participant.baseLocation }}</span>
+      </div>
+    </div>
+    <div class="profile-header__buttons">
+      <button *ngIf="isOwnProfile" class="btn btn--outline">Zarządzaj profilem</button>
+    </div>
+  </div>
+
+  <!-- About + Vehicles -->
+  <div class="grid-2 section">
+    <div>
+      <div class="section__title">O mnie</div>
+      <div class="about-box">{{ participant.bio }}</div>
+    </div>
+
+    <div>
+      <div class="section__title">Moje Pojazdy</div>
+      <div class="vehicle-row">
+<!--        <div class="vehicle-card" *ngFor="let vehicle of participant.vehicles">-->
+<!--          <div class="vehicle-card__img">-->
+<!--            <img [src]="vehicle.imageUrl" alt="">-->
+<!--          </div>-->
+<!--          <div class="vehicle-card__body">-->
+<!--            <div class="vehicle-card__name">{{ vehicle.name }}</div>-->
+<!--            <div class="vehicle-card__sub">{{ vehicle.model }}</div>-->
+<!--            <div class="vehicle-card__sub">Registracja: {{ vehicle.registrationStatus }}</div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+        <div class="vehicle-card vehicle-card--add">
+          <span class="icon--plus">+</span>
+          <span>Dodaj Pojazd</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Events + Gallery -->
+  <div class="grid-2 section">
+    <div>
+      <div class="section__title">Wydarzenia (Created/Upcoming)</div>
+      <div class="events-columns">
+
+        <div>
+          <div class="events-column__title">Moje Wydarzenia</div>
+          <div class="event-list">
+<!--            <div class="event-row" *ngFor="let event of participant.myEvents">-->
+<!--              <span class="icon icon&#45;&#45;calendar"></span>-->
+<!--              <div class="event-row__info">-->
+<!--                <div class="event-row__title">{{ event.title }}</div>-->
+<!--                <div class="event-row__date">{{ event.date }}</div>-->
+<!--                <div class="event-row__type">{{ event.type }}</div>-->
+<!--              </div>-->
+<!--            </div>-->
+          </div>
+        </div>
+
+        <div>
+          <div class="events-column__title">Wydarzenia, w których biorę udział</div>
+          <div class="event-list">
+<!--            <div class="event-row" *ngFor="let event of participant.participatingEvents">-->
+<!--              <span class="icon icon&#45;&#45;calendar"></span>-->
+<!--              <div class="event-row__info">-->
+<!--                <div class="event-row__title">{{ event.title }}</div>-->
+<!--                <div class="event-row__date">{{ event.date }}</div>-->
+<!--                <div class="event-row__type">{{ event.type }}</div>-->
+<!--              </div>-->
+<!--            </div>-->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div>
+      <div class="section__title">Galeria</div>
+      <div class="gallery-grid">
+<!--        <div class="gallery-grid__item" *ngFor="let photo of participant.gallery">-->
+<!--          <img [src]="photo" alt="">-->
+<!--        </div>-->
+      </div>
+
+      <div class="section__title section__title--spaced">Statystyki Społeczności</div>
+      <div class="stats-row">
+<!--        <div class="stat-card" *ngFor="let stat of participant.stats">-->
+<!--          <div class="stat-card__label">{{ stat.label }}</div>-->
+<!--          <div class="stat-card__value">{{ stat.value }}</div>-->
+<!--        </div>-->
+      </div>
+
+      <div class="section__title section__title--spaced">Zapisane Trasy</div>
+      <div class="route-list">
+<!--        <div class="route-item" *ngFor="let route of participant.savedRoutes">-->
+<!--          <div class="route-item__title">{{ route.title }}</div>-->
+<!--          <div class="route-item__sub">{{ route.subtitle }}</div>-->
+<!--        </div>-->
+      </div>
+    </div>
+  </div>
+
+</div>

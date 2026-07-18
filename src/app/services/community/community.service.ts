@@ -16,4 +16,7 @@ export class CommunityService {
     console.log('pobieranie innych użytkowników' + `${environment.urlAddress}/users`);
     return this.https.get<CommunityUser[]>(`${environment.urlAddress}/users`);
   }
+  getUserById(id: string): Observable<CommunityUser> {
+    return this.https.get<CommunityUser>(`${environment.urlAddress}/users/${id}`);
+  }
 }
