@@ -16,6 +16,7 @@ import {AuthService} from '../../services/auth.service';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
+  errorMessage: string = "";
   registerForm: FormGroup;
   constructor(private fb: FormBuilder,
               private router: Router,
@@ -25,6 +26,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = this.fb.group({
       userName: ['test', [Validators.required, Validators.maxLength(50)]],
+      name: ['test', [Validators.required, Validators.maxLength(50)]],
+      surname: ['test', [Validators.required, Validators.maxLength(50)]],
       email: ['test321@gmail.com', [Validators.required, Validators.email]],
       password: ['test321', [Validators.required, Validators.minLength(6), Validators.maxLength(100)]],
       confirmPassword: ['test321', Validators.required],
@@ -50,11 +53,14 @@ export class RegisterComponent implements OnInit {
         response => {
           console.log('Rejestracja zakończona sukcesem', response);
           this.router.navigate(['/login']); // Przekierowanie do strony logowania po rejestracji
+          this.errorMessage = '';
         },
         error => {
 
           console.error('Błąd rejestracji');
           console.error(error);
+
+          this.errorMessage +=  error.error.message;
         }
       );
     } else {
