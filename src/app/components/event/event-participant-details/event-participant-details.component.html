@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="profile-header__buttons">
-      <button *ngIf="isOwnProfile" class="btn btn--outline">Zarządzaj profilem</button>
+      <button *ngIf="isOwnProfile" (click)="onProfileManagementClick()" class="btn btn--outline">Zarządzaj profilem</button>
     </div>
   </div>
 

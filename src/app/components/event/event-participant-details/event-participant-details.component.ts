@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CommunityUser} from '../../../model/community-user';
 import {CommunityService} from '../../../services/community/community.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {UserSessionService} from '../../../services/user-service.service';
 
@@ -16,7 +16,8 @@ participant!: CommunityUser;
   isOwnProfile = false;
   constructor(private userService: CommunityService,
               private route: ActivatedRoute,
-              private session: UserSessionService) {
+              private session: UserSessionService,
+              private router: Router) {
   }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -30,5 +31,8 @@ participant!: CommunityUser;
       },
       error: (err) => console.error('Failed to load participant:', err)
     });
+  }
+  onProfileManagementClick(): void {
+    this.router.navigateByUrl('profile/edit');
   }
 }
