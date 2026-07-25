@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {environment} from '../../environments/environment';
 import {CommunityUser} from '../../model/community-user';
+import {UserPublicProfileDto} from '../../model/user-public-profile';
 
 
 @Injectable({
@@ -18,5 +19,10 @@ export class CommunityService {
   }
   getUserById(id: string): Observable<CommunityUser> {
     return this.https.get<CommunityUser>(`${environment.urlAddress}/users/${id}`);
+  }
+  getPublicProfile(id: string): Observable<UserPublicProfileDto> {
+    return this.https.get<UserPublicProfileDto>(
+      `${environment.urlAddress}/users/user-profile/${id}`
+    );
   }
 }

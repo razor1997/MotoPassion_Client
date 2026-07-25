@@ -1,4 +1,3 @@
-<div class="page__title">MotoPassion</div>
 
 <div class="participant-card" *ngIf="participant">
 
@@ -30,19 +29,19 @@
     <div>
       <div class="section__title">Moje Pojazdy</div>
       <div class="vehicle-row">
-<!--        <div class="vehicle-card" *ngFor="let vehicle of participant.vehicles">-->
-<!--          <div class="vehicle-card__img">-->
-<!--            <img [src]="vehicle.imageUrl" alt="">-->
-<!--          </div>-->
-<!--          <div class="vehicle-card__body">-->
+        <div class="vehicle-card" *ngFor="let vehicle of participant.vehicles">
+          <div class="vehicle-card__img">
+            <img [src]="vehicle.imageUrl" alt="">
+          </div>
+          <div class="vehicle-card__body">
 <!--            <div class="vehicle-card__name">{{ vehicle.name }}</div>-->
-<!--            <div class="vehicle-card__sub">{{ vehicle.model }}</div>-->
+            <div class="vehicle-card__sub">{{ vehicle.model }}</div>
 <!--            <div class="vehicle-card__sub">Registracja: {{ vehicle.registrationStatus }}</div>-->
-<!--          </div>-->
-<!--        </div>-->
+          </div>
+        </div>
 
         <div class="vehicle-card vehicle-card--add">
-          <span class="icon--plus">+</span>
+          <span *ngIf="isOwnProfile" (click)="onAddVehicleClick()" class="icon--plus">+</span>
           <span>Dodaj Pojazd</span>
         </div>
       </div>
@@ -72,14 +71,14 @@
         <div>
           <div class="events-column__title">Wydarzenia, w których biorę udział</div>
           <div class="event-list">
-<!--            <div class="event-row" *ngFor="let event of participant.participatingEvents">-->
-<!--              <span class="icon icon&#45;&#45;calendar"></span>-->
-<!--              <div class="event-row__info">-->
-<!--                <div class="event-row__title">{{ event.title }}</div>-->
-<!--                <div class="event-row__date">{{ event.date }}</div>-->
+            <div class="event-row" *ngFor="let event of participant.joinedEvents">
+              <span class="icon icon--calendar"></span>
+              <div class="event-row__info">
+                <div class="event-row__title">{{ event.title }}</div>
+                <div class="event-row__date">{{ event.date }}</div>
 <!--                <div class="event-row__type">{{ event.type }}</div>-->
-<!--              </div>-->
-<!--            </div>-->
+              </div>
+            </div>
           </div>
         </div>
 
@@ -89,9 +88,9 @@
     <div>
       <div class="section__title">Galeria</div>
       <div class="gallery-grid">
-<!--        <div class="gallery-grid__item" *ngFor="let photo of participant.gallery">-->
-<!--          <img [src]="photo" alt="">-->
-<!--        </div>-->
+        <div class="gallery-grid__item" *ngFor="let photo of participant.gallery">
+          <img [src]="photo" alt="">
+        </div>
       </div>
 
       <div class="section__title section__title--spaced">Statystyki Społeczności</div>

@@ -4,6 +4,7 @@ import {CommunityService} from '../../../services/community/community.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {UserSessionService} from '../../../services/user-service.service';
+import {UserPublicProfileDto} from '../../../model/user-public-profile';
 
 @Component({
   selector: 'app-event-participant-details',
@@ -12,8 +13,11 @@ import {UserSessionService} from '../../../services/user-service.service';
   styleUrl: './event-participant-details.component.css'
 })
 export class EventParticipantDetailsComponent {
-participant!: CommunityUser;
+  participant: UserPublicProfileDto | null = null;
   isOwnProfile = false;
+  loading = false;
+  error = '';
+
   constructor(private userService: CommunityService,
               private route: ActivatedRoute,
               private session: UserSessionService,
@@ -21,18 +25,34 @@ participant!: CommunityUser;
   }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    if (!id) return;
+    if (!id) {
+      this.error = 'Brak identyfikatora użytkownika.';
+      return;
+    }
     console.log(id);
-    this.userService.getUserById(id).subscribe({
-      next: (user) => {
-        this.participant = user
-        this.isOwnProfile = this.session.userId === user.id;
 
+    this.loadProfile(id);
+  }
+  loadProfile(id: string): void {
+    this.loading = true;
+
+    this.userService.getPublicProfile(id).subscribe({
+      next: (participant) => {
+        this.participant = participant;
+        this.isOwnProfile = this.session.userId === participant.id;
+        this.loading = false;
       },
-      error: (err) => console.error('Failed to load participant:', err)
+      error: (err) => {
+        console.error('Failed to load participant profile:', err);
+        this.error = 'Nie udało się pobrać profilu użytkownika.';
+        this.loading = false;
+      }
     });
   }
   onProfileManagementClick(): void {
     this.router.navigateByUrl('profile/edit');
+  }
+  onAddVehicleClick(): void {
+    this.router.navigateByUrl('vehicles/add');
   }
 }
