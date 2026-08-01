@@ -126,6 +126,7 @@
   border: 1px solid #e5e5e5;
   border-radius: 12px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .vehicle-card__img {
@@ -256,3 +257,20 @@
 .route-item__sub { font-size: 11px; color: #888; margin-top: 2px; }
 
 .icon { display: inline-block; }
+.ghost {
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+.danger {
+  background: #ffecec;
+  border: 1px solid #f5b5b5;
+  color: #b30000;
+  border-radius: 6px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+

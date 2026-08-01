@@ -1,0 +1,135 @@
+.vehicles-page {
+  width: 100%;
+  display: grid;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.page-header{
+  text-align: center;
+}
+.page-header h2 {
+  margin: 0 0 6px;
+}
+
+.page-header p {
+  margin: 0;
+  color: #666;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr auto;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid #ccc;
+}
+
+.filters input,
+.filters select {
+  width: 90%;
+  padding: 14px 12px;
+  border: 1px solid #dcdcdc;
+  /*border-radius: 10px;*/
+  background: #fff;
+  color: #111;
+}
+
+.ghost {
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 11px 14px;
+  cursor: pointer;
+}
+
+.loading {
+  padding: 16px;
+  color: #666;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.vehicle-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(0, 0, 0, 0.08);
+}
+
+.photo {
+  background: #eef1f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  margin-bottom: 12px;
+  width: 100%;
+  height: 160px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.meta {
+  font-size: 13px;
+  color: #444;
+  display: grid;
+  gap: 5px;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  color: #777;
+  background: #fafafa;
+  border: 1px dashed #ddd;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filters {
+    grid-template-columns: 1fr;
+  }
+}

@@ -28,6 +28,7 @@ import { EventDetailsComponent } from './components/event/event-details/event-de
 import {
   EventParticipantDetailsComponent
 } from './components/event/event-participant-details/event-participant-details.component';
+import {VehiclesBrowseComponent} from './components/vehicles/vehicles-browse/vehicles-browse.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },  // Strona startowa
@@ -50,6 +51,7 @@ export const routes: Routes = [
   { path: 'vehicles/user-list', component: VehiclesUserListComponent },
   { path: 'vehicles/edit/:id', component: VehicleEditComponent },
   { path: 'vehicles/preview/:id', component: VehiclePreviewComponent },
+  { path: 'vehicles/browse-list', component: VehiclesBrowseComponent },
   { path: 'event/details/:id', component: EventDetailsComponent },
   {
     path: 'admin/panel',

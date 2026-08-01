@@ -1,0 +1,64 @@
+<div class="vehicles-page">
+  <div class="page-header">
+    <h2>Przeglądaj pojazdy</h2>
+    <p>Publiczna lista pojazdów użytkowników MotoPassion.</p>
+  </div>
+
+  <div class="filters">
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="Szukaj po marce lub modelu"
+    >
+
+    <select [(ngModel)]="selectedCategory">
+      <option [ngValue]="0">Wszystkie kategorie</option>
+      <option *ngFor="let c of categories" [value]="c.id">
+        {{ c.name }}
+      </option>
+    </select>
+
+    <select [(ngModel)]="selectedFuelType">
+      <option [ngValue]="0">Wszystkie paliwa</option>
+      <option *ngFor="let f of fuelTypes" [value]="f.id">
+        {{ f.name }}
+      </option>
+    </select>
+
+    <button type="button" class="ghost" (click)="clearFilters()">
+      Wyczyść filtry
+    </button>
+  </div>
+
+  <div class="loading" *ngIf="loading">Ładowanie...</div>
+
+  <div class="grid" *ngIf="!loading">
+    <a
+      class="vehicle-card"
+      *ngFor="let vehicle of filteredVehicles"
+      [routerLink]="['/vehicles/preview', vehicle.id]"
+    >
+      <div class="photo">
+        <img *ngIf="vehicle.imageUrl" [src]="vehicle.imageUrl" alt="photo">
+        <span *ngIf="!vehicle.imageUrl">Foto</span>
+      </div>
+
+      <div class="title">
+        {{ vehicle.mark }} {{ vehicle.model }}
+      </div>
+
+      <div class="meta">
+        <div><strong>Rok:</strong> {{ vehicle.year }}</div>
+        <div><strong>Moc:</strong> {{ vehicle.horsePower }} KM</div>
+        <div><strong>Pojemność:</strong> {{ vehicle.engineCapacity }} L</div>
+        <div><strong>Paliwo:</strong> {{ getFuelName(vehicle.fuelType) }}</div>
+        <div><strong>Kategoria:</strong> {{ getCategoryName(vehicle.category) }}</div>
+        <div><strong>Przebieg:</strong> {{ vehicle.mileage || '—' }} km</div>
+      </div>
+    </a>
+
+    <div class="empty" *ngIf="filteredVehicles.length === 0">
+      Brak pojazdów spełniających wybrane filtry.
+    </div>
+  </div>
+</div>

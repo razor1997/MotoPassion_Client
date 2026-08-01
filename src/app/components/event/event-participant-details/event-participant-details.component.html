@@ -28,7 +28,7 @@
     <div class="section">
       <div class="section__title">Moje Pojazdy</div>
       <div class="vehicle-row">
-        <div class="vehicle-card" *ngFor="let vehicle of vehicles">
+        <div class="vehicle-card" *ngFor="let vehicle of vehicles" [routerLink]="['/vehicles/preview', vehicle.id]">
           <div class="vehicle-card__img">
             <img [src]="vehicle.imageUrl" alt="">
           </div>

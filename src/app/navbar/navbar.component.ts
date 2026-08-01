@@ -36,8 +36,11 @@ export class NavbarComponent implements OnInit {
   {
     switch(this.selectedSite) {
       case 'vehicles/user-list':{
-        return 'Twoje pojazdy';
+        return 'Moje pojazdy';
       }break;
+      case 'vehicles/browse-list': {
+        return 'Przeglądaj pojazdy';
+      } break;
       case 'journeys':{
         return "Journeys";
       } break;

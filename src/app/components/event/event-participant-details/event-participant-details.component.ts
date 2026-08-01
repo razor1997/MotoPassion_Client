@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {CommunityUser} from '../../../model/community-user';
 import {CommunityService} from '../../../services/community/community.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {UserSessionService} from '../../../services/user-service.service';
 import {
@@ -13,7 +13,7 @@ import {
 
 @Component({
   selector: 'app-event-participant-details',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './event-participant-details.component.html',
   styleUrl: './event-participant-details.component.css'
 })
