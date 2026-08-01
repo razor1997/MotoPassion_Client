@@ -3,6 +3,7 @@ import {VehicleService} from '../../../services/vehicle/vehicle.service';
 import {Vehicle} from '../../../model/vehicle.model';
 import {VehicleCardComponent} from '../vehicle-card/vehicle-card.component';
 import {CommonModule} from '@angular/common';
+import {UserSessionService} from '../../../services/user-service.service';
 
 @Component({
   selector: 'app-vehicles-user-list',
@@ -15,8 +16,8 @@ import {CommonModule} from '@angular/common';
 export class VehiclesUserListComponent {
   vehicles: Vehicle[] = [];
   loading = true;
-
-  constructor(private vehicleService: VehicleService) { }
+  constructor(private vehicleService: VehicleService,
+              private session: UserSessionService) { }
 
   ngOnInit(): void {
     const userId = localStorage.getItem('userId') || undefined;
@@ -30,5 +31,8 @@ export class VehiclesUserListComponent {
         this.loading = false;
       }
     });
+  }
+  get currentUserId(): string | null {
+    return this.session.userId;
   }
 }

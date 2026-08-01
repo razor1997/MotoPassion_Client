@@ -22,9 +22,9 @@
     <div><strong>Ubezpieczenie:</strong> {{vehicle.dateInsurance | date:'dd.MM.yyyy'}}</div>
   </div>
   <div class="actions">
-    <button class="ghost" (click)="edit()">Edytuj</button>
+    <button *ngIf="isOwner" class="ghost" (click)="goToEdit()">Edytuj</button>
     <button class="ghost" (click)="preview()">Podgląd</button>
-    <button class="danger" (click)="remove()">Usuń</button>
+    <button *ngIf="isOwner" class="danger" (click)="remove()">Usuń</button>
   </div>
 
 </div>

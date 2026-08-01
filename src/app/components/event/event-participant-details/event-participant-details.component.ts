@@ -4,7 +4,12 @@ import {CommunityService} from '../../../services/community/community.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {UserSessionService} from '../../../services/user-service.service';
-import {UserPublicProfileDto} from '../../../model/user-public-profile';
+import {
+  UserGalleryItemDto, UserPostLinkDto,
+  UserProfileEventItemDto,
+  UserProfileVehicleItemDto,
+  UserPublicProfileDto
+} from '../../../model/user-public-profile';
 
 @Component({
   selector: 'app-event-participant-details',
@@ -14,10 +19,20 @@ import {UserPublicProfileDto} from '../../../model/user-public-profile';
 })
 export class EventParticipantDetailsComponent {
   participant: UserPublicProfileDto | null = null;
+  vehicles: UserProfileVehicleItemDto[] = [];
+  joinedEvents: UserProfileEventItemDto[] = [];
+  gallery: UserGalleryItemDto[] = [];
+  posts: UserPostLinkDto[] = [];
   isOwnProfile = false;
   loading = false;
   error = '';
 
+  sections = [
+    { title: 'Pojazdy', items: [] as UserProfileVehicleItemDto[] },
+    { title: 'Wydarzenia', items: [] as UserProfileEventItemDto[] },
+    { title: 'Galeria', items: [] as UserGalleryItemDto[] },
+    { title: 'Posty', items: [] as UserPostLinkDto[] }
+  ];
   constructor(private userService: CommunityService,
               private route: ActivatedRoute,
               private session: UserSessionService,
@@ -39,6 +54,15 @@ export class EventParticipantDetailsComponent {
     this.userService.getPublicProfile(id).subscribe({
       next: (participant) => {
         this.participant = participant;
+        this.vehicles = participant.vehicles ?? [];
+        this.joinedEvents = participant.joinedEvents ?? [];
+        this.gallery = participant.gallery ?? [];
+        this.posts = participant.posts ?? [];
+
+        this.sections[0].items = this.vehicles;
+        this.sections[1].items = this.joinedEvents;
+        this.sections[2].items = this.gallery;
+        this.sections[3].items = this.posts;
         this.isOwnProfile = this.session.userId === participant.id;
         this.loading = false;
       },

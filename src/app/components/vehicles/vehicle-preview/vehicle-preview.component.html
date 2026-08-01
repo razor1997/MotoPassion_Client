@@ -1,34 +1,87 @@
-<div class="grid">
-<div class="card">
-  <div class="photo">
-    <img *ngIf="vehicle?.imageUrl" class="thumb" [src]="vehicle?.imageUrl" alt="photo" (click)="openImage()">
-    <span *ngIf="!vehicle?.imageUrl">Foto</span>
+<div class="vehicle-preview-page" *ngIf="vehicle as v">
+  <div class="vehicle-grid">
+    <section class="vehicle-card">
+      <div class="vehicle-photo">
+        <img *ngIf="v.imageUrl" class="thumb" [src]="v.imageUrl" alt="photo" (click)="openImage()">
+        <span *ngIf="!v.imageUrl">Foto</span>
+      </div>
+
+      <div class="title">
+        {{ v.mark }} {{ v.model }}
+      </div>
+
+      <div class="meta">
+        <div><strong>Rok:</strong> {{ v.year }}</div>
+        <div><strong>Moc:</strong> {{ v.horsePower }} KM</div>
+        <div><strong>Pojemność:</strong> {{ v.engineCapacity }} L</div>
+        <div><strong>Paliwo:</strong> {{ getFuelName(v.fuelType) }}</div>
+        <div><strong>Przebieg:</strong> {{ v.mileage ?? '—' }} km</div>
+        <div><strong>Kategoria:</strong> {{ getCategoryName(v.category) }}</div>
+      </div>
+
+      <div class="actions">
+        <button class="ghost" (click)="back()">Wróć</button>
+
+        <button *ngIf="isOwner" class="ghost" (click)="goToEdit()">
+          Edytuj
+        </button>
+
+        <button *ngIf="isOwner" class="danger" (click)="deleteVehicle()">
+          Usuń
+        </button>
+      </div>
+    </section>
+
+    <section class="vehicle-card vehicle-card--history">
+      <div class="section-title">Historia napraw</div>
+
+      <div class="empty" *ngIf="expenses.length === 0">
+        Brak kosztów do wyświetlenia.
+      </div>
+
+      <div class="expense-list" *ngIf="expenses.length > 0">
+        <div class="expense-item" *ngFor="let expense of expenses">
+          <div class="expense-main">
+            <div class="expense-title">{{ expense.title }}</div>
+            <div class="expense-meta">
+              <span>{{ expense.date | date:'dd.MM.yyyy' }}</span>
+              <span>{{ getCategoryName(expense.category) }}</span>
+              <span *ngIf="expense.mileage != null">{{ expense.mileage }} km</span>
+            </div>
+            <div class="expense-desc" *ngIf="expense.description">
+              {{ expense.description }}
+            </div>
+          </div>
+
+          <div class="expense-right">
+            <div class="expense-cost">{{ expense.cost.toFixed(2) }} PLN</div>
+            <img
+              *ngIf="expense.factureImageUrl"
+              class="expense-thumb"
+              [src]="expense.factureImageUrl"
+              alt="Faktura"
+              (click)="openFactureImage(expense.factureImageUrl)"
+            >
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <div class="title">
-    {{ vehicle?.mark }} {{ vehicle?.model }}
-  </div>
+  <section class="vehicle-owner" *ngIf="isOwner && privateData">
+    <div class="section-title">Dane właściciela</div>
+    <div class="owner-grid">
+      <div><strong>VIN:</strong> {{ privateData.vin || '—' }}</div>
+      <div><strong>Przegląd:</strong> {{ privateData.dateInspection | date:'dd.MM.yyyy' }}</div>
+      <div><strong>Ubezpieczenie:</strong> {{ privateData.dateInsurance | date:'dd.MM.yyyy' }}</div>
+    </div>
+  </section>
 
-  <div class="meta">
-    <div><strong>VIN:</strong> {{ vehicle?.vin || '—' }}</div>
-    <div><strong>Rok:</strong> {{ vehicle?.year }}</div>
-    <div><strong>Moc:</strong> {{ vehicle?.horsePower }} KM</div>
-    <div><strong>Pojemność:</strong> {{ vehicle?.engineCapacity }} L</div>
-<!--    <div><strong>Paliwo:</strong> {{ getfuelLabel() }}</div>-->
-    <div><strong>Przebieg:</strong> {{ vehicle?.mileage || '—' }} km</div>
-  </div>
-
-  <div class="extras">
-    <div><strong>Przegląd:</strong> {{vehicle?.dateInspection | date:'dd.MM.yyyy'}} </div>
-    <div><strong>Ubezpieczenie:</strong> {{vehicle?.dateInsurance | date:'dd.MM.yyyy'}}</div>
-  </div>
+  <section class="vehicle-owner vehicle-owner--hidden" *ngIf="!isOwner">
+    <div class="section-title">Dane właściciela</div>
+    <div class="empty">Dostępne tylko dla właściciela pojazdu.</div>
+  </section>
 </div>
-<app-expenses-list
-  [expenses]="expenses"
-  (remove)="removeExpense($event.toString())">
-</app-expenses-list>
-</div>
-
 
 <app-image-lightbox
   [url]="activeImageUrl"

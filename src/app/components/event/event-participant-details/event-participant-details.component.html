@@ -25,16 +25,15 @@
       <div class="section__title">O mnie</div>
       <div class="about-box">{{ participant.bio }}</div>
     </div>
-
-    <div>
+    <div class="section">
       <div class="section__title">Moje Pojazdy</div>
       <div class="vehicle-row">
-        <div class="vehicle-card" *ngFor="let vehicle of participant.vehicles">
+        <div class="vehicle-card" *ngFor="let vehicle of vehicles">
           <div class="vehicle-card__img">
             <img [src]="vehicle.imageUrl" alt="">
           </div>
           <div class="vehicle-card__body">
-<!--            <div class="vehicle-card__name">{{ vehicle.name }}</div>-->
+            <div class="vehicle-card__name">{{ vehicle.mark }}</div>
             <div class="vehicle-card__sub">{{ vehicle.model }}</div>
 <!--            <div class="vehicle-card__sub">Registracja: {{ vehicle.registrationStatus }}</div>-->
           </div>
@@ -89,7 +88,7 @@
       <div class="section__title">Galeria</div>
       <div class="gallery-grid">
         <div class="gallery-grid__item" *ngFor="let photo of participant.gallery">
-          <img [src]="photo" alt="">
+          <img [src]="photo.imageUrl" alt="">
         </div>
       </div>
 

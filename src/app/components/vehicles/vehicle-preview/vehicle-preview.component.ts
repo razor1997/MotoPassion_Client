@@ -1,84 +1,131 @@
-import {Component} from '@angular/core';
-import {ExpensesListComponent} from '../../expenses-maintanance/expenses-list/expenses-list.component';
-import {Vehicle} from '../../../model/vehicle.model';
-import {VehicleExpense} from '../../../model/vehicle-espense.model';
-import {VehicleExpenseService} from '../../../services/vehicle-expense/vehicle-expense.service';
-import {ActivatedRoute} from '@angular/router';
-import {VehicleService} from '../../../services/vehicle/vehicle.service';
-import {DatePipe, NgIf} from '@angular/common';
-import {ImageLightboxComponent} from '../../image-lightbox/image-lightbox.component';
+import { Component } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { VehicleService } from '../../../services/vehicle/vehicle.service';
+import { ImageLightboxComponent } from '../../image-lightbox/image-lightbox.component';
+import { UserSessionService } from '../../../services/user-service.service';
+import { categories, fuelTypes } from '../vehicle-utils/vehicle-utils';
+import {
+  VehicleDetailsDto,
+  VehicleExpenseHistoryItemDto
+} from '../../../model/vehicle-details.model';
+import {EXPENSE_CATEGORIES} from '../../expenses-maintanance/expenses-utils/expenses-category';
 
 @Component({
   selector: 'app-vehicle-preview',
+  standalone: true,
   imports: [
-    ExpensesListComponent,
+    CommonModule,
     DatePipe,
-    NgIf,
     ImageLightboxComponent
   ],
   templateUrl: './vehicle-preview.component.html',
   styleUrl: './vehicle-preview.component.css'
 })
 export class VehiclePreviewComponent {
-  vehicleId: string | null =null;
-  vehicle: Vehicle | undefined;
-  expenses: VehicleExpense[] = [];
+  vehicleId: string | null = null;
+  details: VehicleDetailsDto | null = null;
   activeImageUrl: string | null = null;
 
-  constructor(
-    private expenseService: VehicleExpenseService,
-    private route: ActivatedRoute,
-    private vehicleService: VehicleService) {
-  }
-  ngOnInit() {
-    this.vehicleId = this.route.snapshot.paramMap.get('id')!;
-    console.log(this.vehicleId);
+  protected readonly categories = EXPENSE_CATEGORIES;
+  protected readonly fuelTypes = fuelTypes;
 
-    this.vehicleService.getById(this.vehicleId).subscribe({
-      next: (v: Vehicle) => {
-        this.vehicle = {
-          id: v.id,
-          createdAt: v.createdAt,
-          userId: v.userId,
-          category: v.category,
-          mark: v.mark,
-          model: v.model,
-          year: v.year,
-          horsePower: v.horsePower,
-          engineCapacity: v.engineCapacity,
-          fuelType: v.fuelType,
-          mileage: v.mileage,
-          vin: v.vin,
-          imageUrl: v.imageUrl,
-          dateInspection: v.dateInspection? v.dateInspection.split('T')[0] : '',
-          dateInsurance: v.dateInsurance? v.dateInsurance.split('T')[0] : '',
-        };
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private vehicleService: VehicleService,
+    private session: UserSessionService
+  ) {}
+
+  ngOnInit(): void {
+    this.vehicleId = this.route.snapshot.paramMap.get('id');
+
+    if (!this.vehicleId) {
+      return;
+    }
+
+    this.loadDetails();
+  }
+
+  loadDetails(): void {
+    if (!this.vehicleId) {
+      return;
+    }
+
+    this.vehicleService.getDetails(this.vehicleId, this.session.userId ?? undefined).subscribe({
+      next: (details) => {
+        this.details = details;
+      },
+      error: (err) => {
+        console.error('Failed to load vehicle details:', err);
       }
     });
-    this.loadExpenses();
-  }
-  loadExpenses() {
-    if(!this.vehicleId){
-      return;}
-    this.expenseService
-      .getAllByVehicleId(this.vehicleId)
-      .subscribe({
-        next: (data) => this.expenses = data
-      });
-  }
-  removeExpense(id: string): void {
-    this.expenseService.delete(id).subscribe({
-      next: () => this.loadExpenses()
-    });
   }
 
-  openImage() {
-    if (this.vehicle) {
-      this.activeImageUrl = this.vehicle.imageUrl;
+  back(): void {
+    this.router.navigate(['/vehicles/user-list']);
+  }
+
+  openImage(): void {
+    if (this.details?.vehicle.imageUrl) {
+      this.activeImageUrl = this.details.vehicle.imageUrl;
     }
   }
 
-  closeImage() {
+  openFactureImage(url?: string | null): void {
+    if (url) {
+      this.activeImageUrl = url;
+    }
+  }
+
+  closeImage(): void {
     this.activeImageUrl = null;
+  }
+
+  get vehicle() {
+    return this.details?.vehicle ?? null;
+  }
+
+  get expenses(): VehicleExpenseHistoryItemDto[] {
+    return this.details?.expenses ?? [];
+  }
+
+  get isOwner(): boolean {
+    return !!this.details?.isOwner;
+  }
+
+  get privateData() {
+    return this.details?.privateData ?? null;
+  }
+
+  getCategoryName(id: number): string {
+    return this.categories.find((c) => c.id === id)?.name ?? 'Inne';
+  }
+
+  getFuelName(id: number): string {
+    return this.fuelTypes.find((f) => f.id === id)?.name ?? 'Inne';
+  }
+  goToEdit(): void {
+    if (!this.vehicleId) return;
+    this.router.navigate(['/vehicles/edit', this.vehicleId]);
+  }
+
+  deleteVehicle(): void {
+    if (!this.vehicleId) return;
+
+    const currentUserId = this.session.userId;
+    if (!currentUserId) return;
+
+    const confirmed = confirm('Czy na pewno chcesz usunąć to auto?');
+    if (!confirmed) return;
+
+    this.vehicleService.delete(this.vehicleId, currentUserId).subscribe({
+      next: () => {
+        this.router.navigate(['/vehicles/user-list']);
+      },
+      error: (err) => {
+        console.error('Nie udało się usunąć pojazdu:', err);
+      }
+    });
   }
 }

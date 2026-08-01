@@ -3,8 +3,9 @@
 
   <div class="grid" *ngIf="!loading">
     <app-vehicle-card
-      *ngFor="let v of vehicles"
-      [vehicle]="v">
+      *ngFor="let vehicle of vehicles"
+      [vehicle]="vehicle"
+      [isOwner]="vehicle.userId === currentUserId">
     </app-vehicle-card>
 
     <div class="empty" *ngIf="vehicles.length === 0">
