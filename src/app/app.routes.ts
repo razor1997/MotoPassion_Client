@@ -29,6 +29,8 @@ import {
   EventParticipantDetailsComponent
 } from './components/event/event-participant-details/event-participant-details.component';
 import {VehiclesBrowseComponent} from './components/vehicles/vehicles-browse/vehicles-browse.component';
+import {ExpenseDetailsComponent} from './components/expenses-maintanance/expense-details/expense-details.component';
+import {ExpenseEditComponent} from './components/expenses-maintanance/expense-edit/expense-edit.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },  // Strona startowa
@@ -63,6 +65,9 @@ export const routes: Routes = [
     path: 'community/users/:id',
     component: EventParticipantDetailsComponent
   },
+  { path: 'expenses', component: ExpensesPageComponent, canActivate: [AuthGuard] },
+  { path: 'expenses/details/:id', component: ExpenseDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'expenses/edit/:id', component: ExpenseEditComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];
 @NgModule({

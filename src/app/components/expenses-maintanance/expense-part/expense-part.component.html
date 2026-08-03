@@ -1,29 +1,32 @@
+<!-- expense-part.component.html -->
 <div class="row">
   <div class="col date">{{ expense.date | date:'dd.MM.yyyy' }}</div>
-  <div class="col category">{{ getCategoryDetails(expense.category )}}</div>
+  <div class="col category">{{ getCategoryDetails(expense.category) }}</div>
   <div class="col mileage">{{ expense.mileage }}</div>
   <div class="col title">{{ expense.title }}</div>
+
   <div class="col facture" *ngIf="expense.factureImageUrl">
     <img
-      *ngIf="expense.factureImageUrl"
       class="thumb"
       [src]="expense.factureImageUrl"
       alt="Faktura"
       (click)="openImage(expense.factureImageUrl)"
     />
-
   </div>
+
   <div class="facture label" *ngIf="!expense.factureImageUrl">
     ------
   </div>
+
   <div class="col cost" *ngIf="expense.cost">{{ expense.cost.toFixed(2) }} PLN</div>
   <div class="col cost" *ngIf="!expense.cost">------</div>
+
   <div class="col actions">
     <button class="ghost" (click)="showMore.emit(expense.id)">Więcej</button>
-    <button class="ghost" (click)="remove.emit(expense.id)">Usuń</button>
+    <button class="ghost" (click)="edit.emit(expense.id)">Edytuj</button>
+    <button class="danger" (click)="remove.emit(expense.id)">Usuń</button>
   </div>
 </div>
-
 
 <app-image-lightbox
   [url]="activeImageUrl"

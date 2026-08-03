@@ -1,8 +1,9 @@
+// expense-part.component.ts
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {VehicleExpense} from '../../../model/vehicle-espense.model';
-import {EXPENSE_CATEGORIES} from '../expenses-utils/expenses-category';
-import {ImageLightboxComponent} from '../../image-lightbox/image-lightbox.component';
+import { VehicleExpense } from '../../../model/vehicle-espense.model';
+import { EXPENSE_CATEGORIES } from '../expenses-utils/expenses-category';
+import { ImageLightboxComponent } from '../../image-lightbox/image-lightbox.component';
 
 @Component({
   selector: 'app-expense-part',
@@ -13,15 +14,18 @@ import {ImageLightboxComponent} from '../../image-lightbox/image-lightbox.compon
 })
 export class ExpensePartComponent {
   @Input() expense!: VehicleExpense;
+
   @Output() remove = new EventEmitter<string>();
+  @Output() edit = new EventEmitter<string>();
   @Output() showMore = new EventEmitter<string>();
-   expensesCategory = EXPENSE_CATEGORIES;
+
+  expensesCategory = EXPENSE_CATEGORIES;
+
+  activeImageUrl: string | null = null;
 
   getCategoryDetails(id: number) {
     return this.expensesCategory.find(x => x.id === id)?.name;
   }
-
-  activeImageUrl: string | null = null;
 
   openImage(url: string) {
     this.activeImageUrl = url;

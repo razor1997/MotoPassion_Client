@@ -1,0 +1,129 @@
+.card {
+  max-width: 420px;
+  margin: 40px auto 0;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 28px 32px 32px;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  color: #444;
+  font-size: 13px;
+}
+
+.expense-details {
+  max-width: 520px;
+}
+
+/* ---------- Header ---------- */
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.header h2 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 20px;
+  color: #1a1a1a;
+  margin: 0 0 4px;
+}
+
+.header p {
+  font-size: 12px;
+  color: #888;
+  margin: 0;
+}
+
+/* ---------- Actions ---------- */
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.actions button {
+  border: none;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.actions .primary {
+  background: #1a1a1a;
+  color: #fff;
+}
+.actions .primary:hover {
+  background: #333;
+}
+
+.actions .ghost {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+}
+.actions .ghost:hover {
+  background: #f5f5f5;
+}
+
+.actions .danger {
+  background: #fff;
+  color: #d33;
+  border: 1px solid #f0c0c0;
+}
+.actions .danger:hover {
+  background: #fdf0f0;
+}
+
+/* ---------- Details grid ---------- */
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 20px;
+  margin-bottom: 20px;
+}
+
+.details-grid strong {
+  color: #1a1a1a;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.details-grid div:last-child:nth-child(odd) {
+  grid-column: 1 / -1; /* description spans full width when it's alone on its row */
+}
+
+/* ---------- Invoice preview section ---------- */
+.expense-details section.card {
+  margin: 0;
+  padding: 16px 20px;
+  max-width: none;
+}
+
+.expense-details section.card h3 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 15px;
+  color: #1a1a1a;
+  margin: 0 0 12px;
+}
+
+.invoice-preview {
+  max-width: 200px;
+  max-height: 200px;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  object-fit: cover;
+  display: block;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.invoice-preview:hover {
+  opacity: 0.85;
+}

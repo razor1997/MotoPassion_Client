@@ -1,7 +1,8 @@
+// expenses-list.component.ts
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ExpensePartComponent } from '../expense-part/expense-part.component';
-import {VehicleExpense} from '../../../model/vehicle-espense.model';
+import { VehicleExpense } from '../../../model/vehicle-espense.model';
 
 @Component({
   selector: 'app-expenses-list',
@@ -13,4 +14,6 @@ import {VehicleExpense} from '../../../model/vehicle-espense.model';
 export class ExpensesListComponent {
   @Input() expenses: VehicleExpense[] = [];
   @Output() remove = new EventEmitter<string>();
+  @Output() edit = new EventEmitter<string>();
+  @Output() showMore = new EventEmitter<string>();
 }

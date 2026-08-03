@@ -1,0 +1,44 @@
+<!-- expense-details.component.html -->
+<div *ngIf="loading" class="card">Ładowanie...</div>
+
+<div *ngIf="!loading && error" class="card">
+  {{ error }}
+</div>
+
+<div *ngIf="!loading && expense" class="expense-details card">
+  <div class="header">
+    <div>
+      <h2>{{ expense.title }}</h2>
+      <p>{{ vehicle?.mark }} {{ vehicle?.model }}</p>
+    </div>
+
+    <div class="actions">
+      <button class="ghost" (click)="goBack()">Wróć</button>
+      <button *ngIf="isOwner" class="ghost" (click)="goToEdit()">Edytuj</button>
+      <button *ngIf="isOwner" class="danger" (click)="remove()">Usuń</button>
+    </div>
+  </div>
+
+  <div class="details-grid">
+    <div><strong>Data:</strong> {{ displayDate(expense.date) }}</div>
+    <div><strong>Kategoria:</strong> {{ categoryName(expense.category) }}</div>
+    <div><strong>Przebieg:</strong> {{ expense.mileage }} km</div>
+    <div><strong>Koszt:</strong> {{ expense.cost | number:'1.2-2' }} PLN</div>
+    <div><strong>Dodano:</strong> {{ displayDate(expense.createdAt) }}</div>
+    <div *ngIf="expense.description"><strong>Opis:</strong> {{ expense.description }}</div>
+  </div>
+
+  <section *ngIf="expense.factureImageUrl" class="card">
+    <h3>Faktura / Paragon</h3>
+    <img
+      class="invoice-preview"
+      [src]="expense.factureImageUrl"
+      alt="Faktura"
+      (click)="openImage(expense.factureImageUrl)">
+  </section>
+
+  <app-image-lightbox
+    [url]="activeImageUrl"
+    (close)="closeImage()">
+  </app-image-lightbox>
+</div>

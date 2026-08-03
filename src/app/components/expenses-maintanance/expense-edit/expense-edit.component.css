@@ -1,0 +1,174 @@
+/* Chrome, Safari, Edge, Opera - remove number spinners */
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-spinner { -moz-appearance: textfield; }
+
+* { box-sizing: border-box; }
+
+.card {
+  max-width: 420px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 16px;
+  padding: 28px 32px 32px;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  color: #444;
+  font-size: 13px;
+  align-items: center;
+  margin:  40px auto 0;
+
+
+}
+
+.card h2 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 22px;
+  color: #1a1a1a;
+  margin: 0 0 20px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-row label {
+  width: 110px;
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+
+.form-row:has(textarea) {
+  align-items: flex-start;
+}
+.form-row:has(textarea) label {
+  margin-top: 8px;
+}
+
+.form-row input[type="text"],
+.form-row input[type="date"],
+.form-row input[type="number"],
+.form-row select,
+.form-row textarea {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #222;
+  background: #fafafa;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.form-row input:hover,
+.form-row select:hover,
+.form-row textarea:hover {
+  border-color: #bbb;
+}
+
+.form-row input:focus,
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: #2f9fe0;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(47, 159, 224, 0.15);
+}
+
+.form-row textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-row select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 14px;
+  padding-right: 32px;
+}
+
+/* File input row */
+.form-row input[type="file"] {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+.form-row input[type="file"]::file-selector-button {
+  background: #eee;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 7px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background 0.15s;
+}
+.form-row input[type="file"]::file-selector-button:hover {
+  background: #e2e2e2;
+}
+
+.preview {
+  margin-top: 10px;
+  margin-left: 126px; /* aligns under the input column (label width + gap) */
+}
+
+.preview img {
+  max-width: 140px;
+  max-height: 140px;
+  border-radius: 8px;
+  border: 1px solid #e5e5e5;
+  object-fit: cover;
+  display: block;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+  justify-content: center;
+}
+
+.actions button {
+  border: none;
+  border-radius: 20px;
+  padding: 10px 22px;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.actions .primary {
+  background: #1a1a1a;
+  color: #fff;
+}
+.actions .primary:hover {
+  background: #333;
+}
+
+.actions .ghost {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+}
+.actions .ghost:hover {
+  background: #f5f5f5;
+}

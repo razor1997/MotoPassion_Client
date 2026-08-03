@@ -1,68 +1,79 @@
+<!-- expenses-page.component.html -->
 <div class="expenses-page">
   <div class="header h1">
     <div class="form-col">
       <section>
-      <app-expenses-costs
-        [totalCost]="totalCost"
-        [(filterFrom)]="filterFrom"
-        [(filterTo)]="filterTo"
-        [totalCount]="filteredExpenses.length"
-        [vehicles]="vehicles"
-        [selectedVehicleId]="selectedVehicleId"
-        (vehicleChange)="onVehicleSelected($event)"
-        (categoryChange)="onCategorySelected($event)"
-        (filterRefreshClick)="onFilterRefreshClick()"
-        (pdfGenerate)="onPdfGenerateClick()"
-      >
-      </app-expenses-costs>
+        <app-expenses-costs
+          [totalCost]="totalCost"
+          [(filterFrom)]="filterFrom"
+          [(filterTo)]="filterTo"
+          [totalCount]="filteredExpenses.length"
+          [vehicles]="vehicles"
+          [selectedVehicleId]="selectedVehicleId"
+          [category]="categoryId ?? 0"
+          (vehicleChange)="onVehicleSelected($event)"
+          (categoryChange)="onCategorySelected($event)"
+          (filterRefreshClick)="onFilterRefreshClick()"
+          (pdfGenerate)="onPdfGenerateClick()">
+        </app-expenses-costs>
       </section>
     </div>
   </div>
+
   <div class="grid">
     <section class="card">
-      <h3>Dodaj koszt dla {{selectedNameVehicle}}</h3>
+      <h3>Dodaj koszt dla {{ selectedNameVehicle }}</h3>
+
       <div class="form-row">
         <label>Data</label>
         <input type="date" [(ngModel)]="newExpense.date">
       </div>
+
       <div class="form-row">
         <label>Kategoria</label>
         <select [(ngModel)]="newExpense.category">
-          <option *ngFor="let c of expensesCategory" [value]="c.id">{{ c.name }}</option>
+          <option *ngFor="let c of expensesCategory" [ngValue]="c.id">{{ c.name }}</option>
         </select>
       </div>
+
       <div class="form-row">
         <label>Opis</label>
         <input type="text" placeholder="Np. Wymiana zderzaka" [(ngModel)]="newExpense.title">
       </div>
+
       <div class="form-row">
         <label>Faktura/Paragon</label>
         <input type="file" accept="image/*" (change)="onFileSelected($event)">
-        <div class="preview" *ngIf="newExpense.factureImageUrl">
-          <img [src]="newExpense.factureImageUrl" alt="photo">
+        <div class="preview" *ngIf="factureImageUrl">
+          <img [src]="factureImageUrl" alt="photo">
         </div>
       </div>
+
       <div class="form-row">
         <label>Koszt (PLN)</label>
         <input type="number" class="no-spinner" [(ngModel)]="newExpense.cost" placeholder="1000">
       </div>
+
       <div class="form-row">
         <label>Przebieg</label>
         <input type="number" class="no-spinner" [(ngModel)]="newExpense.mileage" placeholder="186000">
       </div>
+
       <div class="form-row">
         <label>Opis (opcjonalnie)</label>
         <textarea rows="3" [(ngModel)]="newExpense.description"></textarea>
       </div>
+
       <button class="primary" *ngIf="selectedVehicleId" (click)="addExpense()">Dodaj do historii</button>
     </section>
 
     <section class="card list-card">
-
       <app-expenses-list
         [expenses]="filteredExpenses"
-        (remove)="removeExpense($event.toString())">
+        (showMore)="onExpenseDetails($event)"
+        (edit)="onExpenseEdit($event)"
+        (remove)="removeExpense($event)">
       </app-expenses-list>
     </section>
-</div>
+  </div>
 </div>

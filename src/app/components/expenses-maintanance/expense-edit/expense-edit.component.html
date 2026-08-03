@@ -1,0 +1,55 @@
+<!-- expense-edit.component.html -->
+<div *ngIf="loading" class="card">Ładowanie...</div>
+
+<div *ngIf="!loading && error" class="card">
+  {{ error }}
+</div>
+
+<div *ngIf="!loading && !error" class="card">
+  <h2>Edytuj koszt</h2>
+
+  <div class="form-row">
+    <label>Data</label>
+    <input type="date" [(ngModel)]="model.date">
+  </div>
+
+  <div class="form-row">
+    <label>Kategoria</label>
+    <select [(ngModel)]="model.category">
+      <option *ngFor="let c of categories" [ngValue]="c.id">{{ c.name }}</option>
+    </select>
+  </div>
+
+  <div class="form-row">
+    <label>Tytuł</label>
+    <input type="text" [(ngModel)]="model.title">
+  </div>
+
+  <div class="form-row">
+    <label>Opis</label>
+    <textarea rows="3" [(ngModel)]="model.description"></textarea>
+  </div>
+
+  <div class="form-row">
+    <label>Koszt (PLN)</label>
+    <input type="number" class="no-spinner" [(ngModel)]="model.cost">
+  </div>
+
+  <div class="form-row">
+    <label>Przebieg</label>
+    <input type="number" class="no-spinner" [(ngModel)]="model.mileage">
+  </div>
+
+  <div class="form-row">
+    <label>Faktura / Paragon</label>
+    <input type="file" accept="image/*" (change)="onFileSelected($event)">
+    <div class="preview" *ngIf="previewUrl">
+      <img [src]="previewUrl" alt="podgląd">
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="primary" (click)="save()">Zapisz</button>
+    <button class="ghost" (click)="cancel()">Anuluj</button>
+  </div>
+</div>
