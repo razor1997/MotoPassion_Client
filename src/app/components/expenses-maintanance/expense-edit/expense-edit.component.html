@@ -15,29 +15,29 @@
 
   <div class="form-row">
     <label>Kategoria</label>
-    <select [(ngModel)]="model.category">
+    <select [(ngModel)]="model.category" (ngModelChange)="markDirty()">
       <option *ngFor="let c of categories" [ngValue]="c.id">{{ c.name }}</option>
     </select>
   </div>
 
   <div class="form-row">
     <label>Tytuł</label>
-    <input type="text" [(ngModel)]="model.title">
+    <input type="text" [(ngModel)]="model.title" (ngModelChange)="markDirty()">
   </div>
 
   <div class="form-row">
     <label>Opis</label>
-    <textarea rows="3" [(ngModel)]="model.description"></textarea>
+    <textarea rows="3" [(ngModel)]="model.description" (ngModelChange)="markDirty()"></textarea>
   </div>
 
   <div class="form-row">
     <label>Koszt (PLN)</label>
-    <input type="number" class="no-spinner" [(ngModel)]="model.cost">
+    <input type="number" class="no-spinner" [(ngModel)]="model.cost" (ngModelChange)="markDirty()">
   </div>
 
   <div class="form-row">
     <label>Przebieg</label>
-    <input type="number" class="no-spinner" [(ngModel)]="model.mileage">
+    <input type="number" class="no-spinner" [(ngModel)]="model.mileage" (ngModelChange)="markDirty()">
   </div>
 
   <div class="form-row">
@@ -49,7 +49,9 @@
   </div>
 
   <div class="actions">
-    <button class="primary" (click)="save()">Zapisz</button>
+    <button class="primary" (click)="save()" [disabled]="!hasChanges || loading">
+      Zapisz
+    </button>
     <button class="ghost" (click)="cancel()">Anuluj</button>
   </div>
 </div>

@@ -9,7 +9,7 @@
 * { box-sizing: border-box; }
 
 .card {
-  max-width: 420px;
+  max-width: 620px;
   background: #fff;
   border: 1px solid #e5e5e5;
   border-radius: 16px;
@@ -156,6 +156,10 @@
   font-family: inherit;
 }
 
+actions button:disabled {
+  background: #b30000;
+  color: #aaa;
+}
 .actions .primary {
   background: #1a1a1a;
   color: #fff;
@@ -163,7 +167,9 @@
 .actions .primary:hover {
   background: #333;
 }
-
+.actions .primary:disabled{
+  background: #aaaaaa;
+}
 .actions .ghost {
   background: #fff;
   color: #333;
@@ -171,4 +177,14 @@
 }
 .actions .ghost:hover {
   background: #f5f5f5;
+}
+.save-info {
+  margin-top: 12px;
+  padding: 10px 16px;
+  background: #eafbea;
+  color: #2f7a2f;
+  border: 1px solid #b8e6b8;
+  border-radius: 8px;
+  font-size: 13px;
+  text-align: center;
 }

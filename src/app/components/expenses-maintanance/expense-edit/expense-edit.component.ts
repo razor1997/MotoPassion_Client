@@ -22,7 +22,37 @@ export class ExpenseEditComponent {
   id = '';
   loading = true;
   error = '';
+  savedMessage = '';
+  isDirty = false;
+  private initialSnapshot = '';
 
+  private buildSnapshot(): string {
+    return JSON.stringify({
+      vehicleId: this.model.vehicleId,
+      title: this.model.title?.trim(),
+      description: this.model.description?.trim(),
+      cost: Number(this.model.cost),
+      date: this.model.date,
+      category: Number(this.model.category),
+      mileage: Number(this.model.mileage),
+      factureImageUrl: this.model.factureImageUrl ?? '',
+      hasNewFile: !!this.factureImage
+    });
+  }
+
+  get hasChanges(): boolean {
+    return this.isDirty;
+  }
+
+  private markPristine(): void {
+    this.initialSnapshot = this.buildSnapshot();
+    this.isDirty = false;
+    this.savedMessage = '';
+  }
+  markDirty(): void {
+    this.isDirty = true;
+    this.savedMessage = '';
+  }
   model: VehicleExpenseCreate = {
     vehicleId: '',
     title: '',
@@ -75,7 +105,9 @@ export class ExpenseEditComponent {
           mileage: expense.mileage ?? 0,
           factureImageUrl: expense.factureImageUrl ?? ''
         };
+        this.factureImage = null;
         this.previewUrl = expense.factureImageUrl ?? '';
+        this.markPristine();
         this.loading = false;
       },
       error: () => {
@@ -86,11 +118,13 @@ export class ExpenseEditComponent {
   }
 
   onFileSelected(event: Event): void {
+
+    this.markDirty();
+    this.savedMessage = '';
     const file = (event.target as HTMLInputElement).files?.[0];
     if (!file) return;
 
     this.factureImage = file;
-
     const reader = new FileReader();
     reader.onload = () => this.previewUrl = reader.result as string;
     reader.readAsDataURL(file);
@@ -118,7 +152,12 @@ export class ExpenseEditComponent {
         })
       )
       .subscribe({
-        next: () => this.router.navigate(['/expenses/details', this.id]),
+        next: () => {
+          this.savedMessage = 'Zapisano zmiany';
+          this.factureImage = null;
+          this.markPristine();
+          this.router.navigate(['/expenses/details', this.id]);
+        },
         error: () => {
           this.error = 'Nie udało się zapisać zmian.';
         }
