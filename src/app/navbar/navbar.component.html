@@ -10,14 +10,13 @@
         </div>
 
       <div *ngIf="isUserLoggedIn()">
-        <button (click)="navigateTo('journeys')" >Dzienniki trasy</button>
-        <button (click)="navigateTo('community')" >Społeczność</button>
-        <button (click)="navigateTo('inspiration')" >Motoinspiracje</button>
-        <button (click)="navigateTo('expenses')" >Lista napraw</button>
-        <button (click)="navigateTo('vehicles/browse-list')">Przeglądaj pojazdy</button>
-        <button (click)="navigateTo('vehicles/user-list')" >Moje pojazdy</button>
-        <button (click)="navigateTo('events')" >Wydarzenia</button>
-
+        <button [class.active]="isActive('journeys')" (click)="navigateTo('journeys')">Dzienniki trasy</button>
+        <button [class.active]="isActive('community')" (click)="navigateTo('community')">Społeczność</button>
+        <button [class.active]="isActive('inspiration')" (click)="navigateTo('inspiration')">Motoinspiracje</button>
+        <button [class.active]="isActive('expenses')" (click)="navigateTo('expenses')">Lista napraw</button>
+        <button [class.active]="isActive('vehicles/browse-list')" (click)="navigateTo('vehicles/browse-list')">Przeglądaj pojazdy</button>
+        <button [class.active]="isActive('vehicles/user-list')" (click)="navigateTo('vehicles/user-list')">Moje pojazdy</button>
+        <button [class.active]="isActive('events')" (click)="navigateTo('events')">Wydarzenia</button>
       </div>
 
     </nav>
