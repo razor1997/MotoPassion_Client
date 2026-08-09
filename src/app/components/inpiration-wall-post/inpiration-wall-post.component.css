@@ -48,3 +48,12 @@
     text-decoration: underline;
   }
 }
+.post-img,
+.post-desc,
+.details-btn {
+  cursor: pointer;
+}
+
+.details-btn {
+  margin-left: auto;
+}

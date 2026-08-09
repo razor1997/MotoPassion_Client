@@ -31,7 +31,7 @@ import {
 import {VehiclesBrowseComponent} from './components/vehicles/vehicles-browse/vehicles-browse.component';
 import {ExpenseDetailsComponent} from './components/expenses-maintanance/expense-details/expense-details.component';
 import {ExpenseEditComponent} from './components/expenses-maintanance/expense-edit/expense-edit.component';
-
+import { InspirationDetailsComponent } from './components/inspiration-details/inspiration-details.component';
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },  // Strona startowa
   { path: 'posts', component: PostsComponent },
@@ -55,6 +55,7 @@ export const routes: Routes = [
   { path: 'vehicles/preview/:id', component: VehiclePreviewComponent },
   { path: 'vehicles/browse-list', component: VehiclesBrowseComponent },
   { path: 'event/details/:id', component: EventDetailsComponent },
+  { path: 'inspiration/:id', component: InspirationDetailsComponent },
   {
     path: 'admin/panel',
     component: AdminPanelComponent,

@@ -1,31 +1,62 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {CommunityPost} from '../../model/community-post';
-import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
-import {CommunityUser} from '../../model/community-user';
-import {HttpParams} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
+import { CommunityPost } from '../../model/community-post';
+import { environment } from '../../environments/environment';
+
+interface PostApiDto {
+  id: string;
+  userId: string;
+  userName: string;
+  userAvatarUrl: string;
+  description: string;
+  photoUrl: string;
+  longitude: number;
+  latitude: number;
+  createdAt: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class InspirationWallService {
-  constructor(private https: HttpClient) {
+  constructor(private http: HttpClient) {}
 
+  private mapPost(post: PostApiDto): CommunityPost {
+    return {
+      id: post.id,
+      userName: post.userName,
+      userAvatarUrl: post.userAvatarUrl,
+      createdAt: post.createdAt,
+      photoUrl: post.photoUrl,
+      description: post.description,
+      location: {
+        name: 'Punkt wyprawy',
+        lat: post.latitude,
+        lng: post.longitude
+      }
+    };
   }
+
   getPosts(): Observable<CommunityPost[]> {
-    console.log('pobieranie innych użytkowników' + `${environment.urlAddress}/users`);
-    return this.https.get<CommunityPost[]>(`${environment.urlAddress}/posts`);
+    return this.http.get<PostApiDto[]>(`${environment.urlAddress}/posts`).pipe(
+      map(posts => posts.map(post => this.mapPost(post)))
+    );
+  }
+
+  getPostById(id: string): Observable<CommunityPost> {
+    return this.http.get<PostApiDto>(`${environment.urlAddress}/posts/${id}`).pipe(
+      map(post => this.mapPost(post))
+    );
   }
 
   getPostsUser(userId: string): Observable<CommunityPost[]> {
-    console.log("test postów użytkownika"+userId)
-    const params = new HttpParams().set('userId', userId);
-
-    return this.https.get<CommunityPost[]>(`${environment.urlAddress}/posts/user/`+userId);
+    return this.http.get<PostApiDto[]>(`${environment.urlAddress}/posts/user/${userId}`).pipe(
+      map(posts => posts.map(post => this.mapPost(post)))
+    );
   }
 
   post(data: FormData): Observable<any> {
-    return this.https.post(`${environment.urlAddress}/posts`, data);
+    return this.http.post(`${environment.urlAddress}/posts`, data);
   }
 }

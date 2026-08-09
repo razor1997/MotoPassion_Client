@@ -1,0 +1,82 @@
+<div class="details-page" *ngIf="loading">
+  <div class="card">Ładowanie...</div>
+</div>
+
+<div class="details-page" *ngIf="!loading && error">
+  <div class="card error-card">{{ error }}</div>
+</div>
+
+<div class="details-page" *ngIf="!loading && post">
+  <header class="topbar">
+    <button class="back-btn" (click)="back()">←</button>
+
+    <div class="title-block">
+      <div class="eyebrow">Inspiration</div>
+      <h1>{{ post.location?.name || 'Wyprawa' }}</h1>
+      <div class="meta-line">
+        <span>{{ post.userName }}</span>
+        <span>{{ post.createdAt | date:'dd.MM.yyyy' }}</span>
+        <span>{{ post.createdAt | date:'HH:mm' }}</span>
+      </div>
+    </div>
+
+    <button class="share-btn" (click)="share()">Udostępnij</button>
+  </header>
+
+  <section class="hero">
+    <img [src]="post.photoUrl" [alt]="post.description">
+  </section>
+
+  <section class="layout">
+    <main class="main-col">
+      <article class="card description-card">
+        <h2>Opis wyprawy</h2>
+        <p>{{ post.description }}</p>
+      </article>
+
+      <article class="card map-card" *ngIf="post.location">
+        <div class="card-head">
+          <h2>Mapa</h2>
+          <button class="ghost-btn" (click)="openLocation()">Otwórz w Mapach</button>
+        </div>
+
+        <div class="map-preview">
+          <div class="map-pin">📍</div>
+          <div>
+            <strong>{{ post.location.name }}</strong>
+            <p>{{ post.location.lat | number:'1.5-5' }}, {{ post.location.lng | number:'1.5-5' }}</p>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <aside class="side-col">
+      <article class="card author-card">
+        <img class="author-avatar" [src]="post.userAvatarUrl" alt="avatar">
+        <div>
+          <h3>{{ post.userName }}</h3>
+          <p>Autor wyprawy</p>
+        </div>
+      </article>
+
+      <article class="card meta-card">
+        <h3>Informacje</h3>
+
+        <div class="meta-item">
+          <span>Data</span>
+          <strong>{{ post.createdAt | date:'dd.MM.yyyy' }}</strong>
+        </div>
+
+        <div class="meta-item">
+          <span>Godzina</span>
+          <strong>{{ post.createdAt | date:'HH:mm' }}</strong>
+        </div>
+
+        <div class="meta-item" *ngIf="post.location">
+          <span>Lokalizacja</span>
+          <strong>{{ post.location.name }}</strong>
+        </div>
+      </article>
+    </aside>
+  </section>
+</div>
