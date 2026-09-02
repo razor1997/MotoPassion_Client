@@ -10,21 +10,50 @@
   <header class="topbar">
     <button class="back-btn" (click)="back()">←</button>
 
-    <div class="title-block">
-      <div class="eyebrow">Inspiration</div>
-      <h1>{{ post.location?.name || 'Wyprawa' }}</h1>
-      <div class="meta-line">
-        <span>{{ post.userName }}</span>
-        <span>{{ post.createdAt | date:'dd.MM.yyyy' }}</span>
-        <span>{{ post.createdAt | date:'HH:mm' }}</span>
-      </div>
-    </div>
+<!--    <div class="title-block">-->
+<!--      <div class="eyebrow">Inspiration</div>-->
+<!--      <h1>{{ post.location?.name || 'Wyprawa' }}</h1>-->
+<!--      <div class="meta-line">-->
+<!--        <span>{{ post.createdAt | date:'dd.MM.yyyy' }}</span>-->
+<!--        <span>{{ post.createdAt | date:'HH:mm' }}</span>-->
+<!--      </div>-->
+<!--    </div>-->
 
     <button class="share-btn" (click)="share()">Udostępnij</button>
   </header>
 
-  <section class="hero">
-    <img [src]="post.photoUrl" [alt]="post.description">
+  <section class="media-grid">
+    <article class="card gallery-card">
+      <div class="card-head">
+        <h2>Galeria zdjęć</h2>
+      </div>
+
+      <div class="gallery-main">
+        <img [src]="post.photoUrl" [alt]="post.description">
+      </div>
+    </article>
+
+    <article class="card participants-card">
+      <div class="card-head">
+        <h2>Uczestnicy</h2>
+        <span class="count">{{ post.participants?.length || 0 }}</span>
+      </div>
+
+      <div
+        class="participant-item"
+        *ngFor="let participant of post.participants"
+        (click)="openParticipant(participant.userId)">
+        <img class="participant-avatar" [src]="participant.avatarUrl" alt="avatar uczestnika">
+        <div class="participant-text">
+          <strong>{{ participant.userName }}</strong>
+          <p>Uczestnik wyprawy</p>
+        </div>
+      </div>
+
+      <div class="empty" *ngIf="!post.participants || post.participants.length === 0">
+        Brak uczestników.
+      </div>
+    </article>
   </section>
 
   <section class="layout">

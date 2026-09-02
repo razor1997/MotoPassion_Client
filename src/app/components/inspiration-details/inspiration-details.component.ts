@@ -52,6 +52,10 @@ export class InspirationDetailsComponent {
     window.open(`https://maps.google.com/?q=${lat},${lng}`, '_blank');
   }
 
+  openParticipant(userId: string): void {
+    this.router.navigate(['/community/users', userId]);
+  }
+
   share(): void {
     if (!this.post) return;
 

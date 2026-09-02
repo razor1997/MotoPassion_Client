@@ -14,6 +14,12 @@ interface PostApiDto {
   longitude: number;
   latitude: number;
   createdAt: string;
+  participants?: {
+    userId: string;
+    userName: string;
+    avatarUrl: string;
+    createdAt: string;
+  }[];
 }
 
 @Injectable({
@@ -25,11 +31,18 @@ export class InspirationWallService {
   private mapPost(post: PostApiDto): CommunityPost {
     return {
       id: post.id,
+      userId: post.userId,
       userName: post.userName,
       userAvatarUrl: post.userAvatarUrl,
       createdAt: post.createdAt,
       photoUrl: post.photoUrl,
       description: post.description,
+      participants: post.participants?.map(p => ({
+        userId: p.userId,
+        userName: p.userName,
+        avatarUrl: p.avatarUrl,
+        createdAt: p.createdAt
+      })) ?? [],
       location: {
         name: 'Punkt wyprawy',
         lat: post.latitude,
