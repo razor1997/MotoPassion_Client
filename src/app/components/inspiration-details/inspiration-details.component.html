@@ -58,11 +58,6 @@
 
   <section class="layout">
     <main class="main-col">
-      <article class="card description-card">
-        <h2>Opis wyprawy</h2>
-        <p>{{ post.description }}</p>
-      </article>
-
       <article class="card map-card" *ngIf="post.location">
         <div class="card-head">
           <h2>Mapa</h2>
@@ -86,6 +81,11 @@
           <h3>{{ post.userName }}</h3>
           <p>Autor wyprawy</p>
         </div>
+      </article>
+
+      <article class="card description-card">
+        <h2>Opis wyprawy</h2>
+        <p>{{ post.description }}</p>
       </article>
 
       <article class="card meta-card">

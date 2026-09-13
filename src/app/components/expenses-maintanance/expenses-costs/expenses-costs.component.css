@@ -1,39 +1,149 @@
 .filters {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  gap: 16px;
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 20px;
   width: 100%;
-  align-content: center;
-  border-bottom: 1px solid #ddd;
-  background: #fafafa;
-  border-left: 1px;
+  padding: 18px 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0) 40%), #121a29;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.22);
+  color: #f4f7fb;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+}
 
+/* ================= Label + input groups ================= */
+.form-row,
+.form-col {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-select {
-  border: 1px solid #dcdcdc;
+
+.filters label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(244, 247, 251, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.filters input[type="date"],
+.filters select {
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
-  padding: 8px 10px;
-  font-size: 14px;
-  margin-left: 16px;
-  margin-right: 16px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.05);
+  color: #f4f7fb;
+  margin: 0; /* remove leftover margin-left/right from old select rule */
+  transition: border-color 0.15s, background 0.15s;
 }
+
+.filters input[type="date"]:hover,
+.filters select:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.filters input[type="date"]:focus,
+.filters select:focus {
+  outline: none;
+  border-color: #4f5cf0;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(79, 92, 240, 0.18);
+}
+
+.filters select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f4f7fb' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 13px;
+  padding-right: 30px;
+}
+
+/* ================= Summary figures ================= */
+.filters h3,
+.filters span,
+.filters strong {
+  margin: 0;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.filters h3 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f4f7fb;
+}
+
+.filters span {
+  color: rgba(244, 247, 251, 0.6);
+  margin-right: 6px;
+}
+
+.filters strong {
+  color: #9fb1ff;
+  font-size: 14px;
+}
+
+/* ================= Action buttons ================= */
+.filter {
+  display: flex;
+  gap: 10px;
+  margin-left: auto; /* pushes button group to the far right */
+}
+
 .filter button {
-  margin: 5px;
+  margin: 0;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 13px;
+  font-weight: 500;
   cursor: pointer;
   border: none;
-  border-radius: 5px;
-  background-color: #315e93;
-  /*background-color: #24303e;*/
-  color: white;
-}
-.filter button:active {
-  background-color: #5cb85c;
-  font-weight: bold;
-}
-.filter button:hover {
-  background-color: #217088;
+  border-radius: 999px;
+  color: #fff;
+  transition: transform 0.1s, box-shadow 0.15s, background 0.15s;
 }
 
+.filter button:first-child {
+  background: linear-gradient(135deg, #4f5cf0, #6f7bff);
+  box-shadow: 0 4px 14px rgba(79, 92, 240, 0.35);
+}
+
+.filter button:first-child:hover {
+  background: linear-gradient(135deg, #5a66f2, #7d88ff);
+}
+
+.filter button:last-child {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.filter button:last-child:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.filter button:active {
+  transform: scale(0.96);
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 900px) {
+  .filters {
+    justify-content: flex-start;
+  }
+
+  .filter {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .filter button {
+    flex: 1;
+  }
+}
